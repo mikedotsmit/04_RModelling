@@ -1,0 +1,56 @@
+---
+title: "Grinding screen panel comparrison"
+author: "Michael C. Smit"
+date: "2020"
+output: html_document
+
+---
+
+```{r}
+library(tidyverse)
+library(kableExtra)
+```
+
+
+<<center><chr>
+![](images/me-glasses.jpg){width=100}
+![](images/me-glasses.jpg){width=75}
+![](images/me-glasses.jpg){width=50}
+![](images/me-glasses.jpg){width=25}
+<hr></center>
+
+```{r child="text/summarySection.Rmd"}
+
+```
+
+```{r child="text/introductionSection.Rmd"}
+
+```
+
+```{r child="text/methodSection.Rmd"}
+
+```
+
+```{r child="text/modelfittingSection.Rmd"}
+
+```
+
+
+
+
+
+# Model results
+
+
+
+#```{r, test-a, echo=FALSE}
+
+#```
+
+
+#```{r, coefprint2}
+#```
+
+
+
+

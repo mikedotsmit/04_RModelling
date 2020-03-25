@@ -1,0 +1,3 @@
+## Summary
+
+Ten $250 \mu M$ screen aperture panels were installed on Grinding Screen `321-SC-014` to compare efficiency with the standard $230 \mu M$ apperture panels. No statistically significant difference in overall efficiency and fines recovery were observed between the two types of panels. The effect on the `P80` of the underflow was recognized to be important but due to lack of sampling points this could not be safely assessed.

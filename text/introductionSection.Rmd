@@ -1,0 +1,6 @@
+## Introduction
+
+Large amounts of fines ($-38 \mu M$) are generated and recirculated in the grinding circuit, resulting in overgrinding of the SCheelite contributing to loss of tungsten in the downstream gravity circuit.
+The Year to date average of $-38 \mu M$ material is $30 %$ by weight of grinding thickener underflow solids.
+Derrick provided $250 \mu M$ aperture (0.25 MTQ) screen trial panels to compare efficiency with the currently installed $230 \mu M$ aperture (`0.23 MT`) panels. 
+The calculated open area of the 0.23 MT screen panels is 36.88 % while that of 0.25 MTQ panels is 37.12 %. Note that `Q` in the [anel code `MTQ` indicates the **modifier** added to the urethane to make it more resistant to degradation but essentially `0.23 MT` and `0.23 MTQ` are geometrically similar.  This report presents the results of two screen surveys conducted after the installation of the trial panels. 
