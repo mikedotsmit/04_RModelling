@@ -2,13 +2,17 @@
 title: "Grinding screen panel comparrison"
 author: "Michael C. Smit"
 date: "2020"
-output: html_document
+output: 
+  html_document:
+    number_sections: TRUE
 
 ---
 
-```{r}
+```{r include=FALSE}
 library(tidyverse)
 library(kableExtra)
+#devtools::install_github("yihui/printr")
+#require(printr)
 ```
 
 
@@ -31,15 +35,16 @@ library(kableExtra)
 
 ```
 
-```{r child="text/modelfittingSection.Rmd"}
+```{r child="text/modelFormulasSection.Rmd"}
+
+```
+
+```{r child="text/results-and-discussionSection.Rmd"}
 
 ```
 
 
 
-
-
-# Model results
 
 
 

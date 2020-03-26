@@ -36,7 +36,16 @@ gramdata <- as_tibble(gramdata)
 sieve <- gramdata %>% 
   select(1) %>% 
   as_tibble(as.data.frame(.))
+#now to save the out put so it cab reused in the report:
+# there no confusion when i use the term "takeout" (like pizza) i.e. take from here to smw else.
+# simmilarlt, Im trying "BrinIn" on the other end (the child of the mother file where this code will be brought in .)
+##I should have a lis tin thie beginning  of this script detailing a list of these depencansies, so one can see at 1st glance the risk of changing code.
+##as well as (maybe) a key section detailing terms used for objects.
 
+takeOut_sieve <- here("code/code-output","sieves-used-in-psd.txt")
+
+write.table(sieve, takeOut_sieve, sep=",", quote = FALSE)
+#dependents: methodSection.Rmd, code-output folder.
 
 #here excluding the sieve (first) column.
 gramdata1 <- gramdata %>%
@@ -113,14 +122,10 @@ quickfeedplot_unmodelled <- ggplot(long_feedraw, aes(sieve, probability, colour 
 #saveRDS(object = quickfeedplot_unmodelled, file = output_file)
 #method2:
 
-output_file <- here("code/code-output","long_feedraw.txt")
-write.table(long_feedraw, output_file, sep=",", quote = FALSE)
+takeout_file <- here("code/code-output","long_feedraw.txt")
+write.table(long_feedraw, file = takeout_file, sep=",", quote = FALSE)
+#dependents: methodSection
 
-#print(quickfeedplot_unmodelled)
-
-
-## ---- plotUnmoddeled
-## ---- test-b -------
 
 
 # plot on the finer sizes look visibly simmilar up to arounfd 300um.
@@ -349,25 +354,15 @@ coef_deter_GGS1 <- glanced_reg_GGS_1 %>%
 coef_deter_GGS2 <- glanced_reg_GGS_2 %>% 
   select(stream, r.squared, adj.r.squared, p.value, AIC)
 
+R2_RR <- full_join(coef_deter_RR1,coef_deter_RR2)
+R2_GGS <- full_join(coef_deter_GGS1,coef_deter_GGS2)
+
+
+write.table(R2_RR, file = here("code/code-output","R2_RR.txt"), sep=",", quote = FALSE)
+
+write.table(R2_GGS, file = here("code/code-output","R2_GGS.txt"), sep=",", quote = FALSE)
 
 ########################
-
-
-
-
-gr11 <- gr1 %>% 
-  column_to_rownames("stream")
-
-gr2 <- gr1 %>% 
-  dplyr::rename(
-    RR = r.squared,
-    GGS = r.squared1,
-    RR. = adj.r.squared,
-    GGS. = adj.r.squared1)
-
-
-
-
 
 
 
@@ -379,9 +374,6 @@ gr2 <- gr1 %>%
 
 
 
-kable(gr2, format = "html") %>% 
-  kable_styling(c("striped", "bordered"), full_width = F)%>% 
-  add_header_above(c(' ', 'r.sqaured' = 2, 'adj. r.sqaured' = 2))
 
 
 coefs <- tidy_reg_RR_GGS %>% 
@@ -394,6 +386,9 @@ coefs_ggs <- tidy_reg_RR_GGS %>%
   select (stream, term1, estimate1)
 
 
+# kable(gr2, format = "html") %>% 
+#   kable_styling(c("striped", "bordered"), full_width = F)%>% 
+#   add_header_above(c(' ', 'r.sqaured' = 2, 'adj. r.sqaured' = 2))
 
 #change to a wider format 
 coef_wider <- coefs_rr %>% 

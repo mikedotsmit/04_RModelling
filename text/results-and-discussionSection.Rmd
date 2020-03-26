@@ -1,0 +1,59 @@
+#Results and Discussion
+
+```{r include=FALSE}
+library(tidyverse)
+library(kableExtra)
+library(xtable)
+library(ggplot2)
+library(patchwork) #for multiple plot placement
+library(gridExtra) #tables as graphics
+```
+
+Modeling of particle size distributions are statical procedures where distributions with known distribution functions are used to compare or model real life distribution to.
+
+The two most commmonly used distributions in Geology and Mineral Processing and specifically comminution circuits are the Roslin-Rammler and the Gates-Gaudin-Schumann distributions.
+
+Both models were used  to model all PSD screening data to, and the subsequent best fit model was selected in each case. Model selection was determined by comparing each PSD's transformed linear model's determinant ($R^2$).
+Interpolation betweeen measured sizing points is conducted by the back-transformation of the model-fitted points along the respective model's distribution function. 
+
+***
+```{r echo=FALSE}
+R2_RR <- read.csv(file = here::here("code/code-output","R2_RR.txt"))
+R2_GGS <- read.csv(file = here::here("code/code-output","R2_GGS.txt"))
+
+tab_r2RR <- kable(R2_RR, format = "html", caption="RR Model(formula)") %>%
+  kable_styling(c("striped", "bordered"), full_width = F)
+
+tab_r2GGS <- kable(R2_GGS, format = "html", caption="GGS Model(formula)") %>%
+  kable_styling(c("striped", "bordered"), full_width = F)
+
+# tab_r2RR + tab_r2GGS
+# 
+# layout +
+#   plot_annotation(
+#   title = "Model Determininants for RR & GGS respectively",
+#   caption = "Source: gapminder: Data from Gapminder
+#              github.com/jennybc/gapminder
+#              gapminder.org/data/",
+#   theme = theme(plot.title = element_text(size = 20, hjust = 0.5, face = "bold"))
+#   )  
+#  add_header_above(c(' ', 'r.sqaured' = 2, 'adj. r.sqaured' = 2))
+
+```
+
+```{r echo=FALSE}
+R2_RR <- read.csv(file = here::here("code/code-output","R2_RR.txt"))
+R2_GGS <- read.csv(file = here::here("code/code-output","R2_GGS.txt"))
+
+
+g1 <- tableGrob(R2_RR)
+g2 <- tableGrob(R2_GGS)
+
+haligned <- gtable_combine(g1, g2, along=1)
+grid.arrange(haligned, ncol=2)
+  
+
+```
+
+
+

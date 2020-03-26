@@ -1,12 +1,4 @@
-## Model fitting
-
-Modeling of particle size distributions are statical procedures where distributions with known distribution functions are used to compare or model real life distribution to.
-
-The two most commmonly used distributions in Geology and Mineral Processing and specifically comminution circuits are the Roslin-Rammler and the Gates-Gaudin-Schumann distributions.
-
-Both models were used  to model all PSD screening data to, and the subsequent best fit model was selected in each case. Model selection was determined by comparing each PSD's transformed linear model's determinant ($R^2$).
-Interpolation betweeen measured sizing points is conducted by the back-transformation of the model-fitted points along the respective model's distribution function. 
-
+## Model formulas 
 
 
 ### Rosin Rammler (RR) Model:
@@ -52,7 +44,7 @@ $$size = scale parameter\times (-\ln (1-percentile))^{1/slope parameter}$$ ,
 where the scale_parameter; is a function of the slope and intercept of the transf
 ormed RR model fit, as follows: $$scale parameter = exp(-\frac{intercept}{slope} )$$
 
-
+***
 
 
 ### Gates-Gaudin-Schumann (GGS) Model:
@@ -76,7 +68,7 @@ Log transformation of the distribution yields:
 
 $$\ln y = n \ln x - n \ln k$$
 
-Applying this transformation to the measured observed distribution data points will yield near straight lines if the data fits the model.
+Applying this transformation to the measured observed distribution data points will yield near straight lines if the data fits the model, and interpolation on along a straight line is much easier than along the curved arithmetic distribution function.
 
 
 

@@ -1,5 +1,12 @@
 ## Method
 
+```{r include=FALSE}
+library(here)
+library(ggplot2)
+library(tidyverse)
+library(kableExtra)
+```
+
 ### Design of experiment
 Include here...
 
@@ -40,28 +47,29 @@ Two sample cuts were taken from the feeds of `321-SC-013` and `321-SC-014`, as w
 Screen cluster feed and individual deck overflow samples were weighed, wet screened to get $-38 µm$ fractions, dried in the oven and sieved to determine the weight of each size fraction. 
 
 
-The following screens sizes were used ($\mu M$) ```print(sieve)```
+The following screens sizes were used ($\mu M$) 
+```{r echo=FALSE}
+bringIn_sieve <- here::here("code/code-output","sieves-used-in-psd.txt")
 
-```{r}
-library(here)
-here()
+sieves_used <- read.csv(file = bringIn_sieve)
+
+   # knitr::kable(sieves_used)
+
+table(sieves_used)
+
+
+#use (brackets) to print result.
 
 ```
 
 
-```{r cache=FALSE}
-# knitr::read_chunk(here::here("code","screentest-19oct2014.R"))
-```
 
-```{r}
-data_path <- "code/code-output"
-file_name <- "long_feedraw.txt"
 
-input_file <- here(data_path,file_name)
 
-#input_file <- here("code/code-output","long_feedraw.txt")
+```{r echo=FALSE}
+BringIn_file <- here::here("code/code-output","long_feedraw.txt")
 
-longfeedraw <- read.csv(file = input_file)
+longfeedraw <- read.csv(file = BringIn_file)
 
 ggplot(longfeedraw, aes(sieve, probability, colour = stream)) +
   geom_line()
