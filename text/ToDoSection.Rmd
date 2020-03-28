@@ -27,6 +27,7 @@ Then do the same for the modelled streams.
 
 ### Formulas
 
+Modelfurmulas section does render to PDF. error with inline `R` code.
 + double check RR Latex formula in (d/l?)
 
 

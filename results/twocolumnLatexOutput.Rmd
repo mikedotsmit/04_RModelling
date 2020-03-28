@@ -1,0 +1,41 @@
+---
+title: test this
+output: pdf_document
+documentclass: report
+header-includes:
+  - \renewcommand{\chaptername}{Part}
+  - \newcommand{\fullline}{\noindent\makebox[\linewidth]{\rule{\textwidth}{0.4pt}}}
+  - \newcommand{\bminione}{\begin{minipage}{0.75 \textwidth}}
+  - \newcommand{\bminitwo}{\begin{minipage}{0.25 \textwidth}}
+  - \newcommand{\emini}{\end{minipage}}
+---
+
+```{r echo=FALSE, include=FALSE, warning=FALSE, message=FALSE, error=FALSE }
+library(ggplot2)
+library(pander)
+```
+
+# Variable list
+## **charVar**
+
+\bminione
+
+----------------------------------
+Feature                     Result
+----------------------- ----------
+Variable type               factor
+
+Number of missing obs.  1 (6.67 %)
+
+Number of unique values          4
+----------------------------------
+
+\emini
+
+\bminitwo
+```{r echo=FALSE, fig.width=4, fig.height=3, message=FALSE, warning=FALSE }
+qplot(x = structure(c(1L, 2L, 3L, 1L, 2L, 4L, 1L, 1L, 2L, 3L,
+1L, 2L, 4L, 1L), .Label = c("a", "b", "c", "d"), class = "factor", na.action = structure(15L, class = "omit")),
+    geom = "bar", xlab = "", main = "charVar")
+```
+\emini

@@ -3,12 +3,7 @@ output:
   pdf_document: default
   html_document: default
 ---
----
-output:
-  html_document: default
-  pdf_document: default
-  word_document: default
-  ---
+
 # Results and Discussion
 
 ```{r include=FALSE}
@@ -35,27 +30,35 @@ library(magrittr)
 library(qwraps2)
 options(qwraps2_markup = 'markdown')
 
-
 knitr.table.format = "latex" #global option for tables. can still set any in each kable function.
 
 #excellent for LaTeX equations:(probable keep this in bib)
 #http://visualmatheditor.equatheque.net/VisualMathEditor.html
-
 ```
 <br><br><br><br>
 
 ```{r global_options, R.options=knitr::opts_chunk$set(warning=FALSE, message=FALSE)}
 ```
 
-
+Each test's feed stream PSD results were first compared to confirm that their distributions were simmilar to allow for comparitive statictics.  
 
 ```{r echo=FALSE}
-BringIn_file <- here::here("code/code-output","long_feedraw.txt")
-
+BringIn_file <- here::here("code/code-output","long_feedraw.txt") #results generated in screentest-19oct2014.R
 longfeedraw <- read.csv(file = BringIn_file)
 
+
 ggplot(longfeedraw, aes(sieve, probability, colour = stream)) +
-  geom_line()
+  geom_line()+
+  ggtitle("Feed stream unmoddeled solids frequency distribution.") +
+  theme(plot.title = element_text(size=9))
+  #annotate(caption) geom = "text", x = 1.00, y = 1.00,
+
+
+ 
+#         #(x = xrng[1], y = yrng[2],) i mannually tiped the y=1.oo um in here to move the caption to start at 1um and not on top of the plots at 0 um as the rng(range) arguments would do.
+#     label = caption, hjust = 0, vjust = 0, size = 3
+#   )
+# 
 ```
 
 The two most commmonly used distributions in Geology and Mineral Processing and specifically comminution circuits are the Roslin-Rammler and the Gates-Gaudin-Schumann distributions.
@@ -64,7 +67,7 @@ Both models were used  to model all PSD screening data to, and the subsequent be
 Interpolation betweeen measured sizing points is conducted by the back-transformation of the model-fitted points along the respective model's distribution function. 
 
 
-```{r echo=FALSE, results='asis'}
+```{r ,echo=FALSE, results='asis'}
 library(knitr)
 library(xtable)
 
@@ -74,23 +77,24 @@ R2_GGS <- read.csv(file = here::here("code/code-output","R2_GGS.txt"))
 
 tblR2RR <- knitr::kable(R2_RR,
                         "latex",
-                        escape = F,booktabs = T) #, 
-                        #digits = c(0,3,3,4,1), 
-                        #caption="RR Model(formula)") %>%
+                        escape = F,booktabs = T, 
+                        digits = c(0,3,3,4,1)) %>% 
+  column_spec(1:5, width = "1cm") 
+  #this column_spec is supposed to set column widths to force text to wrap inside the colmn #https://community.rstudio.com/t/wrap-column-name-in-pdf-table-from-knitr-kable/3278/4)
+                        #caption="RR Model(formula)") # %>%
 #  kable_styling(c("striped", "bordered"), 
                 #full_width = F) %>% 
-  #column_spec(1:5, width = "5cm") #this column_spec is supposed to set column widths to force text to wrap inside the colmn #https://community.rstudio.com/t/wrap-column-name-in-pdf-table-from-knitr-kable/3278/4)
 #https://www.rdocumentation.org/packages/kableExtra/versions/1.1.0/topics/column_spec
 
 
 tblR2GGS <- knitr::kable(R2_GGS,
                   "latex",
-                  escape = F, booktabs = T)#, 
-                  #digits = c(0,3,3,4,1) ,
+                  escape = F, booktabs = T, 
+                  digits = c(0,3,3,4,1)) %>% 
+  column_spec(1:5, width = "1cm")
                   #caption="GGS Model(formula)") %>%
 #kable_styling(c("striped", "bordered"), 
               #full_width = F) %>% 
-  #column_spec(1:5, width = "2cm")
 
 # t1 <- kable(R2_RR, format = "latex", booktabs = TRUE)
 # 
@@ -98,13 +102,13 @@ tblR2GGS <- knitr::kable(R2_GGS,
 
 cat(c("\\begin{table}[!htb]
     \\begin{minipage}{.5\\linewidth}
-      \\caption{}
+      \\caption{RR Model(formula)}
       \\centering",
         tblR2RR,
     "\\end{minipage}%
     \\begin{minipage}{.5\\linewidth}
       \\centering
-        \\caption{}",
+        \\caption{GGS Model(formula)}",
         tblR2GGS,
     "\\end{minipage} 
 \\end{table}"
@@ -116,72 +120,30 @@ cat(c("\\begin{table}[!htb]
 ```
 
 
-```{r ,echo=FALSE, results="asis"}
-library(xtable)
-library(knitr)
 
-#side-by-side-tables
-cat(c("\\begin{table}[!htb]
-    \\begin{minipage}{.5\\linewidth}
-      \\caption{}
-      \\centering",
-        tblR2RR,
-    "\\end{minipage}%
-    \\begin{minipage}{.5\\linewidth}
-      \\centering
-        \\caption{}",
-        tblR2GGS,
-    "\\end{minipage}
-\\end{table}"
-))
-
-
-```
 
 ```{r , echo=FALSE, results='asis', warning=TRUE}
-# Setting `results = 'asis'` allows for using Latex within the code chunk
-
-     cat('\\begin{center}')
-     # `{c c}` Creates a two column table
-     # Use `{c | c}` if you'd like a line between the tables
-     cat('\\begin{tabular}{ c c }')
-     
-     print(tblR2RR, format = 'latex')
-     # Separate the two columns with an `&`
-     
-     cat('&')
-     
-     print(tblR2GGS, format = 'latex')
-     cat('\\end{tabular}')
-     cat('\\end{center}')
+# # Setting `results = 'asis'` allows for using Latex within the code chunk
+# 
+#      cat('\\begin{center}')
+#      # `{c c}` Creates a two column table
+#      # Use `{c | c}` if you'd like a line between the tables
+#      cat('\\begin{tabular}{ c c }')
+# 
+#      print(tblR2RR, format = 'latex')
+#      # Separate the two columns with an `&`
+# 
+#      cat('&')
+# 
+#      print(tblR2GGS, format = 'latex')
+#      cat('\\end{tabular}')
+#      cat('\\end{center}')
 ```
 
 
 
 
 
-```{r sample, echo=FALSE, results='asis'}
-library(knitr)
-library(xtable)
-
-t1 <- kable(R2_RR, format = "latex", booktabs = TRUE)
-
-t2 <- kable(head(mtcars)[4:6], format = "latex", booktabs = TRUE)
-
-cat(c("\\begin{table}[!htb]
-    \\begin{minipage}{.5\\linewidth}
-      \\caption{hello}
-      \\centering",
-        t1,
-    "\\end{minipage}%
-    \\begin{minipage}{.5\\linewidth}
-      \\centering
-        \\caption{}",
-        t2,
-    "\\end{minipage} 
-\\end{table}"
-))  
-```
 
 
 
