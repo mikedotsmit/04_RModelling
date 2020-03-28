@@ -1,4 +1,4 @@
-## Method
+# Method
 
 ```{r include=FALSE}
 library(here)
@@ -7,7 +7,7 @@ library(tidyverse)
 library(kableExtra)
 ```
 
-### Design of experiment
+## Design of experiment
 Include here...
 
 I need to do more research here..
@@ -22,7 +22,7 @@ formula used by OEM for efficiency calcultions. Not sure if they modeled the dat
 
 
 
-### Preparation (maybe include in design of experiment?)
+## Preparation (maybe include in design of experiment?)
 
 Grinding Screens `321-SC-013` and `321-SC-014` were chosen for the comparison test. Ten `0.25 MTQ` panels were installed in `321-SC-014` on the $30^{th}$ of September.  
 
@@ -30,7 +30,7 @@ Grinding Screens `321-SC-013` and `321-SC-014` were chosen for the comparison te
 
 
 
-### Sampling
+## Sampling
 Survey 1 was conducted while `Mill 2` was offline due to an issue with the mill liners. Survey 2 conducted with two secondary mills online but with higher than usual recirculating load. 
 During the surveys, feed to the mills and recirculating load were steady for at least an hour.
 
@@ -66,14 +66,6 @@ table(sieves_used)
 
 
 
-```{r echo=FALSE}
-BringIn_file <- here::here("code/code-output","long_feedraw.txt")
-
-longfeedraw <- read.csv(file = BringIn_file)
-
-ggplot(longfeedraw, aes(sieve, probability, colour = stream)) +
-  geom_line()
-```
 
 
 

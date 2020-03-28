@@ -1,4 +1,4 @@
-## Model formulas 
+# Model formulas 
 
 
 ### Rosin Rammler (RR) Model:

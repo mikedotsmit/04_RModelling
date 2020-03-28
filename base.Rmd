@@ -1,11 +1,12 @@
 ---
 title: "Grinding screen panel comparrison"
 author: "Michael C. Smit"
-date: "2020"
-output: 
+date: '2020'
+output:
   html_document:
-    number_sections: TRUE
-
+  
+  pdf_document: default
+  
 ---
 
 ```{r include=FALSE}
@@ -13,14 +14,36 @@ library(tidyverse)
 library(kableExtra)
 #devtools::install_github("yihui/printr")
 #require(printr)
+
+library(ggplot2)
+library(here)
+library(conflicted)
+library(markdown)
+library(tinytex)
+library(tidyverse)
+library(readxl)
+library(modelr)
+library(broom)
+library(reshape)
+library(readr)
+library(knitr)
+library(kableExtra)
+library(magrittr)
+library(qwraps2)
+options(qwraps2_markup = 'markdown')
+
+#devtools::install_github("username/packagename")
+knitr.table.format = "latex" #global option for tables. can still set any in each kable function.
+#excellent for LaTeX equaitons:(probable keep this in bib)
+#http://visualmatheditor.equatheque.net/VisualMathEditor.html
+
 ```
 
 
 <<center><chr>
 ![](images/me-glasses.jpg){width=100}
 ![](images/me-glasses.jpg){width=75}
-![](images/me-glasses.jpg){width=50}
-![](images/me-glasses.jpg){width=25}
+
 <hr></center>
 
 ```{r child="text/summarySection.Rmd"}
@@ -43,18 +66,13 @@ library(kableExtra)
 
 ```
 
+```{r child="text/ToDoSection.Rmd"}
+
+```
 
 
 
 
-
-#```{r, test-a, echo=FALSE}
-
-#```
-
-
-#```{r, coefprint2}
-#```
 
 
 

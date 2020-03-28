@@ -43,9 +43,8 @@ sieve <- gramdata %>%
 ##as well as (maybe) a key section detailing terms used for objects.
 
 takeOut_sieve <- here("code/code-output","sieves-used-in-psd.txt")
-
 write.table(sieve, takeOut_sieve, sep=",", quote = FALSE)
-#dependents: methodSection.Rmd, code-output folder.
+#dependents / use in: methodSection.Rmd.
 
 #here excluding the sieve (first) column.
 gramdata1 <- gramdata %>%
@@ -122,8 +121,8 @@ quickfeedplot_unmodelled <- ggplot(long_feedraw, aes(sieve, probability, colour 
 #saveRDS(object = quickfeedplot_unmodelled, file = output_file)
 #method2:
 
-takeout_file <- here("code/code-output","long_feedraw.txt")
-write.table(long_feedraw, file = takeout_file, sep=",", quote = FALSE)
+takeout_longfeedraw <- here("code/code-output","long_feedraw.txt")
+write.table(long_feedraw, file = takeout_longfeedraw, sep=",", quote = FALSE)
 #dependents: methodSection
 
 

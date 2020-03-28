@@ -1,4 +1,4 @@
-## Introduction
+# Introduction
 
 Large amounts of fines ($-38 \mu M$) are generated and recirculated in the grinding circuit, resulting in overgrinding of the SCheelite contributing to loss of tungsten in the downstream gravity circuit.
 The Year to date average of $-38 \mu M$ material is $30 %$ by weight of grinding thickener underflow solids.
