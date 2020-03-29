@@ -3,10 +3,9 @@ title: "Grinding screen panel comparrison"
 author: "Michael C. Smit"
 date: '2020'
 output:
-  html_document:
-  
   pdf_document: default
-  
+  html_document:
+    df_print: paged
 ---
 
 ```{r include=FALSE}

@@ -1,3 +1,8 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
 # To Do 
 
 
@@ -27,36 +32,32 @@ Then do the same for the modelled streams.
 
 ### Formulas
 
-Modelfurmulas section does render to PDF. error with inline `R` code.
+
 + double check RR Latex formula in (d/l?)
 
 
-\begin{equation}
-
-  F\left(d\right) = exp\left[-(\frac{d}{l})^{m} \right]
-
-  \label{eq : RR}
-\end{equation}
+ $$F\left(d\right) = exp\left[-(\frac{d}{l})^{m} \right]$$
 
 
 + add regression formulas that include the coeficients
 
-++ result, discussion section?
++ result, discussion section?
 
 ### Tables
 
++ add row in distribution figures 
 + wrap text in col names of R2
 tableshttps://community.rstudio.com/t/wrap-column-name-in-pdf-table-from-knitr-kable/3278/4
 +also add latex formulas
 
 + repair layout of model coef tables in "Results and Discussion sectio:
 
-++ fix rounding 
-++ fix layout
++ fix rounding 
++ fix layout
 
 
 
 The RR transformation is achieved by taking the natural log twice and simplified as:
-$$\ln\left\{-\ln\left[1-F(d)\right] \right\} = m\times \ln d - m\times \ln \bar{d} $$
+#$$\ln\left\{-\ln\left[1-F(d)\right] \right\} = m\times \ln d - m\times \ln \bar{d} $$
 
 

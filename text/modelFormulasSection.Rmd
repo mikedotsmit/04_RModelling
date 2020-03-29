@@ -2,6 +2,7 @@
 output:
   pdf_document: default
   html_document: default
+  word_document: default
 ---
 # Model formulas 
 
@@ -9,14 +10,8 @@ output:
 ### Rosin Rammler (RR) Model:
 The RR model distribution function has been used to describe the particle size distributions of various minerals, powders and liquids of various types and sizes. The function is particularly suited to represent those produced by grinding, milling, and crushing operations. The general expression of the RR model is:
 
-\begin{equation}
 
-  F\left(d\right) = exp\left[-(\frac{d}{l})^{m} \right]
-
-  \label{eq : RR}
-\end{equation}
-
-
+$$  F\left(d\right) = exp\left[-(\frac{d}{l})^{m} \right] $$
 
 
 where:  
@@ -44,7 +39,7 @@ $$\underbrace{\ln\left\{-\ln\left[1-F(d)\right] \right\}}_\textrm{Y} =  \underbr
 (This is really the reason why we're doing the model fitting; so that we can better estimate the size at which a certain specified mass fraction will pass). 
 The back-transform is then conducted to determine the required percentile values:
 
-$$ x = \bar{d} \left(- \ln \left(1-Y \right)    \right)^\frac{1}{m}$$
+$$ x = \bar{d} \left(- \ln \left(1-Y \right)\right)^\frac{1}{m}$$
 $$size = scale parameter\times (-\ln (1-percentile))^{1/slope parameter}$$ ,
 where the scale_parameter; is a function of the slope and intercept of the transf
 ormed RR model fit, as follows: $$scale parameter = exp(-\frac{intercept}{slope} )$$
@@ -75,18 +70,10 @@ $$\ln y = n \ln x - n \ln k$$
 
 Applying this transformation to the measured observed distribution data points will yield near straight lines if the data fits the model, and interpolation on along a straight line is much easier than along the curved arithmetic distribution function.
 
+***
 
 
 
-If the size distribution of particles from a crushing or grinding operation does not
-approximate a straight line, it suggests that there may have been a problem with the data
-collection, or there is something unusual happening in the comminution process.
-The size modulus is a measure of how coarse the size distribution is, and the distribution
-modulus is a measure of how broad the size distribution is. Size modulus for a size
-distribution can be determined from a graph by extrapolating the straight-line portion up
-to 100% passing and finding the corresponding size value. The distribution modulus can
-be calculated by choosing two points in the linear portion of the graph, calculating the
-logs of the sizes and % passing values, and calculating the slope. 
 
 
 

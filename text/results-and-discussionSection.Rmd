@@ -64,6 +64,17 @@ ggplot(longfeedraw, aes(sieve, probability, colour = stream)) +
 The two most commmonly used distributions in Geology and Mineral Processing and specifically comminution circuits are the Roslin-Rammler and the Gates-Gaudin-Schumann distributions.
 
 Both models were used  to model all PSD screening data to, and the subsequent best fit model was selected in each case. Model selection was determined by comparing each PSD's transformed linear model's determinant ($R^2$).
+
+If the transformed size distributions from a crushing or grinding operation do not
+approximate a straight line, it suggests that there may have been a problem with the data
+collection, or there is something unusual happening in the comminution process (hang-ups or unnuasual recirculation).
+The size modulus is a measure of how coarse the size distribution is, and the distribution
+modulus is a measure of how broad the size distribution is. Size modulus for a size
+distribution can be determined from a graph by extrapolating the straight-line portion up
+to 100% passing and finding the corresponding size value. The distribution modulus can
+be calculated by choosing two points in the linear portion of the graph, calculating the
+logs of the sizes and % passing values, and calculating the slope. 
+
 Interpolation betweeen measured sizing points is conducted by the back-transformation of the model-fitted points along the respective model's distribution function. 
 
 
