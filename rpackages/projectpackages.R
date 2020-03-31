@@ -10,10 +10,10 @@
 library(easypackages)
 library(here)
 
-mypackage <- c("rmd","patchwork","tidyverse","kableExtra","conflicted","tinytex","tidyverse","readxl","modelr","broom","reshape","readr","knitr","kableExtra","magrittr","qwraps2","xtable","gridExtra")
+mypackage <- c("rmd","patchwork","tidyverse","kableExtra","conflicted","tinytex","tidyverse","readxl","modelr","broom","reshape","readr","kableExtra","magrittr","qwraps2","xtable","gridExtra")
 
 libraries(mypackage) #attaches packages
 #packages(mypackage) #checks installed, installs, attaches.
 
-
+# exclude from packages vector as include in "rmd" families package: "knitr",
 
