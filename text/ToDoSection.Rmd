@@ -13,6 +13,8 @@ https://cran.r-project.org/web/packages/kableExtra/vignettes/awesome_table_in_ht
 
 
 ## Write up
+explain and list the test that were conducted.
+explain which part are taken further into considerring for analasys and why.
 
 Im not too happy with the layout structure and flow. compare with professional technical report in the industry.
 
@@ -20,9 +22,10 @@ Im not too happy with the layout structure and flow. compare with professional t
 ## Tables, Plot, Figs, Formulas
 
 ### Plot
+simple small plots off all raw distributions.
 
-move plot (unmodelled psd) out of "sampling" section; should be in results.
 this same plot can be plot next to the OS and US streams.
+
 Then do the same for the modelled streams.
 
 ### Formulas

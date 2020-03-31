@@ -1,3 +1,8 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
 This file houses most of the code for this specific test conducted.
 the filename (of this file) denotes the specific test which's code is represented here.
 the raw data is pulled into this file and processed.
@@ -31,7 +36,7 @@ knitr.table.format = "latex" #global option for tables. can still set any in eac
 ```{r}
 #pull in the data, try to give descriptive name: in this case 'gramdata'.
 
-gramdata <- read_csv(here("data", "test-31aug-2014-csv.csv")) #read here to see ,ore about "here::here" function (https://malco.io/2018/11/05/why-should-i-use-the-here-package-when-i-m-already-using-projects/)
+gramdata <- read_csv(here("data/02_preparedData", "test-31aug-2014-csv.csv")) #read here to see ,ore about "here::here" function (https://malco.io/2018/11/05/why-should-i-use-the-here-package-when-i-m-already-using-projects/)
 
 ```
 
@@ -527,7 +532,7 @@ ss <- s %>%
 
 ```{r}
 # join the table containing data and model transformation with coeficients.
-sss <- dplyr::left_join(ss, coefs_intcpt_slope_scale, by = "stream") 
+#sss <- dplyr::left_join(ss, coefs_intcpt_slope_scale, by = "stream") 
 
 #error from here on (cannot find "unnest_sss)
 # unnest_sss <- sss %>% 
