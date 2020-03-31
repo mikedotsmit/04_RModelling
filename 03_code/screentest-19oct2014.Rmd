@@ -18,7 +18,7 @@ library("here")
 
 ```{r,include = FALSE }
 #attache rpackages from central location:
-source(here::here("rpackages",'projectpackages.R'))
+source(here::here("02_rpackages",'projectpackages.R'))
 
 ```
 
@@ -36,7 +36,7 @@ knitr.table.format = "latex" #global option for tables. can still set any in eac
 ```{r}
 #pull in the data, try to give descriptive name: in this case 'gramdata'.
 
-gramdata <- read_csv(here("data/02_preparedData", "test-31aug-2014-csv.csv")) #read here to see ,ore about "here::here" function (https://malco.io/2018/11/05/why-should-i-use-the-here-package-when-i-m-already-using-projects/)
+gramdata <- read_csv(here("01_data/02_preparedData", "test-31aug-2014-csv.csv")) #read here to see ,ore about "here::here" function (https://malco.io/2018/11/05/why-should-i-use-the-here-package-when-i-m-already-using-projects/)
 
 ```
 
@@ -59,10 +59,11 @@ sieve <- gramdata %>%
 ##I should have a lis tin thie beginning  of this script detailing a list of these depencansies, so one can see at 1st glance the risk of changing code.
 ##as well as (maybe) a key section detailing terms used for objects.
 ```
+
 ```{r}
 
-takeOut_sieve <- here("code/code-output","sieves-used-in-psd.txt")
-write.table(sieve, takeOut_sieve, sep=",", quote = FALSE)
+takeOut_sieve <- here("03_code/code-output","sieves-used-in-psd.txt")
+write.table(sieve, takeOut_sieve, sep=",", row.names = FALSE, quote = FALSE)
 #dependents / use in: methodSection.Rmd.
 ```
 
@@ -150,7 +151,7 @@ quickfeedplot_unmodelled <- ggplot(long_feedraw, aes(sieve, probability, colour 
 ```
 
 ```{r}
-takeout_longfeedraw <- here("code/code-output","long_feedraw.txt")
+takeout_longfeedraw <- here("03_code/code-output","long_feedraw.txt")
 write.table(long_feedraw, file = takeout_longfeedraw, sep=",", quote = FALSE)
 #dependents: methodSection
 
@@ -397,16 +398,16 @@ R2_RR <- full_join(coef_deter_RR1,coef_deter_RR2)
 R2_GGS <- full_join(coef_deter_GGS1,coef_deter_GGS2)
 
 #write the tibbles to \code-output folder  for use in table generated in resultsanddiscion section
-write.table(R2_RR, file = here("code/code-output","R2_RR.txt"), sep=",", quote = FALSE)
-write.table(R2_GGS, file = here("code/code-output","R2_GGS.txt"), sep=",", quote = FALSE)
+write.table(R2_RR, file = here("03_code/code-output","R2_RR.txt"), sep=",", quote = FALSE)
+write.table(R2_GGS, file = here("03_code/code-output","R2_GGS.txt"), sep=",", quote = FALSE)
 ```
 
 ```{r}
 
 #print the out put of the table.
 # bring in the saved data to be tabled:
-R2_RR <- read.csv(file = here::here("code/code-output","R2_RR.txt"))
-R2_GGS <- read.csv(file = here::here("code/code-output","R2_GGS.txt"))
+R2_RR <- read.csv(file = here::here("03_code/code-output","R2_RR.txt"))
+R2_GGS <- read.csv(file = here::here("03_code/code-output","R2_GGS.txt"))
 
 tblR2RR <- knitr::kable(R2_RR,
                         "latex",
