@@ -1,13 +1,7 @@
----
-output:
-  pdf_document: default
-  html_document: default
-  word_document: default
----
 # Model formulas 
 
 
-### Rosin Rammler (RR) Model:
+## Rosin Rammler (RR) Model:
 The RR model distribution function has been used to describe the particle size distributions of various minerals, powders and liquids of various types and sizes. The function is particularly suited to represent those produced by grinding, milling, and crushing operations. The general expression of the RR model is:
 
 
@@ -47,7 +41,7 @@ ormed RR model fit, as follows: $$scale parameter = exp(-\frac{intercept}{slope}
 ***
 
 
-### Gates-Gaudin-Schumann (GGS) Model:
+## Gates-Gaudin-Schumann (GGS) Model:
 
 The Gates-Gaudin-Schumann plot is a graph of **cumulative % passing versus nominal
 sieve size**, with both the $X$ and $Y$ axes being logarithmic plots. In this type of plot, most of the data points (except for the two or three coarsest sizes measured) should lie nearly in a straight line.
@@ -82,4 +76,3 @@ Applying this transformation to the measured observed distribution data points w
 
 
 
-RR model fits the feed streams means (F13m and F14m) better (near straight line QQ fits) than the Oversize streams.

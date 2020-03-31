@@ -8,27 +8,22 @@ output:
     df_print: paged
 ---
 
-```{r include=FALSE}
-library(tidyverse)
-library(kableExtra)
-#devtools::install_github("yihui/printr")
-#require(printr)
 
-library(ggplot2)
-library(here)
-library(conflicted)
-library(markdown)
-library(tinytex)
-library(tidyverse)
-library(readxl)
-library(modelr)
-library(broom)
-library(reshape)
-library(readr)
-library(knitr)
-library(kableExtra)
-library(magrittr)
-library(qwraps2)
+```{r, include = FALSE}
+#Function here::here to help with file paths relative to the project folder:
+library("here")
+```
+
+
+```{r, include = FALSE }
+#attache rpackages from central location:
+source(here::here("rpackages",'projectpackages.R'))
+
+```
+
+
+```{r, include = FALSE}
+
 options(qwraps2_markup = 'markdown')
 
 #devtools::install_github("username/packagename")

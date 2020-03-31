@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/W32TeX) (preloaded format=pdflatex 2020.3.13)  28 MAR 2020 20:46
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/W32TeX) (preloaded format=pdflatex 2020.3.29)  31 MAR 2020 11:47
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -689,27 +689,27 @@ LaTeX Warning: Command \textmu invalid in math mode on input line 136.
 
 LaTeX Warning: Command \textmu invalid in math mode on input line 136.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 165.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 167.
 [1
 
 {c:/Users/miked/AppData/Roaming/TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdfte
-x.map}]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 165.
+x.map}] [2]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 167.
 (./methodSection.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 165.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 165.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 167.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 167.
 Package rerunfilecheck Info: File `methodSection.out' has not changed.
 (rerunfilecheck)             Checksum: CC5A92F52882A96EDEFF4744B3210186;666.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 165.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 167.
  ) 
 Here is how much of TeX's memory you used:
- 11949 strings out of 482913
- 172539 string characters out of 5957672
+ 11950 strings out of 482913
+ 172545 string characters out of 5957672
  421914 words of memory out of 5000000
  26979 multiletter control sequences out of 15000+600000
  563362 words of font info for 49 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 34i,5n,37p,387b,316s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 34i,5n,37p,387b,317s stack positions out of 5000i,500n,10000p,200000b,80000s
 {c:/Users/miked/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ec.e
 nc}{c:/Users/miked/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mat
 hit.enc}{c:/Users/miked/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/l
@@ -723,10 +723,10 @@ st/fonts/type1/public/lm/lmmi7.pfb><c:/Users/miked/AppData/Roaming/TinyTeX/texm
 f-dist/fonts/type1/public/lm/lmr10.pfb><c:/Users/miked/AppData/Roaming/TinyTeX/
 texmf-dist/fonts/type1/public/lm/lmsy10.pfb><c:/Users/miked/AppData/Roaming/Tin
 yTeX/texmf-dist/fonts/type1/public/lm/lmtt10.pfb>
-Output written on methodSection.pdf (1 page, 118883 bytes).
+Output written on methodSection.pdf (2 pages, 119282 bytes).
 PDF statistics:
- 73 PDF objects out of 1000 (max. 8388607)
- 62 compressed objects within 1 object stream
- 10 named destinations out of 1000 (max. 500000)
+ 77 PDF objects out of 1000 (max. 8388607)
+ 65 compressed objects within 1 object stream
+ 11 named destinations out of 1000 (max. 500000)
  33 words of extra memory for PDF output out of 10000 (max. 10000000)
 

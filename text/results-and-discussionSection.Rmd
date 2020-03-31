@@ -1,33 +1,21 @@
----
-output:
-  pdf_document: default
-  html_document: default
----
-
 # Results and Discussion
 
-```{r include=FALSE}
-library(tidyverse)
-library(kableExtra)
-library(xtable)
-library(ggplot2)
-library(patchwork) #for multiple plot placement
-library(gridExtra) #tables as graphics
 
-library(here)
-library(conflicted)
-library(markdown)
-library(tinytex)
-library(tidyverse)
-library(readxl)
-library(modelr)
-library(broom)
-library(reshape)
-library(readr)
-library(knitr)
-library(kableExtra)
-library(magrittr)
-library(qwraps2)
+```{r, include = FALSE}
+#Function here::here to help with file paths relative to the project folder:
+library("here")
+```
+
+
+```{r,include = FALSE }
+#attache rpackages from central location:
+source(here::here("rpackages",'projectpackages.R'))
+
+```
+
+
+```{r include = FALSE}
+
 options(qwraps2_markup = 'markdown')
 
 knitr.table.format = "latex" #global option for tables. can still set any in each kable function.
@@ -65,6 +53,9 @@ The two most commmonly used distributions in Geology and Mineral Processing and 
 
 Both models were used  to model all PSD screening data to, and the subsequent best fit model was selected in each case. Model selection was determined by comparing each PSD's transformed linear model's determinant ($R^2$).
 
+RR model fits the feed streams means (F13m and F14m) better (near straight line QQ fits) than the Oversize streams.
+
+
 If the transformed size distributions from a crushing or grinding operation do not
 approximate a straight line, it suggests that there may have been a problem with the data
 collection, or there is something unusual happening in the comminution process (hang-ups or unnuasual recirculation).
@@ -90,7 +81,7 @@ tblR2RR <- knitr::kable(R2_RR,
                         "latex",
                         escape = F,booktabs = T, 
                         digits = c(0,3,3,4,1)) %>% 
-  column_spec(1:5, width = "1cm") 
+  column_spec(1:5, width = "1.2cm") 
   #this column_spec is supposed to set column widths to force text to wrap inside the colmn #https://community.rstudio.com/t/wrap-column-name-in-pdf-table-from-knitr-kable/3278/4)
                         #caption="RR Model(formula)") # %>%
 #  kable_styling(c("striped", "bordered"), 
@@ -102,7 +93,7 @@ tblR2GGS <- knitr::kable(R2_GGS,
                   "latex",
                   escape = F, booktabs = T, 
                   digits = c(0,3,3,4,1)) %>% 
-  column_spec(1:5, width = "1cm")
+  column_spec(1:5, width = "1.2cm")
                   #caption="GGS Model(formula)") %>%
 #kable_styling(c("striped", "bordered"), 
               #full_width = F) %>% 
@@ -131,51 +122,7 @@ cat(c("\\begin{table}[!htb]
 ```
 
 
-```{r ,echo=FALSE, results='asis'}
-library(knitr)
-library(xtable)
 
-# bring in the saved data to be tabled:
-R2_RR <- read.csv(file = here::here("code/code-output","R2_RR.txt"))
-R2_GGS <- read.csv(file = here::here("code/code-output","R2_GGS.txt"))
-
-tblR2RR <- knitr::kable(R2_RR,
-                        "latex",
-                        escape = F,booktabs = T, 
-                        digits = c(0,3,3,4,1)) %>% 
-  column_spec(1:5, width = "1cm") 
-  #this column_spec is supposed to set column widths to force text to wrap inside the colmn #https://community.rstudio.com/t/wrap-column-name-in-pdf-table-from-knitr-kable/3278/4)
-                        #caption="RR Model(formula)") # %>%
-#  kable_styling(c("striped", "bordered"), 
-                #full_width = F) %>% 
-#https://www.rdocumentation.org/packages/kableExtra/versions/1.1.0/topics/column_spec
-
-
-tblR2GGS <- knitr::kable(R2_GGS,
-                  "latex",
-                  escape = F, booktabs = T, 
-                  digits = c(0,3,3,4,1)) %>% 
-  column_spec(1:5, width = "1cm")
-                  
-
-cat(c("\\begin{table}[!htb]
-    \\begin{minipage}{.5\\linewidth}
-      \\caption{RR Model(formula)}
-      \\centering",
-        tblR2RR,
-    "\\end{minipage}%
-    \\begin{minipage}{.5\\linewidth}
-      \\centering
-        \\caption{GGS Model(formula)}",
-        tblR2GGS,
-    "\\end{minipage} 
-\\end{table}"
-))  
-
-
-
-
-```
 
 try add as footnote in table/s: "RRmodel is a better fit ,according to the simple model applied, i.e. single linear model applied to transformed y-variables and transformed x-factors. When applyinh peicewise (conditional) factors, the GGS model becomes a better model, but at the same tiem more noise (errors (epsilon?) is incorpaorated in the model. double the coefficients.
 

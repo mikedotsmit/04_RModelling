@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/W32TeX) (preloaded format=pdflatex 2020.3.29)  29 MAR 2020 11:50
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/W32TeX) (preloaded format=pdflatex 2020.3.29)  31 MAR 2020 11:49
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -707,126 +707,43 @@ LaTeX Warning: Command \textmu invalid in math mode on input line 174.
 
 LaTeX Warning: Command \textmu invalid in math mode on input line 174.
 
-
-Package hyperref Warning: Difference (2) between bookmark levels is greater 
-(hyperref)                than one, level fixed on input line 207.
-
 [2] [3]
-<base_files/figure-latex/unnamed-chunk-11-1.pdf, id=113, 469.755pt x 325.215pt>
+<base_files/figure-latex/unnamed-chunk-17-1.pdf, id=113, 469.755pt x 325.215pt>
 
-File: base_files/figure-latex/unnamed-chunk-11-1.pdf Graphic file (type pdf)
-<use base_files/figure-latex/unnamed-chunk-11-1.pdf>
-Package pdftex.def Info: base_files/figure-latex/unnamed-chunk-11-1.pdf  used o
-n input line 299.
+File: base_files/figure-latex/unnamed-chunk-17-1.pdf Graphic file (type pdf)
+<use base_files/figure-latex/unnamed-chunk-17-1.pdf>
+Package pdftex.def Info: base_files/figure-latex/unnamed-chunk-17-1.pdf  used o
+n input line 298.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-[4 <./base_files/figure-latex/unnamed-chunk-11-1.pdf>]
-Overfull \hbox (1.07492pt too wide) in paragraph at lines 333--333
-[]|\T1/lmr/m/n/10 stream|  
- []
-
-
-Overfull \hbox (11.93633pt too wide) in paragraph at lines 333--333
- []|\T1/lmr/m/n/10 r.squared|
- []
-
-
-Overfull \hbox (28.32507pt too wide) in paragraph at lines 333--333
- []|\T1/lmr/m/n/10 adj.r.squared|
- []
-
-
-Overfull \hbox (2.38069pt too wide) in paragraph at lines 333--333
- []|\T1/lmr/m/n/10 p.value|
- []
-
-
-Overfull \hbox (3.21373pt too wide) in paragraph at lines 337--337
-[]|\T1/lmr/m/n/10 OS13m|  
- []
-
-
-Overfull \hbox (3.21373pt too wide) in paragraph at lines 338--338
-[]|\T1/lmr/m/n/10 OS14m|  
- []
-
-
-Overfull \hbox (2.93575pt too wide) in paragraph at lines 339--339
-[]|\T1/lmr/m/n/10 US13m|  
- []
-
-
-Overfull \hbox (2.93575pt too wide) in paragraph at lines 341--341
-[]|\T1/lmr/m/n/10 US14m|  
- []
-
-
-Overfull \hbox (1.07492pt too wide) in paragraph at lines 349--349
-[]|\T1/lmr/m/n/10 stream|  
- []
-
-
-Overfull \hbox (11.93633pt too wide) in paragraph at lines 349--349
- []|\T1/lmr/m/n/10 r.squared|
- []
-
-
-Overfull \hbox (28.32507pt too wide) in paragraph at lines 349--349
- []|\T1/lmr/m/n/10 adj.r.squared|
- []
-
-
-Overfull \hbox (2.38069pt too wide) in paragraph at lines 349--349
- []|\T1/lmr/m/n/10 p.value|
- []
-
-
-Overfull \hbox (3.21373pt too wide) in paragraph at lines 353--353
-[]|\T1/lmr/m/n/10 OS13m|  
- []
-
-
-Overfull \hbox (3.21373pt too wide) in paragraph at lines 354--354
-[]|\T1/lmr/m/n/10 OS14m|  
- []
-
-
-Overfull \hbox (2.93575pt too wide) in paragraph at lines 355--355
-[]|\T1/lmr/m/n/10 US13m|  
- []
-
-
-Overfull \hbox (2.93575pt too wide) in paragraph at lines 357--357
-[]|\T1/lmr/m/n/10 US14m|  
- []
-
-[5pdfTeX warning (ext4): destination with the same identifier (name{table.1}) h
-as been already used, duplicate ignored
+[4 <./base_files/figure-latex/unnamed-chunk-17-1.pdf>] [5pdfTeX warning (ext4):
+ destination with the same identifier (name{table.1}) has been already used, du
+plicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.400 ...) = exp\left[-(\frac{d}{l})^{m} \right]\]
+l.409 ...) = exp\left[-(\frac{d}{l})^{m} \right]\]
                                                   pdfTeX warning (ext4): destin
 ation with the same identifier (name{table.2}) has been already used, duplicate
  ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.400 ...) = exp\left[-(\frac{d}{l})^{m} \right]\]
+l.409 ...) = exp\left[-(\frac{d}{l})^{m} \right]\]
                                                   ]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 431.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 440.
 [6]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 431.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 440.
 (./base.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 431.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 431.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 440.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 440.
 Package rerunfilecheck Info: File `base.out' has not changed.
-(rerunfilecheck)             Checksum: 83E31AAAF6316E26CED8452C0B06B915;2277.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 431.
+(rerunfilecheck)             Checksum: E76DF0191EBB78BBC2726B89BB27A78D;2277.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 440.
  ) 
 Here is how much of TeX's memory you used:
  12060 strings out of 482913
  174004 string characters out of 5957672
- 430713 words of memory out of 5000000
+ 430710 words of memory out of 5000000
  27039 multiletter control sequences out of 15000+600000
  584386 words of font info for 67 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
@@ -851,7 +768,7 @@ pData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr5.pfb><c:/Users/miked
 /AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr7.pfb><c:/Users/mi
 ked/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy10.pfb><c:/Use
 rs/miked/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtt10.pfb>
-Output written on base.pdf (6 pages, 258225 bytes).
+Output written on base.pdf (6 pages, 258345 bytes).
 PDF statistics:
  207 PDF objects out of 1000 (max. 8388607)
  181 compressed objects within 2 object streams
