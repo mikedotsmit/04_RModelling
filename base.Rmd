@@ -17,7 +17,7 @@ library("here")
 
 ```{r, include = FALSE }
 #attache rpackages from central location:
-source(here::here("rpackages",'projectpackages.R'))
+source(here::here("02_rpackages",'projectpackages.R'))
 
 ```
 
@@ -35,32 +35,32 @@ knitr.table.format = "latex" #global option for tables. can still set any in eac
 
 
 <<center><chr>
-![](images/me-glasses.jpg){width=100}
-![](images/me-glasses.jpg){width=75}
+![](06_images/me-glasses.jpg){width=100}
+![](06_images/me-glasses.jpg){width=75}
 
 <hr></center>
 
-```{r child="text/summarySection.Rmd"}
+```{r child = "04_text/summarySection.Rmd"}
 
 ```
 
-```{r child="text/introductionSection.Rmd"}
+```{r child = "04_text/introductionSection.Rmd"}
 
 ```
 
-```{r child="text/methodSection.Rmd"}
+```{r child = "04_text/methodSection.Rmd"}
 
 ```
 
-```{r child="text/modelFormulasSection.Rmd"}
+```{r child = "04_text/modelFormulasSection.Rmd"}
 
 ```
 
-```{r child="text/results-and-discussionSection.Rmd"}
+```{r child = "04_text/results-and-discussionSection.Rmd"}
 
 ```
 
-```{r child="text/ToDoSection.Rmd"}
+```{r child = "04_text/ToDoSection.Rmd"}
 
 ```
 

@@ -14,7 +14,7 @@ library("here")
 
 ```{r,include = FALSE }
 #attache rpackages from central location:
-source(here::here("rpackages",'projectpackages.R'))
+source(here::here("02_rpackages",'projectpackages.R'))
 
 ```
 
@@ -36,7 +36,7 @@ knitr.table.format = "latex" #global option for tables. can still set any in eac
 Each test's feed stream PSD results were first compared to confirm that their distributions were simmilar to allow for comparitive statictics.  
 
 ```{r echo=FALSE}
-BringIn_file <- here::here("code/code-output","long_feedraw.txt") #results generated in screentest-19oct2014.R
+BringIn_file <- here::here("03_code/code-output","long_feedraw.txt") #results generated in screentest-19oct2014.R
 longfeedraw <- read.csv(file = BringIn_file)
 
 
@@ -79,8 +79,8 @@ library(knitr)
 library(xtable)
 
 # bring in the saved data to be tabled:
-R2_RR <- read.csv(file = here::here("code/code-output","R2_RR.txt"))
-R2_GGS <- read.csv(file = here::here("code/code-output","R2_GGS.txt"))
+R2_RR <- read.csv(file = here::here("03_code/code-output","R2_RR.txt"))
+R2_GGS <- read.csv(file = here::here("03_code/code-output","R2_GGS.txt"))
 
 tblR2RR <- knitr::kable(R2_RR,
                         "latex",

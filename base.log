@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/W32TeX) (preloaded format=pdflatex 2020.3.29)  31 MAR 2020 12:52
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/W32TeX) (preloaded format=pdflatex 2020.3.29)  31 MAR 2020 19:29
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -673,14 +673,14 @@ LaTeX Font Info:    Trying to load font information for U+msb on input line 83.
 (c:/Users/miked/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-<images/me-glasses.jpg, id=72, 281.05pt x 374.39874pt>
-File: images/me-glasses.jpg Graphic file (type jpg)
-<use images/me-glasses.jpg>
-Package pdftex.def Info: images/me-glasses.jpg  used on input line 86.
+<06_images/me-glasses.jpg, id=72, 281.05pt x 374.39874pt>
+File: 06_images/me-glasses.jpg Graphic file (type jpg)
+<use 06_images/me-glasses.jpg>
+Package pdftex.def Info: 06_images/me-glasses.jpg  used on input line 86.
 (pdftex.def)             Requested size: 75.27983pt x 100.2835pt.
-File: images/me-glasses.jpg Graphic file (type jpg)
-<use images/me-glasses.jpg>
-Package pdftex.def Info: images/me-glasses.jpg  used on input line 87.
+File: 06_images/me-glasses.jpg Graphic file (type jpg)
+<use 06_images/me-glasses.jpg>
+Package pdftex.def Info: 06_images/me-glasses.jpg  used on input line 87.
 (pdftex.def)             Requested size: 56.45773pt x 75.20976pt.
 LaTeX Font Info:    External font `lmex10' loaded for size
 (Font)              <10> on input line 92.
@@ -695,7 +695,7 @@ File: t1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
 ) [1
 
 {c:/Users/miked/AppData/Roaming/TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdfte
-x.map} <./images/me-glasses.jpg>]
+x.map} <./06_images/me-glasses.jpg>]
 LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 1
 59.
 (c:/Users/miked/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/ts1lmr.fd
@@ -721,33 +721,32 @@ plicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.409 ...) = exp\left[-(\frac{d}{l})^{m} \right]\]
-                                                  pdfTeX warning (ext4): destin
-ation with the same identifier (name{table.2}) has been already used, duplicate
- ignored
+l.412 \end{itemize}
+                   pdfTeX warning (ext4): destination with the same identifier 
+(name{table.2}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.409 ...) = exp\left[-(\frac{d}{l})^{m} \right]\]
-                                                  ]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 440.
+l.412 \end{itemize}
+                   ]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 445.
 [6]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 440.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 445.
 (./base.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 440.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 440.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 445.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 445.
 Package rerunfilecheck Info: File `base.out' has not changed.
 (rerunfilecheck)             Checksum: E76DF0191EBB78BBC2726B89BB27A78D;2277.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 440.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 445.
  ) 
 Here is how much of TeX's memory you used:
  12060 strings out of 482913
- 174004 string characters out of 5957672
+ 174022 string characters out of 5957672
  430710 words of memory out of 5000000
  27039 multiletter control sequences out of 15000+600000
  584386 words of font info for 67 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 34i,13n,37p,378b,329s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 34i,13n,37p,378b,379s stack positions out of 5000i,500n,10000p,200000b,80000s
 {c:/Users/miked/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-rm.e
 nc}{c:/Users/miked/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mat
 hit.enc}{c:/Users/miked/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/l
@@ -768,7 +767,7 @@ pData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr5.pfb><c:/Users/miked
 /AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr7.pfb><c:/Users/mi
 ked/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy10.pfb><c:/Use
 rs/miked/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtt10.pfb>
-Output written on base.pdf (6 pages, 258344 bytes).
+Output written on base.pdf (6 pages, 258000 bytes).
 PDF statistics:
  207 PDF objects out of 1000 (max. 8388607)
  181 compressed objects within 2 object streams
