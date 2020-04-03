@@ -11,7 +11,8 @@ output:
 ```{r , include = FALSE}
 
 library("here")
-#Function here::here to help with file paths relative to the project folder:
+
+# Function here::here to help with file paths relative to the project folder:
 ```
 
 
@@ -35,7 +36,7 @@ Each test's feed stream PSD results were first compared to confirm that their di
 
 
 ```{r, echo = FALSE, eval = TRUE, include = TRUE, out.width='75%', fig.align='center', fig.cap='...'}
-knitr::include_graphics(here::here("05_fig_output",'allStreamsPreModelling.png'))
+knitr::include_graphics(here::here("05_fig_output",'allStreamsPreModelling.pdf'))
 ```
 
 

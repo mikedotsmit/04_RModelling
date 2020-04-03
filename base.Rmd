@@ -42,27 +42,27 @@ git commit tried from Rstudio
 -it worked :) 
 
 
-```{r child = "04_text/summarySection.Rmd"}
+```{r child = "04_text/01_SummarySection.Rmd"}
 
 ```
 
-```{r child = "04_text/introductionSection.Rmd"}
+```{r child = "04_text/02_IntroductionSection.Rmd"}
 
 ```
 
-```{r child = "04_text/methodSection.Rmd"}
+```{r child = "04_text/03_MethodSection.Rmd"}
 
 ```
 
-```{r child = "04_text/modelFormulasSection.Rmd"}
+```{r child = "04_text/04_ModelFormulasSection.Rmd"}
 
 ```
 
-```{r child = "04_text/results-and-discussionSection.Rmd"}
+```{r child = "04_text/05_Results-and-discussionSection.Rmd"}
 
 ```
 
-```{r child = "04_text/ToDoSection.Rmd"}
+```{r child = "04_text/09_ToDoSection.Rmd"}
 
 ```
 

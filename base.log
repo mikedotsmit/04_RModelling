@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/W32TeX) (preloaded format=pdflatex 2020.3.29)  3 APR 2020 12:53
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/W32TeX) (preloaded format=pdflatex 2020.3.29)  3 APR 2020 16:46
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -683,13 +683,13 @@ File: 06_images/me-glasses.jpg Graphic file (type jpg)
 Package pdftex.def Info: 06_images/me-glasses.jpg  used on input line 85.
 (pdftex.def)             Requested size: 56.45773pt x 75.20976pt.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10> on input line 90.
+(Font)              <10> on input line 92.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7> on input line 90.
+(Font)              <7> on input line 92.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <5> on input line 90.
+(Font)              <5> on input line 92.
 LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 9
-1.
+3.
 (c:/Users/miked/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/t1lmtt.fd
 File: t1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
 ) [1
@@ -697,15 +697,15 @@ File: t1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
 {c:/Users/miked/AppData/Roaming/TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdfte
 x.map} <./06_images/me-glasses.jpg>]
 LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 1
-57.
+59.
 (c:/Users/miked/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/ts1lmr.fd
 File: ts1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 
-LaTeX Warning: Command \textmu invalid in math mode on input line 172.
+LaTeX Warning: Command \textmu invalid in math mode on input line 174.
 
 
-LaTeX Warning: Command \textmu invalid in math mode on input line 172.
+LaTeX Warning: Command \textmu invalid in math mode on input line 174.
 
 [2] [3]
 <C:/Users/miked/OneDrive/Statistics/R/Projects/nuiphao/2014-revisit-panelcompar
@@ -716,82 +716,82 @@ omparison/05_fig_output/allStreamsPreModelling.pdf Graphic file (type pdf)
 mparison/05_fig_output/allStreamsPreModelling.pdf>
 Package pdftex.def Info: C:/Users/miked/OneDrive/Statistics/R/Projects/nuiphao/
 2014-revisit-panelcomparison/05_fig_output/allStreamsPreModelling.pdf  used on 
-input line 298.
+input line 300.
 (pdftex.def)             Requested size: 352.31758pt x 281.85406pt.
 [4pdfTeX warning (ext4): destination with the same identifier (name{figure.1}) 
 has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.329 
+l.331 
        <c:/Users/miked/OneDrive/Statistics/R/Projects/nuiphao/2014-revisit-pane
 lcomparison/05_fig_output/allStreamsPreModelling.pdf>]
-Overfull \hbox (3.14244pt too wide) in paragraph at lines 340--340
+Overfull \hbox (3.14244pt too wide) in paragraph at lines 342--342
  []|\T1/lmr/m/n/10 adj.R2|
  []
 
 
-Overfull \hbox (5.22614pt too wide) in paragraph at lines 340--340
+Overfull \hbox (5.22614pt too wide) in paragraph at lines 342--342
  []|\T1/lmr/m/n/10 p.value|
  []
 
 
-Overfull \hbox (4.00372pt too wide) in paragraph at lines 342--342
+Overfull \hbox (4.00372pt too wide) in paragraph at lines 344--344
 []|\T1/lmr/m/n/10 Feed13MeanPct|  
  []
 
 
-Overfull \hbox (4.00372pt too wide) in paragraph at lines 343--343
+Overfull \hbox (4.00372pt too wide) in paragraph at lines 345--345
 []|\T1/lmr/m/n/10 Feed14MeanPct|  
  []
 
 
-Overfull \hbox (3.14244pt too wide) in paragraph at lines 356--356
+Overfull \hbox (3.14244pt too wide) in paragraph at lines 358--358
  []|\T1/lmr/m/n/10 adj.R2|
  []
 
 
-Overfull \hbox (5.22614pt too wide) in paragraph at lines 356--356
+Overfull \hbox (5.22614pt too wide) in paragraph at lines 358--358
  []|\T1/lmr/m/n/10 p.value|
  []
 
 
-Overfull \hbox (4.00372pt too wide) in paragraph at lines 358--358
+Overfull \hbox (4.00372pt too wide) in paragraph at lines 360--360
 []|\T1/lmr/m/n/10 Feed13MeanPct|  
- []
-
-
-Overfull \hbox (2.17046pt too wide) in paragraph at lines 358--358
- []|\T1/lmr/m/n/10 0.0001|
- []
-
-
-Overfull \hbox (4.00372pt too wide) in paragraph at lines 359--359
-[]|\T1/lmr/m/n/10 Feed14MeanPct|  
- []
-
-
-Overfull \hbox (2.17046pt too wide) in paragraph at lines 359--359
- []|\T1/lmr/m/n/10 0.0001|
  []
 
 
 Overfull \hbox (2.17046pt too wide) in paragraph at lines 360--360
- []|\T1/lmr/m/n/10 0.0017|
+ []|\T1/lmr/m/n/10 0.0001|
+ []
+
+
+Overfull \hbox (4.00372pt too wide) in paragraph at lines 361--361
+[]|\T1/lmr/m/n/10 Feed14MeanPct|  
  []
 
 
 Overfull \hbox (2.17046pt too wide) in paragraph at lines 361--361
- []|\T1/lmr/m/n/10 0.0025|
+ []|\T1/lmr/m/n/10 0.0001|
  []
 
 
 Overfull \hbox (2.17046pt too wide) in paragraph at lines 362--362
- []|\T1/lmr/m/n/10 0.0007|
+ []|\T1/lmr/m/n/10 0.0017|
+ []
+
+
+Overfull \hbox (2.17046pt too wide) in paragraph at lines 363--363
+ []|\T1/lmr/m/n/10 0.0025|
  []
 
 
 Overfull \hbox (2.17046pt too wide) in paragraph at lines 364--364
+ []|\T1/lmr/m/n/10 0.0007|
+ []
+
+
+Overfull \hbox (2.17046pt too wide) in paragraph at lines 366--366
  []|\T1/lmr/m/n/10 0.0009|
  []
 
@@ -800,24 +800,24 @@ as been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.423 t
+l.425 t
        his same plot can be plot next to the OS and US streams.pdfTeX warning (
 ext4): destination with the same identifier (name{table.2}) has been already us
 ed, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.423 t
+l.425 t
        his same plot can be plot next to the OS and US streams.]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 467.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 469.
 [6]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 467.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 469.
 (./base.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 467.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 467.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 469.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 469.
 Package rerunfilecheck Info: File `base.out' has not changed.
 (rerunfilecheck)             Checksum: E76DF0191EBB78BBC2726B89BB27A78D;2277.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 467.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 469.
  ) 
 Here is how much of TeX's memory you used:
  12064 strings out of 482913
@@ -847,7 +847,7 @@ pData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr5.pfb><c:/Users/miked
 /AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr7.pfb><c:/Users/mi
 ked/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy10.pfb><c:/Use
 rs/miked/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtt10.pfb>
-Output written on base.pdf (6 pages, 260519 bytes).
+Output written on base.pdf (6 pages, 260571 bytes).
 PDF statistics:
  209 PDF objects out of 1000 (max. 8388607)
  183 compressed objects within 2 object streams
