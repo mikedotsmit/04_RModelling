@@ -1,0 +1,81 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
+
+
+# Results and Discussion
+
+
+```{r , include = FALSE}
+library("here")
+
+#Function here::here to help with file paths relative to the project folder:
+```
+
+
+```{r , include = FALSE }
+#attache rpackages from central location:
+source(here::here("02_rpackages",'projectpackages.R'))
+
+```
+
+
+```{r include = FALSE}
+
+options(qwraps2_markup = 'markdown')
+
+knitr.table.format = "latex" #global option for tables. can still set any in each kable function.
+
+```
+
+
+
+```{r echo=FALSE, results='asis'}
+
+# bring in the saved data to be tabled:
+R2_RR <- read.csv(file = here::here("03_code/01_code-output","R2_RR.txt"))
+R2_GGS <- read.csv(file = here::here("03_code/01_code-output","R2_GGS.txt"))
+
+tblR2RR <- knitr::kable(R2_RR,
+                        "latex",
+                        escape = F,booktabs = T, 
+                        digits = c(0,3,3,4,1)) %>% 
+  column_spec(1:5, width = "1.2cm") 
+ 
+
+tblR2GGS <- knitr::kable(R2_GGS,
+                  "latex",
+                  escape = F, booktabs = T, 
+                  digits = c(0,3,3,4,1)) %>% 
+  column_spec(1:5, width = "1.2cm")
+                
+
+cat(c("\\begin{table}[!htb]
+    \\begin{minipage}{.5\\linewidth}
+      \\caption{RR Model(formula)}
+      \\centering",
+        tblR2RR,
+    "\\end{minipage}%
+    \\begin{minipage}{.5\\linewidth}
+      \\centering
+        \\caption{GGS Model(formula)}",
+        tblR2GGS,
+    "\\end{minipage} 
+\\end{table}"
+))  
+
+
+
+
+```
+
+
+
+
+
+
+
+
+

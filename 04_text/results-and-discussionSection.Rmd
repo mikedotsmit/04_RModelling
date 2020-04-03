@@ -3,16 +3,19 @@ output:
   pdf_document: default
   html_document: default
 ---
+
+
 # Results and Discussion
 
 
-```{r, include = FALSE}
-#Function here::here to help with file paths relative to the project folder:
+```{r , include = FALSE}
+
 library("here")
+#Function here::here to help with file paths relative to the project folder:
 ```
 
 
-```{r,include = FALSE }
+```{r , include = FALSE }
 #attache rpackages from central location:
 source(here::here("02_rpackages",'projectpackages.R'))
 
@@ -25,40 +28,51 @@ options(qwraps2_markup = 'markdown')
 
 knitr.table.format = "latex" #global option for tables. can still set any in each kable function.
 
-#excellent for LaTeX equations:(probable keep this in bib)
-#http://visualmatheditor.equatheque.net/VisualMathEditor.html
 ```
-<br><br><br><br>
 
-```{r global_options, R.options=knitr::opts_chunk$set(warning=FALSE, message=FALSE)}
-```
 
 Each test's feed stream PSD results were first compared to confirm that their distributions were simmilar to allow for comparitive statictics.  
 
-```{r echo=FALSE}
-BringIn_file <- here::here("03_code/code-output","long_feedraw.txt") #results generated in screentest-19oct2014.R
-longfeedraw <- read.csv(file = BringIn_file)
 
-
-ggplot(longfeedraw, aes(sieve, probability, colour = stream)) +
-  geom_line()+
-  ggtitle("Feed stream unmoddeled solids frequency distribution.") +
-  theme(plot.title = element_text(size=9))
-  #annotate(caption) geom = "text", x = 1.00, y = 1.00,
-
-
- 
-#         #(x = xrng[1], y = yrng[2],) i mannually tiped the y=1.oo um in here to move the caption to start at 1um and not on top of the plots at 0 um as the rng(range) arguments would do.
-#     label = caption, hjust = 0, vjust = 0, size = 3
-#   )
-# 
+```{r, echo = FALSE, eval = TRUE, include = TRUE, out.width='75%', fig.align='center', fig.cap='...'}
+knitr::include_graphics(here::here("05_fig_output",'allStreamsPreModelling.png'))
 ```
+
+
+
+
+
+```{r include = FALSE}           
+#```{r results = 'asis', out.width="40px"}
+
+#knitr::include_graphics(path = "05_fig_output/allStreamsPreModelling.png")
+#```
+#<hr></center>
+# <<center><chr>
+# ![](05_fig_output/allStreamsPreModelling.png){width=65}
+
+
+
+
+# <<center><chr>
+# ![plotTitle](here::here("05_fig_output","allStreamsPreModelling.pdf"))
+
+#This can also be collected for multiple images side-by side:
+
+#![Image Title](./path/to/image.pdf){width=33%}![Image2 Title](./path/to/image2.pdf){width=33%}![Image3 Title](./path/to/image3.pdf){width=33%}
+
+```
+
+
+
+
+
 
 The two most commmonly used distributions in Geology and Mineral Processing and specifically comminution circuits are the Roslin-Rammler and the Gates-Gaudin-Schumann distributions.
 
 Both models were used  to model all PSD screening data to, and the subsequent best fit model was selected in each case. Model selection was determined by comparing each PSD's transformed linear model's determinant ($R^2$).
 
-RR model fits the feed streams means (F13m and F14m) better (near straight line QQ fits) than the Oversize streams.
+RR model fits the feed streams means (Feed13Mean and Feed14Mean) better (near straight line QQ fits) than the Oversize streams.
 
 
 If the transformed size distributions from a crushing or grinding operation do not
@@ -75,18 +89,17 @@ Interpolation betweeen measured sizing points is conducted by the back-transform
 
 
 ```{r ,echo=FALSE, results='asis'}
-library(knitr)
-library(xtable)
 
 # bring in the saved data to be tabled:
-R2_RR <- read.csv(file = here::here("03_code/code-output","R2_RR.txt"))
-R2_GGS <- read.csv(file = here::here("03_code/code-output","R2_GGS.txt"))
+R2_RR <- read.csv(file = here::here("03_code/01_code-output","R2_RR.txt"))
+R2_GGS <- read.csv(file = here::here("03_code/01_code-output","R2_GGS.txt"))
 
 tblR2RR <- knitr::kable(R2_RR,
                         "latex",
                         escape = F,booktabs = T, 
                         digits = c(0,3,3,4,1)) %>% 
-  column_spec(1:5, width = "1.2cm") 
+  column_spec(1:5, width = "0.9cm") %>% 
+  column_spec(1, width = "2.3cm")
   #this column_spec is supposed to set column widths to force text to wrap inside the colmn #https://community.rstudio.com/t/wrap-column-name-in-pdf-table-from-knitr-kable/3278/4)
                         #caption="RR Model(formula)") # %>%
 #  kable_styling(c("striped", "bordered"), 
@@ -98,7 +111,8 @@ tblR2GGS <- knitr::kable(R2_GGS,
                   "latex",
                   escape = F, booktabs = T, 
                   digits = c(0,3,3,4,1)) %>% 
-  column_spec(1:5, width = "1.2cm")
+  column_spec(2:5, width = "0.9cm") %>% 
+  column_spec(1, width = "2.3cm")
                   #caption="GGS Model(formula)") %>%
 #kable_styling(c("striped", "bordered"), 
               #full_width = F) %>% 
@@ -107,6 +121,7 @@ tblR2GGS <- knitr::kable(R2_GGS,
 # 
 # t2 <- kable(R2_GGS, format = "latex", booktabs = TRUE)
 
+#code posistions side by side
 cat(c("\\begin{table}[!htb]
     \\begin{minipage}{.5\\linewidth}
       \\caption{RR Model(formula)}
@@ -130,25 +145,6 @@ cat(c("\\begin{table}[!htb]
 
 
 try add as footnote in table/s: "RRmodel is a better fit ,according to the simple model applied, i.e. single linear model applied to transformed y-variables and transformed x-factors. When applyinh peicewise (conditional) factors, the GGS model becomes a better model, but at the same tiem more noise (errors (epsilon?) is incorpaorated in the model. double the coefficients.
-
-
-```{r , echo=FALSE, results='asis', warning=TRUE}
-# # Setting `results = 'asis'` allows for using Latex within the code chunk
-# 
-#      cat('\\begin{center}')
-#      # `{c c}` Creates a two column table
-#      # Use `{c | c}` if you'd like a line between the tables
-#      cat('\\begin{tabular}{ c c }')
-# 
-#      print(tblR2RR, format = 'latex')
-#      # Separate the two columns with an `&`
-# 
-#      cat('&')
-# 
-#      print(tblR2GGS, format = 'latex')
-#      cat('\\end{tabular}')
-#      cat('\\end{center}')
-```
 
 
 

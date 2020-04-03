@@ -1,0 +1,162 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
+# side by side plots
+
+Aim is not to reprint plot's axes for each plotted side-by-side plot as they are the same..can be a common axis/axes.
+
+
+https://stackoverflow.com/questions/13649473/add-a-common-legend-for-combined-ggplots
+## method 1
+
+
+```{r, include = FALSE}
+#Function here::here to help with file paths relative to the project folder:
+library("here")
+```
+
+
+```{r,include = FALSE }
+#attache rpackages from central location:
+source(here::here("02_rpackages",'projectpackages.R'))
+
+```
+
+
+```{r include = FALSE}
+
+options(qwraps2_markup = 'markdown')
+
+knitr.table.format = "latex" #global option for tables. can still set any in each kable function.
+
+```
+<br><br><br><br>
+
+Each test's feed stream PSD results were first compared to confirm that their distributions were simmilar to allow for comparitive statictics.  
+
+
+```{r global_options, R.options=knitr::opts_chunk$set(warning=FALSE, message=FALSE)}
+```
+```{r unmodeled_PSDdata_in, echo=FALSE}
+#results generated in screentest-19oct2014.R
+feedraw_psd <- read.csv(file = here::here("03_code/01_code-output","feedraw_psd.txt"))
+OSraw_psd <- read.csv(file = here::here("03_code/01_code-output","OSraw_psd.txt"))
+USraw_psd <- read.csv(file = here::here("03_code/01_code-output","USraw_psd.txt"))
+
+#this code is duplicated (convert to long data and plots) in "screentest-19oct2014.Rmd". here for report inclusion, there for prior checking.
+
+long_feedraw_psd <- feedraw_psd %>% pivot_longer(-sieve, names_to= "stream" , values_to = "probability")
+long_OSraw_psd <- OSraw_psd %>% pivot_longer(-sieve, names_to= "stream" , values_to = "probability")  
+long_USraw_psd <- USraw_psd %>% pivot_longer(-sieve, names_to= "stream" , values_to = "probability")
+
+
+plot.Feedraw_psd <- ggplot(long_feedraw_psd, aes(sieve, probability, colour = stream)) +
+  geom_line()+
+  ggtitle("Feed streams unmoddeled solids frequency distribution.") +
+  theme(plot.title = element_text(size=9))
+  #annotate(extra text any location on plot) geom = "text", x = 1.00, y = 1.00,
+
+plot.OSraw_psd <- ggplot(long_OSraw_psd, aes(sieve, probability, colour = stream)) +
+  geom_line()+
+  ggtitle("OverSize streams unmoddeled solids frequency distribution.") +
+  theme(plot.title = element_text(size=9))
+
+plot.USraw_psd <- ggplot(long_USraw_psd, aes(sieve, probability, colour = stream)) +
+  geom_line()+
+  ggtitle("Undersize stream unmoddeled solids frequency distribution.") +
+  theme(plot.title = element_text(size=9))
+
+
+ggsave(file=here("05_fig_output","feedraw_psd.pdf"), plot.Feedraw_psd, width=10, height=8)
+ggsave(file=here("05_fig_output","OSraw_psd.pdf"), plot.OSraw_psd, width=10, height=8) 
+ggsave(file=here("05_fig_output","USraw_psd.pdf"), plot.USraw_psd, width=10, height=8)
+
+```
+
+```{r}
+# package name: patchwork (side by side plots)
+combined.plot_raw_psd <- plot.Feedraw_psd + plot.OSraw_psd + plot.USraw_psd & theme(legend.position = "bottom")
+combined.plot_raw_psd + plot_layout(guides = "collect")
+
+```
+
+***
+
+# Method 2
+
+Each test's feed stream PSD results were first compared to confirm that their distributions were simmilar to allow for comparitive statictics.  
+
+
+
+```{r , echo=FALSE}
+#results generated in screentest-19oct2014.R
+feedraw_psd <- read.csv(file = here::here("03_code/01_code-output","feedraw_psd.txt"))
+OSraw_psd <- read.csv(file = here::here("03_code/01_code-output","OSraw_psd.txt"))
+USraw_psd <- read.csv(file = here::here("03_code/01_code-output","USraw_psd.txt"))
+
+#this code is duplicated (convert to long data and plots) in "screentest-19oct2014.Rmd". here for report inclusion, there for prior checking.
+
+long_feedraw_psd <- feedraw_psd %>% pivot_longer(-sieve, names_to= "stream" , values_to = "probability")
+long_OSraw_psd <- OSraw_psd %>% pivot_longer(-sieve, names_to= "stream" , values_to = "probability")  
+long_USraw_psd <- USraw_psd %>% pivot_longer(-sieve, names_to= "stream" , values_to = "probability")
+
+```
+
+
+
+
+
+difference in code starts here:
+
+```{r}
+#combine the datasets:
+PSD_raw_psd_allStreams <- rbind(long_feedraw_psd,long_OSraw_psd,long_USraw_psd)
+
+PSD_raw_psd_allStreams <- data.frame(PSD_raw_psd_allStreams,
+                             Df = rep(c("Feed (unmodeled)","OS (unmod.)","US (unmod.)" ),
+                                                      times=c(nrow(long_feedraw_psd),nrow(long_OSraw_psd),nrow(long_USraw_psd))))
+
+outplot_all_unmoddled <- ggplot(PSD_raw_psd_allStreams, aes(sieve, probability, colour = stream)) +
+  geom_line() +
+  geom_point() +
+  ggtitle("Feed streams unmoddeled solids frequency distribution.") +
+  theme(plot.title = element_text(size=9)) +
+  facet_wrap(~Df)
+
+
+ggsave(here("05_fig_output","all_streams_preModelling.pdf"), outplot_all_unmoddled, width=10, height=8)
+```
+method 2 is perfect for this application:
+
++ x and y same for all plots
++ can combine with row bing...in this case no problem..with cbind will be a proble where different models(RR and GGS) have diffrenrows due to logs.
+
+
+
+# Method 3
+try to combine 3 PSD with 3 cummulative PSDs
+
+```{r}
+
+#combine the datasets for plotting side-by-side:
+
+PSD_raw_psd_allStreams <- rbind(long_feedraw_psd,long_OSraw_psd,long_USraw_psd)
+
+#PSD_cum_raw_psd_allStreams <- cumsum(PSD_raw_psd_allStreams)
+
+PSD_raw_psd_allStreams <- data.frame(PSD_raw_psd_allStreams,
+                             Df = rep(c("Feed (unmodeled)","OS (unmod.)","US (unmod.)" ),
+                                                      times=c(nrow(long_feedraw_psd),nrow(long_OSraw_psd),nrow(long_USraw_psd))))
+
+(outplot_all_unmoddled <- ggplot(PSD_raw_psd_allStreams, aes(sieve, cumsum(probability), colour = stream)) +
+  geom_line(size = 1) +
+  geom_point() +
+  ggtitle("Unmoddeled solids frequency distribution.") +
+  theme(plot.title = element_text(size=10)) +
+  facet_wrap(~Df))
+
+```
+
+

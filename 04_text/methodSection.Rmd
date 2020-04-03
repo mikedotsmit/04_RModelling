@@ -68,7 +68,7 @@ Screen cluster feed and individual deck overflow samples were weighed, wet scree
 The following screens sizes were used ($\mu M$) in the laboratory screen stach to determine the PSD of each sample taken during the plant tests:
 
 ```{r echo=FALSE}
-bringIn_sieve <- here::here("03_code/code-output","sieves-used-in-psd.txt")
+bringIn_sieve <- here::here("03_code/01_code-output","sieves-used-in-psd.txt")
 
 sieves_used <- read.csv(file = bringIn_sieve)
 

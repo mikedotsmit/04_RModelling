@@ -1,5 +1,13 @@
 # To Do 
 
+fix output location of knits for files in /04-text
+
++ make a subfolder (output)
+
+draw diagram that outlines workflow of this project...draw data in then munge then write to table to..., then import data from to .rmd...bla bla 
+
+Remove typos!
+Use the devtools::spell_check() function. Typos in documentation are not the end of the world but can annoy the user, and it’s not hard to remove them thanks to this tool, so do it when you get a chance.
 
 lots of advice to follow here
 

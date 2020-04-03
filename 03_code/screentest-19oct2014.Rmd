@@ -5,10 +5,10 @@ output:
 ---
 This file houses most of the code for this specific test conducted.
 the filename (of this file) denotes the specific test which's code is represented here.
-the raw data is pulled into this file and processed.
+the raw_psd data is pulled into this file and processed.
 data munging/wrangling ocurrs here mainly.
 the outputs from this file is used within or drawn into the various chapters and subsequently into the final file (base.Rmd) for conversion to PDF (currently not HTML).
-outputs are exported or written to code/code-outputs.
+outputs are exported or written to code/01_code-outputs.
 
 ```{r, include = FALSE}
 #Function here::here to help with file paths relative to the project folder:
@@ -62,14 +62,14 @@ sieve <- gramdata %>%
 
 ```{r}
 
-takeOut_sieve <- here("03_code/code-output","sieves-used-in-psd.txt")
+takeOut_sieve <- here("03_code/01_code-output","sieves-used-in-psd.txt")
 write.table(sieve, takeOut_sieve, sep=",", row.names = FALSE, quote = FALSE)
 #dependents / use in: methodSection.Rmd.
 ```
 
 
 ```{r}
-#here excluding the sieve (first) column.
+#excluding the sieve (first) column (x axis).
 gramdata1 <- gramdata %>%
   dplyr::select(-1) %>%   #dplyr::select(2:ncol(.)) %>%
   as_tibble()
@@ -82,13 +82,11 @@ pct <- gramdata1 %>% #mass percentage
 
 
 ```{r}
-#separating feed stream data from that of Over and undersize.
-#calculate means at the same time.
+#in this script, feed stream PSD results separated from that of Over and undersize.
+#calculate means in the same step with dplyr::select function.
 
-###############
-###########
+# Means of streams frequency distribution 
 
-# Means
 
 # Two plant screen tested for comparison. Each plant screen has 5 decks.
 # In this test we'll average the results of the five decks. We can (and should) also have a look at the variability between the 5 decks to see if all results look plausible.
@@ -96,66 +94,91 @@ pct <- gramdata1 %>% #mass percentage
 #Results of screen13's feed samples are located in columns 1:6, thus we select columns 1:6 and calculate their withi the dplyr's mutate function.
 feed13 <- pct %>% 
   dplyr::select(1:6) %>%   #check in the data which columns contain the data stream to be averaged.
-  mutate(F13m = rowMeans(.)) #mutate creates the new colu,m with mean mass percent data.
+  mutate(Feed13MeanPct = rowMeans(.)) #mutate creates the new colu,m with mean mass percent data.
 
 #pull this mean column out as a vector to use later:
-F13m <- feed13$F13m 
+Feed13MeanPct <- feed13$Feed13MeanPct 
 
 #underpan from screen 13 only allowed for 1 sample to be taken and this sample represent all the decks and thus we rename it as the mean.
-US13m <- pct %>%  
-  dplyr::select(US13_0, "US13m" = "US13_0") 
-
+US13MeanPct <- pct %>%  
+  dplyr::select(US13_0, "US13MeanPct" = "US13_0") 
 
 osize13 <- pct %>% 
   dplyr::select(8:12) %>% 
-  mutate(OS13m=rowMeans(.))
-OS13m <- osize13$OS13m
+  mutate(OS13MeanPct=rowMeans(.))
+OS13MeanPct <- osize13$OS13MeanPct
+```
 
+```{r}
+#do same for screen 14
 
 feed14 <- pct %>% 
   dplyr::select(13:18) %>%   #check in the data which columns contain the data stream to be averaged.
-  mutate(F14m = rowMeans(.)) #mutate creates the new colu,m with mean mass percent data.
-F14m <- feed14$F14m
+  mutate(Feed14MeanPct = rowMeans(.)) #mutate creates the new colu,m with mean mass percent data.
+Feed14MeanPct <- feed14$Feed14MeanPct
 
 
-US14m <- pct %>%  
-  dplyr::select(US14_0, "US14m" = "US14_0") 
+US14MeanPct <- pct %>%  
+  dplyr::select(US14_0, "US14MeanPct" = "US14_0") 
 
 osize14 <- pct %>% 
   dplyr::select(20:24) %>% 
-  mutate(mean = rowMeans(.)) 
-OS14m <- osize14$mean
+  mutate(mean_pct = rowMeans(.)) 
+OS14MeanPct <- osize14$mean_pct
 ```
 
-## plotting raw feed distribution to have a quick view if they are simmilar. if they are not (simmilar) then the expeririment or test will not not give conclusive results. as our aim is to test if one panel size is "signifficantly" better than another panels size.
+plotting raw_psd feed distribution to have a quick view if they are simmilar. if they are not (simmilar) then the expeririment or test will not not give conclusive results. as our aim is to test if one panel size is "signifficantly" better than another panels size.
+
+```{r }
+feedraw_psd <- cbind(sieve, Feed13MeanPct, Feed14MeanPct) 
+OSraw_psd <- cbind(sieve, OS13MeanPct, OS14MeanPct)  
+USraw_psd <- cbind(sieve, US13MeanPct, US14MeanPct)
+```
+```{r }
+write.table(feedraw_psd, here("03_code/01_code-output","feedraw_psd.txt"), sep=",", quote = FALSE)
+write.table(OSraw_psd, here("03_code/01_code-output","OSraw_psd.txt"), sep=",", quote = FALSE)
+write.table(USraw_psd, here("03_code/01_code-output","USraw_psd.txt"), sep=",", quote = FALSE)
+
+#long format prep for plot
+#this code is duplicated (convert to long data and plots) in "results-and-discussionSEction".. here for prior checking, there for report inclusion.
+
+long_feedraw_psd <- feedraw_psd %>% pivot_longer(-sieve, names_to= "stream" , values_to = "probability")
+long_OSraw_psd <- OSraw_psd %>% pivot_longer(-sieve, names_to= "stream" , values_to = "probability")  
+long_USraw_psd <- USraw_psd %>% pivot_longer(-sieve, names_to= "stream" , values_to = "probability")
+
+#combine the datasets:
+PSD_raw_psd_allStreams <- rbind(long_feedraw_psd,long_OSraw_psd,long_USraw_psd)
+PSD_raw_psd_allStreams <- data.frame(PSD_raw_psd_allStreams,
+                             Df = rep(c("Feed (unmodeled)","OS (unmod.)","US (unmod.)" ),
+                                                      times=c(nrow(long_feedraw_psd),nrow(long_OSraw_psd),nrow(long_USraw_psd))))
+
+(outplot_all_unmoddled <- ggplot(PSD_raw_psd_allStreams, aes(sieve, probability, colour = stream)) +
+  geom_line() +
+  geom_point() +
+  ggtitle("Feed streams unmoddeled solids frequency distribution.") +
+  theme(plot.title = element_text(size=9)) +
+  facet_wrap(~Df))
+```
 
 ```{r}
-feedraw <- cbind(sieve,F13m,F14m) 
+#dependents: methodSection
+```
 
-long_feedraw <- feedraw %>% 
-  pivot_longer(-sieve, names_to= "stream" , values_to = "probability")
-  
+```{r}
+ggsave(here("05_fig_output","allStreamsPreModelling.png"), outplot_all_unmoddled, width=10, height=8)
 
-quickfeedplot_unmodelled <- ggplot(long_feedraw, aes(sieve, probability, colour = stream)) +
-  geom_line()
-
+#ggsave(here("05_fig_output","allStreamsPreModelling.pdf"), outplot_all_unmoddled, width=10, height=8)
 
 #save the data that created the chart so it can be easily called from the final report.
 # two way of ding this:
 #1 save the chart object [rds], or
 #2 save the data that can produce the chart object [CSV]
 #method1:
-#output_file <- here("code/code-output","feed_unmoddeled.RDS")  #https://www.middleprofessor.com/files/applied-biostatistics_bookdown/_book/data-reading-writing-and-wrangling.html
+#output_file <- here("code/01_code-output","feed_unmoddeled.RDS")  #https://www.middleprofessor.com/files/applied-biostatistics_bookdown/_book/data-reading-writing-and-wrangling.html
 #saveRDS(object = quickfeedplot_unmodelled, file = output_file)
 #method2:
 ```
 
-```{r}
-takeout_longfeedraw <- here("03_code/code-output","long_feedraw.txt")
-write.table(long_feedraw, file = takeout_longfeedraw, sep=",", quote = FALSE)
-#dependents: methodSection
-
-```
 
 ```{r}
 # plot on the finer sizes look visibly simmilar up to arounfd 300um.
@@ -163,35 +186,31 @@ write.table(long_feedraw, file = takeout_longfeedraw, sep=",", quote = FALSE)
 ### ok continue##
 
 #bring all the screen stream means together.
-#In the following steps, we'll be applying the transformations. these transformations involve logs, as these logs  will be applied to cummulative percentage values, the last and largest will be 1, and log of 1 is 0, and the second log (log of 0) is "-inf,
+#In the following steps, transformations are applied. these transformations involve logs, as these logs  will be applied to cummulative percentage values, the last and largest will be 1, and log of 1 is 0, and the second log (log of 0) is "-inf,
 #thus i''ll exclude the last row using dplyr::slice (::filter does work anymore (tidyverse update)).
 
-meanpct <- cbind(sieve, F13m, OS13m, US13m, F14m, OS14m, US14m)
+meanpct <- cbind(sieve, Feed13MeanPct, OS13MeanPct, US13MeanPct, Feed14MeanPct, OS14MeanPct, US14MeanPct)
 
 #here the vector "meanpct" contains all stream averages. In certain circumstances this would ok. In this case, its not:
-# the streams US13m and US14m have zero mass retained in the first bin of the particle size distribution (largest screen). 
+# the streams US13MeanPct and US14MeanPct have zero mass retained in the first bin of the particle size distribution (largest screen). 
 #We know we're going to use log transforms and logs of zero mass = -Inf. 
 #Thus we'll have to apply our models separately to the two parts of our data (due to their difference in vector lengths).
 # i'll keep vector "meanpct" but also separate them and then apply the linear models on the two groups separately:
 #there must a shorter way to ignore nas..[add to to do]
-meanpct_excl_US <- cbind(sieve, F13m, OS13m, F14m, OS14m)
+meanPct_FeedAndOS <- cbind(sieve, Feed13MeanPct, OS13MeanPct, Feed14MeanPct, OS14MeanPct)
 
 sieve_sliced <- sieve %>% 
   dplyr::slice(2:n()) #also have to prepare the x(sieve) vector to be the same n() as y (in the case of the undersize streams).(https://dplyr.tidyverse.org/reference/slice.html)
 
-sliced_US13m <- US13m %>% 
+sliced_US13MeanPct <- US13MeanPct %>% 
   dplyr::slice(2:n())
 
-sliced_US14m <- US14m %>% 
+sliced_US14MeanPct <- US14MeanPct %>% 
   dplyr::slice(2:n())
 
 #combine the sliced vectors 
-meanpct_US13and14 <- cbind(sieve_sliced, sliced_US13m, sliced_US14m)
+meanPct_US <- cbind(sieve_sliced, sliced_US13MeanPct, sliced_US14MeanPct)
 
-mean1 <- meanpct_excl_US
-  
-mean2 <- meanpct_US13and14
-  
 #the work done here ontop is not automated and the engineer has to look think do depending on the data.
 
 #As we have two 'sets' of data primarily because of different lengths of data points (1st screen pan had 0 grams in the largest size fraction for the Us samples),
@@ -203,23 +222,27 @@ mean2 <- meanpct_US13and14
 ```{r}
 #rearange in long format (tidy data) to enable grouping in following step.    
 #because we divided the data into groups, we'll everystep prior to and incl. the modeling in two steps aswell.
-long1 <- mean1 %>% 
+long_meanPct_FeedAndOS <- meanPct_FeedAndOS %>% 
   pivot_longer(-sieve, names_to= "stream" , values_to = "probability") # opposite is :pivot_wider(names_from= stream, values_from = probs). use quotes when names do not yet exist, if exist ,; no quotes.
 
-long2 <- mean2 %>% 
+long_meanPct_US <- meanPct_US %>% 
   pivot_longer(-sieve, names_to= "stream" , values_to = "probability") 
 
 ####plot
 #feed and OS
-quickfeedplot_unmodelled2 <- ggplot(long1, aes(sieve, probability, colour = stream)) +
-  geom_line()
+(plot_unmodelled_feed2 <- ggplot(long_meanPct_FeedAndOS, aes(sieve, probability, colour = stream)) +
+  geom_line())
 
-print(quickfeedplot_unmodelled2)
+print(plot_unmodelled_feed2)
+#() brackets do the job of "print()" function.
+#print(plot_unmodelled_feed2)
 #US only
-quickfeedplot_unmodelled3 <- ggplot(long2, aes(sieve, probability, colour = stream)) +
-  geom_line()
+(plot_unmodelled_feed3 <- ggplot(long_meanPct_US, aes(sieve, probability, colour = stream)) +
+  geom_line())
 
-print(quickfeedplot_unmodelled3)
+plot_unmodelled_feed2 + plot_unmodelled_feed3
+
+#print(plot_unmodelled_feed3)
 ###end plot
 ```
 
@@ -227,7 +250,7 @@ print(quickfeedplot_unmodelled3)
 #here the cummulative passing and retained mass percentages of each stream is calculated (with dplyr::mutate),
 #followed by applied the Rosin Rammler- as well as the Gates-Gaudin-Schumann distribution transformations.
 #the formulas are descibed in the .rmd writeup in Latex.
-transformations1 <- long1 %>% 
+transformations1 <- long_meanPct_FeedAndOS %>% 
   group_by (stream)%>% 
   mutate (cumret = cumsum(probability)) %>%
   select (-probability) %>%
@@ -245,7 +268,7 @@ transformations1 <- long1 %>%
   nest() 
 # Nesting is often useful for creating per group models
 
-transformations2 <- long2 %>% 
+transformations2 <- long_meanPct_US %>% 
   group_by (stream)%>% 
   mutate (cumret = cumsum(probability)) %>%
   select (-probability) %>%
@@ -397,17 +420,17 @@ coef_deter_GGS2 <- glanced_reg_GGS_2 %>%
 R2_RR <- full_join(coef_deter_RR1,coef_deter_RR2)
 R2_GGS <- full_join(coef_deter_GGS1,coef_deter_GGS2)
 
-#write the tibbles to \code-output folder  for use in table generated in resultsanddiscion section
-write.table(R2_RR, file = here("03_code/code-output","R2_RR.txt"), sep=",", quote = FALSE)
-write.table(R2_GGS, file = here("03_code/code-output","R2_GGS.txt"), sep=",", quote = FALSE)
+#write the tibbles to \01_code-output folder  for use in table generated in resultsanddiscion section
+write.table(R2_RR, file = here("03_code/01_code-output","R2_RR.txt"), sep=",", quote = FALSE)
+write.table(R2_GGS, file = here("03_code/01_code-output","R2_GGS.txt"), sep=",", quote = FALSE)
 ```
 
 ```{r}
 
 #print the out put of the table.
 # bring in the saved data to be tabled:
-R2_RR <- read.csv(file = here::here("03_code/code-output","R2_RR.txt"))
-R2_GGS <- read.csv(file = here::here("03_code/code-output","R2_GGS.txt"))
+R2_RR <- read.csv(file = here::here("03_code/01_code-output","R2_RR.txt"))
+R2_GGS <- read.csv(file = here::here("03_code/01_code-output","R2_GGS.txt"))
 
 tblR2RR <- knitr::kable(R2_RR,
                         "latex",

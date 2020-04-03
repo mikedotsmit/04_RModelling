@@ -10,7 +10,7 @@
 library(easypackages)
 library(here)
 
-mypackage <- c("rmd","patchwork","tidyverse","kableExtra","conflicted","tinytex","tidyverse","readxl","modelr","broom","reshape","readr","kableExtra","magrittr","qwraps2","xtable","gridExtra")
+mypackage <- c("rmd","patchwork","tidyverse","kableExtra","conflicted","tinytex","tidyverse","readxl","modelr","broom","reshape","readr","kableExtra","magrittr","qwraps2","xtable","gridExtra","svglite")
 
 libraries(mypackage) #attaches packages
 #packages(mypackage) #checks installed, installs, attaches.
