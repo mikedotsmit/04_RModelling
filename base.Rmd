@@ -39,7 +39,7 @@ knitr.table.format = "latex" #global option for tables. can still set any in eac
 ![](06_images/me-glasses.jpg){width=75}
 
 git commit tried from Rstudio
-
+-it worked :) 
 
 
 ```{r child = "04_text/summarySection.Rmd"}
