@@ -38,7 +38,7 @@ knitr.table.format = "latex" #global option for tables. can still set any in eac
 ![myPicTitleHere](06_images/me-glasses.jpg){width=100}
 ![](06_images/me-glasses.jpg){width=75}
 
-
+git commit tried from Rstudio
 
 
 
