@@ -35,38 +35,17 @@ knitr.table.format = "latex" #global option for tables. can still set any in eac
 Each test's feed stream PSD results were first compared to confirm that their distributions were simmilar to allow for comparitive statictics.  
 
 
-```{r, echo = FALSE, eval = TRUE, include = TRUE, out.width='75%', fig.align='center', fig.cap='...'}
+
+```{r eval=TRUE, echo=FALSE, fig.align='center', fig.cap='...', include=TRUE, out.width='50%'}
+
 knitr::include_graphics(here::here("05_fig_output",'allStreamsPreModelling.pdf'))
 ```
 
 
+```{r eval=TRUE, echo=FALSE, fig.align='center', fig.cap='...', include=TRUE, out.width='50%'}
 
-
-
-```{r include = FALSE}           
-#```{r results = 'asis', out.width="40px"}
-
-#knitr::include_graphics(path = "05_fig_output/allStreamsPreModelling.png")
-#```
-#<hr></center>
-# <<center><chr>
-# ![](05_fig_output/allStreamsPreModelling.png){width=65}
-
-
-
-
-# <<center><chr>
-# ![plotTitle](here::here("05_fig_output","allStreamsPreModelling.pdf"))
-
-#This can also be collected for multiple images side-by side:
-
-#![Image Title](./path/to/image.pdf){width=33%}![Image2 Title](./path/to/image2.pdf){width=33%}![Image3 Title](./path/to/image3.pdf){width=33%}
-
+knitr::include_graphics(here::here("05_fig_output",'allStreamsCummulativePreModelling.pdf'))
 ```
-
-
-
-
 
 
 The two most commmonly used distributions in Geology and Mineral Processing and specifically comminution circuits are the Roslin-Rammler and the Gates-Gaudin-Schumann distributions.

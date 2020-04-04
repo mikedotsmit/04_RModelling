@@ -152,51 +152,100 @@ PSD_raw_psd_allStreams <- data.frame(PSD_raw_psd_allStreams,
                              Df = rep(c("Feed (unmodeled)","OS (unmod.)","US (unmod.)" ),
                                                       times=c(nrow(long_feedraw_psd),nrow(long_OSraw_psd),nrow(long_USraw_psd))))
 
-(outplot_all_unmoddled <- ggplot(PSD_raw_psd_allStreams, aes(sieve, probability, colour = stream)) +
-  geom_line() +
+(outplot_all_unmodelled <- ggplot(PSD_raw_psd_allStreams, aes(sieve, probability, colour = stream)) +
+  geom_line(size = 1) +
   geom_point() +
   ggtitle("Feed streams unmoddeled solids frequency distribution.") +
   theme(plot.title = element_text(size=9)) +
-  facet_wrap(~Df))
+  facet_wrap(~Df)) #facet wrap allow for multiple plots next to eachother, whil eusing common axes for all plots.
 ```
 
 ```{r}
+#save the plot as image:
+ggsave(here("05_fig_output","allStreamsPreModelling.png"), outplot_all_unmodelled, width=10, height=8)
+
 #dependents: methodSection
 ```
+feed streams' psd look close enough in this test.
 
 ```{r}
-ggsave(here("05_fig_output","allStreamsPreModelling.png"), outplot_all_unmoddled, width=10, height=8)
+#cummulative data for plots
+#for cumsum ..do before convert to long format
 
-#ggsave(here("05_fig_output","allStreamsPreModelling.pdf"), outplot_all_unmoddled, width=10, height=8)
+feedraw_cum <- feedraw_psd %>% 
+  mutate (CumRet_F13 = cumsum(Feed13MeanPct)) %>%
+  mutate (CumPass_F13 = 1-CumRet_F13) %>% 
+  mutate (CumRet_F14 = cumsum(Feed14MeanPct)) %>%
+  mutate (CumPass_F14 = 1-CumRet_F14)
+  
 
-#save the data that created the chart so it can be easily called from the final report.
-# two way of ding this:
-#1 save the chart object [rds], or
-#2 save the data that can produce the chart object [CSV]
-#method1:
-#output_file <- here("code/01_code-output","feed_unmoddeled.RDS")  #https://www.middleprofessor.com/files/applied-biostatistics_bookdown/_book/data-reading-writing-and-wrangling.html
-#saveRDS(object = quickfeedplot_unmodelled, file = output_file)
-#method2:
+OSraw_cum <- OSraw_psd %>% 
+  mutate (CumRet_OS13 = cumsum(OS13MeanPct)) %>%
+  mutate (CumPass_OS13 = 1-CumRet_OS13) %>% 
+  mutate (CumRet_OS14 = cumsum(OS14MeanPct)) %>%
+  mutate (CumPass_OS14 = 1-CumRet_OS14)
+
+USraw_cum <- USraw_psd %>% 
+  mutate (CumRet_US13 = cumsum(US13MeanPct)) %>%
+  mutate (CumPass_US13 = 1-CumRet_US13) %>% 
+  mutate (CumRet_US14 = cumsum(US14MeanPct)) %>%
+  mutate (CumPass_US14 = 1-CumRet_US14)
+
+#select the columns to plot
+#in this case: cumpass
+feedRawCumOnly <- feedraw_cum %>% 
+  select(sieve, CumPass_F13, CumPass_F14)
+
+OSRawCumOnly <- OSraw_cum %>% 
+  select(sieve, CumPass_OS13, CumPass_OS14)
+
+USRawCumOnly <- USraw_cum %>% 
+  select(sieve, CumPass_US13, CumPass_US14)
+
+#long format for ggplot
+long_feedraw_cum <- feedRawCumOnly %>% pivot_longer(-sieve, names_to= "stream" , values_to = "probability")
+long_OSraw_cum <- OSRawCumOnly %>% pivot_longer(-sieve, names_to= "stream" , values_to = "probability")  
+long_USraw_cum <- USRawCumOnly %>% pivot_longer(-sieve, names_to= "stream" , values_to = "probability")
+
+#combine the datasets: (to ease side by side plot in ggplot)
+PSD_raw_cum_allStreams <- rbind(long_feedraw_cum,long_OSraw_cum,long_USraw_cum)
+PSD_raw_cum_allStreams <- data.frame(PSD_raw_cum_allStreams,
+                             Df = rep(c("Feed (unmodeled)","OS (unmod.)","US (unmod.)" ),
+                                                      times=c(nrow(long_feedraw_cum),nrow(long_OSraw_cum),nrow(long_USraw_cum))))
+
+(plot_all_unmodelled_cum <- ggplot(PSD_raw_cum_allStreams, aes(sieve, probability, colour = stream)) +
+  geom_line(size = 1) +
+  geom_point() +
+  ggtitle("Cummulative unmoddeled solids frequency distributions.") +
+  theme(plot.title = element_text(size=9)) +
+  facet_wrap(~Df)) #facet wrap allow for multiple plots next to eachother, whil eusing common axes for all 
+
+#save the plot as image:
+ggsave(here("05_fig_output","allStreamsCummulativePreModelling.pdf"), plot_all_unmodelled_cum, width=10, height=8)
+
+#dependents: methodSection
+
 ```
 
 
-```{r}
-# plot on the finer sizes look visibly simmilar up to arounfd 300um.
-#reaching 600um a steady differences is obvious..but "not" large..and not increasing markably.
-### ok continue##
 
+
+
+
+```{r}
 #bring all the screen stream means together.
-#In the following steps, transformations are applied. these transformations involve logs, as these logs  will be applied to cummulative percentage values, the last and largest will be 1, and log of 1 is 0, and the second log (log of 0) is "-inf,
+#In the following steps, transformations are applied. these transformations involve double logs. as these logs  will be applied to cummulative percentage values, the last and largest will be 1, and log of 1 is 0, and the second log (log of 0) is "-inf,
 #thus i''ll exclude the last row using dplyr::slice (::filter does work anymore (tidyverse update)).
 
 meanpct <- cbind(sieve, Feed13MeanPct, OS13MeanPct, US13MeanPct, Feed14MeanPct, OS14MeanPct, US14MeanPct)
 
-#here the vector "meanpct" contains all stream averages. In certain circumstances this would ok. In this case, its not:
+#here the vector "meanpct" contains all stream averages. In certain circumstances this would suffice. In this case, its doesnt: 
 # the streams US13MeanPct and US14MeanPct have zero mass retained in the first bin of the particle size distribution (largest screen). 
 #We know we're going to use log transforms and logs of zero mass = -Inf. 
 #Thus we'll have to apply our models separately to the two parts of our data (due to their difference in vector lengths).
 # i'll keep vector "meanpct" but also separate them and then apply the linear models on the two groups separately:
 #there must a shorter way to ignore nas..[add to to do]
+#maybe a good idea is to separate them from the data indraw step thus excel.
 meanPct_FeedAndOS <- cbind(sieve, Feed13MeanPct, OS13MeanPct, Feed14MeanPct, OS14MeanPct)
 
 sieve_sliced <- sieve %>% 
@@ -211,39 +260,34 @@ sliced_US14MeanPct <- US14MeanPct %>%
 #combine the sliced vectors 
 meanPct_US <- cbind(sieve_sliced, sliced_US13MeanPct, sliced_US14MeanPct)
 
-#the work done here ontop is not automated and the engineer has to look think do depending on the data.
+#the work done here ontop is not automated and the engineer has to look-think-do depending on the data.
 
 #As we have two 'sets' of data primarily because of different lengths of data points (1st screen pan had 0 grams in the largest size fraction for the Us samples),
-#thus we'll do two code sets of regressions. Done simmilarly but just separately..we've already prepared the data ontop.
+#thus we'll do two code sets of regressions separately. Done simmilarly but just separately..we've already prepared the data ontop.
 
 ```
 
 
+
+
+
+
+
 ```{r}
 #rearange in long format (tidy data) to enable grouping in following step.    
-#because we divided the data into groups, we'll everystep prior to and incl. the modeling in two steps aswell.
+#"pivot_longer" function renders data compatable with tidyverse plotting and analases
+
 long_meanPct_FeedAndOS <- meanPct_FeedAndOS %>% 
   pivot_longer(-sieve, names_to= "stream" , values_to = "probability") # opposite is :pivot_wider(names_from= stream, values_from = probs). use quotes when names do not yet exist, if exist ,; no quotes.
 
 long_meanPct_US <- meanPct_US %>% 
   pivot_longer(-sieve, names_to= "stream" , values_to = "probability") 
 
-####plot
+#plot
 #feed and OS
-(plot_unmodelled_feed2 <- ggplot(long_meanPct_FeedAndOS, aes(sieve, probability, colour = stream)) +
-  geom_line())
+#adding the () arround the entire function will execute the plot as well as display (print) it
 
-print(plot_unmodelled_feed2)
-#() brackets do the job of "print()" function.
-#print(plot_unmodelled_feed2)
-#US only
-(plot_unmodelled_feed3 <- ggplot(long_meanPct_US, aes(sieve, probability, colour = stream)) +
-  geom_line())
 
-plot_unmodelled_feed2 + plot_unmodelled_feed3
-
-#print(plot_unmodelled_feed3)
-###end plot
 ```
 
 ```{r}
@@ -285,6 +329,12 @@ transformations2 <- long_meanPct_US %>%
   mutate_if(is.numeric, list(~na_if(., -Inf)))%>% #removes -Infinities and replace with NA. This required as we took logs of 0 (sieve) and 1 (cumret).
   nest() 
 ```
+
+
+
+
+
+
 
 ```{r}
 
