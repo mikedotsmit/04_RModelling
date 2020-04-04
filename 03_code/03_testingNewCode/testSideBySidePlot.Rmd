@@ -169,6 +169,113 @@ knitr::include_graphics(here::here("05_fig_output",'allStreamsCummulativePreMode
 ```
 
 
+```{r eval=TRUE, echo=FALSE, fig.align='center', fig.cap='Caption set from chunk options', include=TRUE, out.width='60%', fig.show='hold'}
+
+#here added the "fig.show='hold'" in chunk option from https://bookdown.org/yihui/rmarkdown/r-code.html#figures
+
+knitr::include_graphics(here::here("05_fig_output",'allStreamsPreModelling.pdf'))
+knitr::include_graphics(here::here("05_fig_output",'allStreamsCummulativePreModelling.pdf'))
+```
+
+
+```{r}
+
+#here added the "fig.show='hold'" in chunk option from https://bookdown.org/yihui/rmarkdown/r-code.html#figures
+
+library(patchwork)
+p1 <- (here::here("05_fig_output",'allStreamsPreModelling.pdf'))
+p2 <- (here::here("05_fig_output",'allStreamsCummulativePreModelling.pdf'))
+
+p1 + p2
+
+patchwork does work with immages, only with ggplots.
+try ot out.
+```
+
+
+
+
+
+
+
+
+
+
+Get the SVG-based logo for the R Project from an image URL.
+```{r}
+r_svg_url <- "https://www.r-project.org/logo/Rlogo.svg"
+
+```
+
+```{r}
+library(kableExtra)
+#print the out put of the table.
+# bring in the saved data to be tabled:
+R2_RR <- read.csv(file = here::here("03_code/01_code-output","R2_RR.txt"))
+R2_GGS <- read.csv(file = here::here("03_code/01_code-output","R2_GGS.txt"))
+
+tblR2RR <- knitr::kable(R2_RR,
+                        "latex",
+                        escape = F,booktabs = T, 
+                        digits = c(0,3,3,4,1)) %>% 
+  column_spec(1:5, width = "1.2cm") 
+  #this column_spec is supposed to set column widths to force text to wrap inside the colmn #https://community.rstudio.com/t/wrap-column-name-in-pdf-table-from-knitr-kable/3278/4)
+                        #caption="RR Model(formula)") # %>%
+#  kable_styling(c("striped", "bordered"), 
+                #full_width = F) %>% 
+#https://www.rdocumentation.org/packages/kableExtra/versions/1.1.0/topics/column_spec
+
+
+tblR2GGS <- knitr::kable(R2_GGS,
+                  "latex", #use latex for more complex tables than markdown https://haozhu233.github.io/kableExtra/awesome_table_in_pdf.pdf
+                  escape = F, booktabs = T, 
+                  digits = c(0,3,3,4,1)) %>% 
+  column_spec(1:5, width = "1.2cm")
+                  #caption="GGS Model(formula)") %>%
+#kable_styling(c("striped", "bordered"), 
+              #full_width = F) %>% 
+
+# t1 <- kable(R2_RR, format = "latex", booktabs = TRUE)
+# 
+# t2 <- kable(R2_GGS, format = "latex", booktabs = TRUE)
+
+x <- cat(c("\\begin{table}[!htb]
+    \\begin{minipage}{.5\\linewidth}
+      \\caption{RR Model(formula)}
+      \\centering",
+        tblR2RR,
+    "\\end{minipage}%
+    \\begin{minipage}{.5\\linewidth}
+      \\centering
+        \\caption{GGS Model(formula)}",
+        tblR2GGS,
+    "\\end{minipage} 
+\\end{table}"
+),file = here::here("05_fig_output","R2SidebySide.jpg"))
+
+
+
+# save_kable <- function(x, file,
+#                         bs_theme = "simplex", self_contained = TRUE,
+#                        extra_dependencies = NULL, ...,
+#                        latex_header_includes = NULL, keep_tex = FALSE) {
+#   if (!is.null(attr(x, "format")) && attr(x, "format") == "latex") {
+#     return(save_kable_latex(x, file, latex_header_includes, keep_tex))
+#   }
+#   return(save_kable_html(x, file, bs_theme, self_contained,
+#                          extra_dependencies, ...))
+# }
+#                        
+```
+#Install ghostprint https://haozhu233.github.io/kableExtra/awesome_table_in_pdf.pdf
+FirstImport_gramdata <- read_csv(here("01_data/02_preparedData", "test-31aug-2014-csv.csv"))
+
+
+
+
+
+
+
 
 
 

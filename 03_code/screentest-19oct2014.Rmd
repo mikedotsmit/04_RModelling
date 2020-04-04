@@ -414,7 +414,8 @@ Coef_RR1 <- tidy_reg_RR_1 %>%
 
 
 ## @knitr coefprint1
-table_RR1Coef_RR1 <-Coef_RR1%>% kable
+table_RR1Coef_RR1 <-Coef_RR1%>% 
+  kable()
 
 ## @knitr coefprint2
 ## @knitr coefprint3
