@@ -476,9 +476,11 @@ write.table(R2_RR, file = here("03_code/01_code-output","R2_RR.txt"), sep=",", q
 write.table(R2_GGS, file = here("03_code/01_code-output","R2_GGS.txt"), sep=",", quote = FALSE)
 ```
 
-```{r}
+```{r echo = FALSE, results='asis'}
+#i struggled to get the table below to save as immage thus creaqted a separate child .Rmd to knit the table.
+#{r child = (file = here::here("03_code","tableR2.Rmd"))}
+# the child (or grand-hcild) file is read into the results and discussionSEction .Rmd (wcich itseld is read into the mother file base.Rmd for final or complete document knitting to PDF)
 
-#print the out put of the table.
 # bring in the saved data to be tabled:
 R2_RR <- read.csv(file = here::here("03_code/01_code-output","R2_RR.txt"))
 R2_GGS <- read.csv(file = here::here("03_code/01_code-output","R2_GGS.txt"))
@@ -487,7 +489,8 @@ tblR2RR <- knitr::kable(R2_RR,
                         "latex",
                         escape = F,booktabs = T, 
                         digits = c(0,3,3,4,1)) %>% 
-  column_spec(1:5, width = "1.2cm") 
+  column_spec(1:5, width = "0.9cm") %>% 
+  column_spec(1, width = "2.3cm")
   #this column_spec is supposed to set column widths to force text to wrap inside the colmn #https://community.rstudio.com/t/wrap-column-name-in-pdf-table-from-knitr-kable/3278/4)
                         #caption="RR Model(formula)") # %>%
 #  kable_styling(c("striped", "bordered"), 
@@ -499,7 +502,8 @@ tblR2GGS <- knitr::kable(R2_GGS,
                   "latex",
                   escape = F, booktabs = T, 
                   digits = c(0,3,3,4,1)) %>% 
-  column_spec(1:5, width = "1.2cm")
+  column_spec(2:5, width = "0.9cm") %>% 
+  column_spec(1, width = "2.3cm")
                   #caption="GGS Model(formula)") %>%
 #kable_styling(c("striped", "bordered"), 
               #full_width = F) %>% 
@@ -508,6 +512,7 @@ tblR2GGS <- knitr::kable(R2_GGS,
 # 
 # t2 <- kable(R2_GGS, format = "latex", booktabs = TRUE)
 
+#code posistions side by side
 cat(c("\\begin{table}[!htb]
     \\begin{minipage}{.5\\linewidth}
       \\caption{RR Model(formula)}
@@ -521,6 +526,7 @@ cat(c("\\begin{table}[!htb]
     "\\end{minipage} 
 \\end{table}"
 ))  
+
 
 
 ```

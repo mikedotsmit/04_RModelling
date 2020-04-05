@@ -81,60 +81,16 @@ logs of the sizes and % passing values, and calculating the slope.
 Interpolation betweeen measured sizing points is conducted by the back-transformation of the model-fitted points along the respective model's distribution function. 
 
 
-```{r ,echo=FALSE, results='asis'}
 
-# bring in the saved data to be tabled:
-R2_RR <- read.csv(file = here::here("03_code/01_code-output","R2_RR.txt"))
-R2_GGS <- read.csv(file = here::here("03_code/01_code-output","R2_GGS.txt"))
-
-tblR2RR <- knitr::kable(R2_RR,
-                        "latex",
-                        escape = F,booktabs = T, 
-                        digits = c(0,3,3,4,1)) %>% 
-  column_spec(1:5, width = "0.9cm") %>% 
-  column_spec(1, width = "2.3cm")
-  #this column_spec is supposed to set column widths to force text to wrap inside the colmn #https://community.rstudio.com/t/wrap-column-name-in-pdf-table-from-knitr-kable/3278/4)
-                        #caption="RR Model(formula)") # %>%
-#  kable_styling(c("striped", "bordered"), 
-                #full_width = F) %>% 
-#https://www.rdocumentation.org/packages/kableExtra/versions/1.1.0/topics/column_spec
+try another approach for the R2 table: here brought in a s child document.
+As the previous approach failed to save a readable image of the table.
 
 
-tblR2GGS <- knitr::kable(R2_GGS,
-                  "latex",
-                  escape = F, booktabs = T, 
-                  digits = c(0,3,3,4,1)) %>% 
-  column_spec(2:5, width = "0.9cm") %>% 
-  column_spec(1, width = "2.3cm")
-                  #caption="GGS Model(formula)") %>%
-#kable_styling(c("striped", "bordered"), 
-              #full_width = F) %>% 
-
-# t1 <- kable(R2_RR, format = "latex", booktabs = TRUE)
-# 
-# t2 <- kable(R2_GGS, format = "latex", booktabs = TRUE)
-
-#code posistions side by side
-cat(c("\\begin{table}[!htb]
-    \\begin{minipage}{.5\\linewidth}
-      \\caption{RR Model(formula)}
-      \\centering",
-        tblR2RR,
-    "\\end{minipage}%
-    \\begin{minipage}{.5\\linewidth}
-      \\centering
-        \\caption{GGS Model(formula)}",
-        tblR2GGS,
-    "\\end{minipage} 
-\\end{table}"
-))  
-
-
-
+New child starts here..
+```{r child = (file = here::here("03_code","tableR2.Rmd"))}
 
 ```
-
-
+and Ends here..
 
 
 try add as footnote in table/s: "RRmodel is a better fit ,according to the simple model applied, i.e. single linear model applied to transformed y-variables and transformed x-factors. When applyinh peicewise (conditional) factors, the GGS model becomes a better model, but at the same tiem more noise (errors (epsilon?) is incorpaorated in the model. double the coefficients.

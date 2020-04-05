@@ -1,0 +1,77 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r, include = FALSE}
+#Function here::here to help with file paths relative to the project folder:
+library("here")
+```
+
+
+```{r, include = FALSE }
+#attache rpackages from central location:
+source(here::here("02_rpackages",'projectpackages.R'))
+
+```
+
+
+```{r, include = FALSE }
+#the original code (displayed below is from the code file: "screentest-19oct2014.Rmd"). another copy is in a code testing file:" testSideBySidePlot.Rmd.
+#here this table geerating code is kept in its own child Rmd file, a i could not get it to save a table for simple inclusion into the results discussion section. Having the code in oits own rmd file generates the pdf of the table only , and this way there is an image file of the table.
+
+```
+
+
+```{r echo = FALSE, results='asis'}
+
+# bring in the saved data to be tabled:
+R2_RR <- read.csv(file = here::here("03_code/01_code-output","R2_RR.txt"))
+R2_GGS <- read.csv(file = here::here("03_code/01_code-output","R2_GGS.txt"))
+
+tblR2RR <- knitr::kable(R2_RR,
+                        "latex",
+                        escape = F,booktabs = T, 
+                        digits = c(0,3,3,4,1)) %>% 
+  column_spec(1:5, width = "0.9cm") %>% 
+  column_spec(1, width = "2.3cm")
+  #this column_spec is supposed to set column widths to force text to wrap inside the colmn #https://community.rstudio.com/t/wrap-column-name-in-pdf-table-from-knitr-kable/3278/4)
+                        #caption="RR Model(formula)") # %>%
+#  kable_styling(c("striped", "bordered"), 
+                #full_width = F) %>% 
+#https://www.rdocumentation.org/packages/kableExtra/versions/1.1.0/topics/column_spec
+
+
+tblR2GGS <- knitr::kable(R2_GGS,
+                  "latex",
+                  escape = F, booktabs = T, 
+                  digits = c(0,3,3,4,1)) %>% 
+  column_spec(2:5, width = "0.9cm") %>% 
+  column_spec(1, width = "2.3cm")
+                  #caption="GGS Model(formula)") %>%
+#kable_styling(c("striped", "bordered"), 
+              #full_width = F) %>% 
+
+# t1 <- kable(R2_RR, format = "latex", booktabs = TRUE)
+# 
+# t2 <- kable(R2_GGS, format = "latex", booktabs = TRUE)
+
+#code posistions side by side
+cat(c("\\begin{table}[!htb]
+    \\begin{minipage}{.5\\linewidth}
+      \\caption{RR Model(formula)}
+      \\centering",
+        tblR2RR,
+    "\\end{minipage}%
+    \\begin{minipage}{.5\\linewidth}
+      \\centering
+        \\caption{GGS Model(formula)}",
+        tblR2GGS,
+    "\\end{minipage} 
+\\end{table}"
+))  
+
+
+
+```
