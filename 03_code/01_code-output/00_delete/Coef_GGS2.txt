@@ -1,0 +1,5 @@
+stream,term,estimate
+1,US13MeanPct,(Intercept),11.3140506356356
+2,US13MeanPct,GGS_x,-2.74685959835403
+3,US14MeanPct,(Intercept),11.5521623097812
+4,US14MeanPct,GGS_x,-2.8079749262211

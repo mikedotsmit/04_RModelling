@@ -40,7 +40,12 @@ formula used by OEM for efficiency calcultions. Not sure if they modeled the dat
 
 
 
-## Preparation (maybe include in design of experiment?)
+## Preparation 
+
+source Plant's SOPs for each step  (SOP = Standard Operating Procedures)
++ sample prep, 
++ screen analases
+
 
 Grinding Screens `321-SC-013` and `321-SC-014` were chosen for the comparison test. Ten `0.25 MTQ` panels were installed in `321-SC-014` on the $30^{th}$ of September.  
 

@@ -305,7 +305,7 @@ transformations1 <- long_meanPct_FeedAndOS %>%
     RRx = log(sieve),
     RRy = log(log(1/cumret)),
     # Gauss Gaudin Shumann transforms:
-    GGS_x = log(sieve),
+    GGSx = log(sieve),
     GGS_y = log(cumret))  %>%
   
   mutate_if(is.numeric, list(~na_if(., -Inf)))%>% #removes -Infinities and replace with NA. This required as we took logs of 0 (sieve) and 1 (cumret).
@@ -323,11 +323,15 @@ transformations2 <- long_meanPct_US %>%
     RRx = log(sieve),
     RRy = log(log(1/cumret)),
     # Gauss Gaudin Shumann transforms:
-    GGS_x = log(sieve),
+    GGSx = log(sieve),
     GGS_y = log(cumret))  %>%
   
   mutate_if(is.numeric, list(~na_if(., -Inf)))%>% #removes -Infinities and replace with NA. This required as we took logs of 0 (sieve) and 1 (cumret).
   nest() 
+```
+```{r}
+transformations1
+transformations2
 ```
 
 
@@ -349,7 +353,7 @@ regression1 <- transformations1 %>%
     augmented_RR = map (RRmodels, augment),
     
     #GGS model    
-    GGS_models = lapply(data, function(df) lm(GGS_y ~ GGS_x, data = df)),# "GGS_models" column will be created in the mutate.
+    GGS_models = lapply(data, function(df) lm(GGS_y ~ GGSx, data = df)),# "GGS_models" column will be created in the mutate.
     tidied_GGS = map (GGS_models, tidy), 
     glanced_GGS = map(GGS_models, glance),
     augmented_GGS = map (GGS_models, augment)
@@ -368,13 +372,30 @@ regression2 <- transformations2 %>%
     augmented_RR = map (RRmodels, augment),
     
     #GGS model    
-    GGS_models = lapply(data, function(df) lm(GGS_y ~ GGS_x, data = df)),# "GGS_models" column will be created in the mutate.
+    GGS_models = lapply(data, function(df) lm(GGS_y ~ GGSx, data = df)),# "GGS_models" column will be created in the mutate.
     tidied_GGS = map (GGS_models, tidy), 
     glanced_GGS = map(GGS_models, glance),
     augmented_GGS = map (GGS_models, augment)
   ) 
 
 ```
+
+
+```{r}
+ggplot(PSD_raw_cum_allStreams, aes(sieve, probability, colour = stream)) + geom_point()+
+  geom_line(aes(y=predict(regression1)))
+
+
+```
+
+
+
+
+
+
+
+
+
 
 ```{r}
 #####
@@ -400,26 +421,20 @@ tidy_reg_RR_2 <-regression2 %>%
 tidy_reg_GGS_2 <-regression2 %>% 
   unnest(tidied_GGS) 
 
+
+
+
 ```
 
-# the required regression data is now unnested but mixed with all the other lists and data.
-#now pull out or select the relevent data.
+the required regression data is now unnested but mixed with all the other nested lists and data generated.
+now pull out or select the relevent data: (with dplyr::select)
 
-#i do quick check if i can print tables in .rmd mother report (currently named "grams3-report-name.RMD")
-# to prevent the .RMD file to all the script from this .R script, we help .RMD identify wich code to use:
+i do quick check if i can print tables in .rmd mother report (currently named "grams3-report-name.RMD")
+to prevent the .RMD file to all the script from this .R script, we help .RMD identify wich code to use:
 
 ```{r}
 Coef_RR1 <- tidy_reg_RR_1 %>% 
   dplyr::select(stream,term, estimate)
-
-
-## @knitr coefprint1
-table_RR1Coef_RR1 <-Coef_RR1%>% 
-  kable()
-
-## @knitr coefprint2
-## @knitr coefprint3
-
 
 Coef_RR2 <- tidy_reg_RR_2 %>% 
   dplyr::select(stream,term, estimate)
@@ -429,6 +444,13 @@ Coef_GGS1 <- tidy_reg_GGS_1 %>%
 
 Coef_GGS2 <- tidy_reg_GGS_2 %>% 
   dplyr::select(stream,term, estimate)
+
+#write the tibbles to \01_code-output folder  for use in table generated in resultsanddiscion section
+write.table(Coef_RR1, file = here("03_code/01_code-output","CoefRR1.txt"), sep=",", quote = FALSE)
+write.table(Coef_RR2, file = here("03_code/01_code-output","CoefRR2.txt"), sep=",", quote = FALSE)
+write.table(Coef_GGS1, file = here("03_code/01_code-output","CoefGGS1.txt"), sep=",", quote = FALSE)
+write.table(Coef_GGS2, file = here("03_code/01_code-output","CoefGGS2.txt"), sep=",", quote = FALSE)
+
 
 ```
 #it might be worth it to separate each stream's coefficients in its own dataframe.
@@ -457,16 +479,16 @@ glanced_reg_GGS_2 <-regression2 %>%
 #Coefficient of determination (r^2).(i tried latex formatting for the R2 not yet successful)
 coef_deter_RR1 <- glanced_reg_RR_1 %>% 
   #conduct select and rename in one step with dplyr::select()
- select(stream,R2 = r.squared, adj.R2= adj.r.squared, p.value, AIC)
+ select(stream, R2 = r.squared, adj.R2 = adj.r.squared, p.value, AIC)
 
 coef_deter_RR2 <- glanced_reg_RR_2 %>% 
-  select(stream,R2 = r.squared, adj.R2= adj.r.squared, p.value, AIC)
+  select(stream, R2 = r.squared, adj.R2 = adj.r.squared, p.value, AIC)
 
 coef_deter_GGS1 <- glanced_reg_GGS_1 %>% 
-  select(stream,R2 = r.squared, adj.R2= adj.r.squared, p.value, AIC)
+  select(stream, R2 = r.squared, adj.R2 = adj.r.squared, p.value, AIC)
 
 coef_deter_GGS2 <- glanced_reg_GGS_2 %>% 
-  select(stream,R2 = r.squared, adj.R2= adj.r.squared, p.value, AIC)
+  select(stream, R2 = r.squared, adj.R2 = adj.r.squared, p.value, AIC)
 
 R2_RR <- full_join(coef_deter_RR1,coef_deter_RR2)
 R2_GGS <- full_join(coef_deter_GGS1,coef_deter_GGS2)
@@ -476,10 +498,14 @@ write.table(R2_RR, file = here("03_code/01_code-output","R2_RR.txt"), sep=",", q
 write.table(R2_GGS, file = here("03_code/01_code-output","R2_GGS.txt"), sep=",", quote = FALSE)
 ```
 
-```{r echo = FALSE, results='asis'}
-#i struggled to get the table below to save as immage thus creaqted a separate child .Rmd to knit the table.
+creating the tables
+
+#i struggled to get the table below to save as immage thus created a separate child .Rmd to knit the table.
 #{r child = (file = here::here("03_code","tableR2.Rmd"))}
-# the child (or grand-hcild) file is read into the results and discussionSEction .Rmd (wcich itseld is read into the mother file base.Rmd for final or complete document knitting to PDF)
+# the child (or grand-child) file is read into the results and discussionSection .Rmd (which itself is read into the mother file base.Rmd for final or complete document knitting to PDF)
+
+```{r message=FALSE, warning=FALSE, include=FALSE, results='asis'}
+
 
 # bring in the saved data to be tabled:
 R2_RR <- read.csv(file = here::here("03_code/01_code-output","R2_RR.txt"))
@@ -530,6 +556,11 @@ cat(c("\\begin{table}[!htb]
 
 
 ```
+
+
+
+
+
 
 ```{r}
 # tidy_reg_RR_GGS%>% 

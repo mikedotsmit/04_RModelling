@@ -196,11 +196,6 @@ try ot out.
 
 
 
-
-
-
-
-
 Get the SVG-based logo for the R Project from an image URL.
 ```{r}
 r_svg_url <- "https://www.r-project.org/logo/Rlogo.svg"

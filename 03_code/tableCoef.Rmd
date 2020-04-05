@@ -1,0 +1,113 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r, include = FALSE}
+#Function here::here to help with file paths relative to the project folder:
+library("here")
+```
+
+
+```{r, include = FALSE }
+#attache rpackages from central location:
+source(here::here("02_rpackages",'projectpackages.R'))
+
+```
+```{r, include = FALSE }
+
+
+#This Rmd draws in the model coef data and generates the table for use in the results and discussion section as RMardown 'mother-child' doc relationship.
+```
+
+
+```{r echo = FALSE, results='asis'}
+
+# bring in the saved data to be tabled:
+Coef_RR1 <- read.csv(file = here::here("03_code/01_code-output","CoefRR1.txt"))
+Coef_RR2 <- read.csv(file = here::here("03_code/01_code-output","CoefRR2.txt"))
+Coef_GGS1 <- read.csv(file = here::here("03_code/01_code-output","CoefGGS1.txt"))
+Coef_GGS2 <- read.csv(file = here::here("03_code/01_code-output","CoefGGS2.txt"))
+
+
+
+
+tblCoefRR1 <- knitr::kable(Coef_RR1,
+                        "latex",
+                        escape = F,booktabs = T, 
+                        digits = c(0,0,3)) %>% 
+  column_spec(1, width = "3cm") %>% 
+  column_spec(2:3, width = "1.5cm") %>% 
+  kable_styling(c("striped", "bordered"))
+  #this column_spec is supposed to set column widths to force text to wrap inside the colmn #https://community.rstudio.com/t/wrap-column-name-in-pdf-table-from-knitr-kable/3278/4)
+                        #caption="RR Model(formula)") # %>%
+#  kable_styling(c("striped", "bordered"), 
+                #full_width = F) %>% 
+#https://www.rdocumentation.org/packages/kableExtra/versions/1.1.0/topics/column_spec
+
+
+tblCoefRR2 <- knitr::kable(Coef_RR2,
+                  "latex",
+                  escape = F, booktabs = T, 
+                  digits = c(0,0,3)) %>% 
+  column_spec(1, width = "3cm") %>% 
+  column_spec(2:3, width = "1.5cm") %>% 
+  kable_styling(c("striped", "bordered")) 
+
+
+
+tblCoefGGS1 <- knitr::kable(Coef_GGS1,
+                        "latex",
+                        escape = F,booktabs = T, 
+                        digits = c(0,0,3)) %>% 
+  column_spec(1, width = "3cm") %>% 
+  column_spec(2:3, width = "1.5cm") %>% 
+  kable_styling(c("striped", "bordered"))
+  
+tblCoefGGS2 <- knitr::kable(Coef_GGS2,
+                  "latex",
+                  escape = F, booktabs = T, 
+                  digits = c(0,0,3)) %>% 
+  column_spec(1, width = "3cm") %>% 
+  column_spec(2:3, width = "1.5cm") %>% 
+  kable_styling(c("striped", "bordered")) 
+
+
+
+              #full_width = F) %>% 
+
+# t1 <- kable(R2_RR, format = "latex", booktabs = TRUE)
+# 
+# t2 <- kable(R2_GGS, format = "latex", booktabs = TRUE)
+
+#code posistions side by side
+cat(c("\\begin{table}[!htb]
+    \\begin{minipage}{.5\\linewidth}
+      \\caption{RR Model Coeficients}
+      \\centering",
+        tblCoefRR1,
+    "\\end{minipage}%
+    \\begin{minipage}{.5\\linewidth}
+      \\centering
+        \\caption{RR Model Coeficients}",
+        tblCoefRR2,
+    "\\end{minipage} 
+\\end{table}"
+))  
+
+cat(c("\\begin{table}[!htb]
+    \\begin{minipage}{.5\\linewidth}
+      \\caption{GGS Model Coeficients}
+      \\centering",
+        tblCoefGGS1,
+    "\\end{minipage}%
+    \\begin{minipage}{.5\\linewidth}
+      \\centering
+        \\caption{GGS Model Coeficients}",
+        tblCoefGGS2,
+    "\\end{minipage} 
+\\end{table}"
+))  
+
+```

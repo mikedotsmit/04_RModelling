@@ -1,0 +1,92 @@
+
+https://arxiv.org/pdf/1412.3565v2.pdf
+
+
+```{r}
+```
+
+
+```{r}
+
+regressions <- unnest(transformations1) %>% 
+  do(tidy(lm(RRy~RRx, data = .), conf.int = TRUE))
+
+regressions
+
+```
+
+```{r}
+
+regressions %>% dplyr::filter(term != "(Intercept") %>% 
+  ggplot(aes(x = estimate, y = term, color = factor(stream), group = stream)) +
+  geom_point() + geom_errorbarh(aes(xmin = conf.low, xmax = conf.high)) +
+  geom_vline(xintercept = 15)
+
+
+
+```
+
+
+```{r}
+regressions <- unnest(transformations1) %>% 
+  do(mod = lm(RRy~RRx, .))
+
+regressions
+
+
+```
+
+```{r}
+un <- transformations1
+
+ggplot(PSD_raw_cum_allStreams, aes(sieve, probability)) +
+                                     geom_point()
+```
+
+
+```{r}
+nlsfit <- nls(RRy ~ RRx, unnest(transformations1), start=list(k=1, b=0))
+summary(nlsfit)
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+```{r}
+# Fixed lines
+p <- ggplot(mtcars, aes(x = wt, y = mpg)) + geom_point()
+p + geom_vline(xintercept = 5)
+p + geom_vline(xintercept = 1:5)
+p + geom_vline(xintercept = 1:5, colour="green", linetype = "longdash")
+p + geom_vline(aes(xintercept = wt))
+
+# With coordinate transforms
+p + geom_vline(aes(xintercept = wt)) + coord_equal()
+p + geom_vline(aes(xintercept = wt)) + coord_flip()
+p + geom_vline(aes(xintercept = wt)) + coord_polar()
+
+p2 <- p + aes(colour = factor(cyl))
+p2 + geom_vline(xintercept = 15)
+
+# To display different lines in different facets, you need to
+# create a data frame.
+p <- qplot(mpg, wt, data=mtcars, facets = vs ~ am)
+vline.data <- data.frame(z = c(15, 20, 25, 30), vs = c(0, 0, 1, 1), am = c(0, 1, 0, 1))
+p + geom_vline(aes(xintercept = z), vline.data)
+```
+
