@@ -13,17 +13,9 @@ output:
 library("here")
 
 # Function here::here to help with file paths relative to the project folder:
-```
 
-
-```{r , include = FALSE }
 #attache rpackages from central location:
 source(here::here("02_rpackages",'projectpackages.R'))
-
-```
-
-
-```{r include = FALSE}
 
 options(qwraps2_markup = 'markdown')
 
@@ -88,6 +80,14 @@ As the previous approach failed to save a readable image of the table.
 
 New child starts here..
 ```{r child = (file = here::here("03_code","tableR2.Rmd"))}
+
+```
+and Ends here..
+
+
+
+New child starts here..
+```{r child = (file = here::here("03_code","tableCoef.Rmd"))}
 
 ```
 and Ends here..

@@ -7,10 +7,7 @@ output:
 ```{r, include = FALSE}
 #Function here::here to help with file paths relative to the project folder:
 library("here")
-```
 
-
-```{r, include = FALSE }
 #attache rpackages from central location:
 source(here::here("02_rpackages",'projectpackages.R'))
 

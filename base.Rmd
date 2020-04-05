@@ -12,17 +12,8 @@ output:
 ```{r, include = FALSE}
 #Function here::here to help with file paths relative to the project folder:
 library("here")
-```
-
-
-```{r, include = FALSE }
 #attache rpackages from central location:
 source(here::here("02_rpackages",'projectpackages.R'))
-
-```
-
-
-```{r, include = FALSE}
 
 options(qwraps2_markup = 'markdown')
 
@@ -31,6 +22,7 @@ knitr.table.format = "latex" #global option for tables. can still set any in eac
 #excellent for LaTeX equaitons:(probable keep this in bib)
 #http://visualmatheditor.equatheque.net/VisualMathEditor.html
 
+sessionInfo(package = NULL)
 ```
 
 

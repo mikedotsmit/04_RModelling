@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/W32TeX) (preloaded format=pdflatex 2020.3.29)  5 APR 2020 09:21
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/W32TeX) (preloaded format=pdflatex 2020.3.29)  5 APR 2020 13:31
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -697,15 +697,15 @@ File: t1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
 {c:/Users/miked/AppData/Roaming/TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdfte
 x.map} <./06_images/me-glasses.jpg>]
 LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 1
-59.
+61.
 (c:/Users/miked/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/ts1lmr.fd
 File: ts1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 
-LaTeX Warning: Command \textmu invalid in math mode on input line 174.
+LaTeX Warning: Command \textmu invalid in math mode on input line 176.
 
 
-LaTeX Warning: Command \textmu invalid in math mode on input line 174.
+LaTeX Warning: Command \textmu invalid in math mode on input line 176.
 
 [2] [3]
 <C:/Users/miked/OneDrive/Statistics/R/Projects/nuiphao/2014-revisit-panelcompar
@@ -716,7 +716,7 @@ omparison/05_fig_output/allStreamsPreModelling.pdf Graphic file (type pdf)
 mparison/05_fig_output/allStreamsPreModelling.pdf>
 Package pdftex.def Info: C:/Users/miked/OneDrive/Statistics/R/Projects/nuiphao/
 2014-revisit-panelcomparison/05_fig_output/allStreamsPreModelling.pdf  used on 
-input line 300.
+input line 305.
 (pdftex.def)             Requested size: 234.87471pt x 187.89977pt.
 <C:/Users/miked/OneDrive/Statistics/R/Projects/nuiphao/2014-revisit-panelcompar
 ison/05_fig_output/allStreamsCummulativePreModelling.pdf, id=114, 722.7pt x 578
@@ -728,7 +728,7 @@ e pdf)
 mparison/05_fig_output/allStreamsCummulativePreModelling.pdf>
 Package pdftex.def Info: C:/Users/miked/OneDrive/Statistics/R/Projects/nuiphao/
 2014-revisit-panelcomparison/05_fig_output/allStreamsCummulativePreModelling.pd
-f  used on input line 309.
+f  used on input line 314.
 (pdftex.def)             Requested size: 281.85185pt x 225.48149pt.
 File: C:/Users/miked/OneDrive/Statistics/R/Projects/nuiphao/2014-revisit-panelc
 omparison/05_fig_output/allStreamsPreModelling.pdf Graphic file (type pdf)
@@ -736,7 +736,7 @@ omparison/05_fig_output/allStreamsPreModelling.pdf Graphic file (type pdf)
 mparison/05_fig_output/allStreamsPreModelling.pdf>
 Package pdftex.def Info: C:/Users/miked/OneDrive/Statistics/R/Projects/nuiphao/
 2014-revisit-panelcomparison/05_fig_output/allStreamsPreModelling.pdf  used on 
-input line 318.
+input line 323.
 (pdftex.def)             Requested size: 281.85185pt x 225.48149pt.
 File: C:/Users/miked/OneDrive/Statistics/R/Projects/nuiphao/2014-revisit-panelc
 omparison/05_fig_output/allStreamsCummulativePreModelling.pdf Graphic file (typ
@@ -745,82 +745,83 @@ e pdf)
 mparison/05_fig_output/allStreamsCummulativePreModelling.pdf>
 Package pdftex.def Info: C:/Users/miked/OneDrive/Statistics/R/Projects/nuiphao/
 2014-revisit-panelcomparison/05_fig_output/allStreamsCummulativePreModelling.pd
-f  used on input line 318.
+f  used on input line 323.
 (pdftex.def)             Requested size: 281.85185pt x 225.48149pt.
 [4pdfTeX warning (ext4): destination with the same identifier (name{figure.1}) 
 has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.353 
-       <c:/Users/miked/OneDrive/Statistics/R/Projects/nuiphao/2014-revisit-pane
-lcomparison/05_fig_output/allStreamsPreModelling.pdf>]
-Overfull \hbox (3.14244pt too wide) in paragraph at lines 366--366
+l.339 R
+       R model fits the feed streams means (Feed13Mean and Feed14Mean) better <
+c:/Users/miked/OneDrive/Statistics/R/Projects/nuiphao/2014-revisit-panelcompari
+son/05_fig_output/allStreamsPreModelling.pdf>]
+Overfull \hbox (3.14244pt too wide) in paragraph at lines 371--371
  []|\T1/lmr/m/n/10 adj.R2|
  []
 
 
-Overfull \hbox (5.22614pt too wide) in paragraph at lines 366--366
+Overfull \hbox (5.22614pt too wide) in paragraph at lines 371--371
  []|\T1/lmr/m/n/10 p.value|
  []
 
 
-Overfull \hbox (4.00372pt too wide) in paragraph at lines 368--368
+Overfull \hbox (4.00372pt too wide) in paragraph at lines 373--373
 []|\T1/lmr/m/n/10 Feed13MeanPct|  
  []
 
 
-Overfull \hbox (4.00372pt too wide) in paragraph at lines 369--369
+Overfull \hbox (4.00372pt too wide) in paragraph at lines 374--374
 []|\T1/lmr/m/n/10 Feed14MeanPct|  
  []
 
 
-Overfull \hbox (3.14244pt too wide) in paragraph at lines 382--382
+Overfull \hbox (3.14244pt too wide) in paragraph at lines 387--387
  []|\T1/lmr/m/n/10 adj.R2|
  []
 
 
-Overfull \hbox (5.22614pt too wide) in paragraph at lines 382--382
+Overfull \hbox (5.22614pt too wide) in paragraph at lines 387--387
  []|\T1/lmr/m/n/10 p.value|
  []
 
 
-Overfull \hbox (4.00372pt too wide) in paragraph at lines 384--384
+Overfull \hbox (4.00372pt too wide) in paragraph at lines 389--389
 []|\T1/lmr/m/n/10 Feed13MeanPct|  
  []
 
 
-Overfull \hbox (2.17046pt too wide) in paragraph at lines 384--384
+Overfull \hbox (2.17046pt too wide) in paragraph at lines 389--389
  []|\T1/lmr/m/n/10 0.0001|
  []
 
 
-Overfull \hbox (4.00372pt too wide) in paragraph at lines 385--385
+Overfull \hbox (4.00372pt too wide) in paragraph at lines 390--390
 []|\T1/lmr/m/n/10 Feed14MeanPct|  
- []
-
-
-Overfull \hbox (2.17046pt too wide) in paragraph at lines 385--385
- []|\T1/lmr/m/n/10 0.0001|
- []
-
-
-Overfull \hbox (2.17046pt too wide) in paragraph at lines 386--386
- []|\T1/lmr/m/n/10 0.0017|
- []
-
-
-Overfull \hbox (2.17046pt too wide) in paragraph at lines 387--387
- []|\T1/lmr/m/n/10 0.0025|
- []
-
-
-Overfull \hbox (2.17046pt too wide) in paragraph at lines 388--388
- []|\T1/lmr/m/n/10 0.0007|
  []
 
 
 Overfull \hbox (2.17046pt too wide) in paragraph at lines 390--390
+ []|\T1/lmr/m/n/10 0.0001|
+ []
+
+
+Overfull \hbox (2.17046pt too wide) in paragraph at lines 391--391
+ []|\T1/lmr/m/n/10 0.0017|
+ []
+
+
+Overfull \hbox (2.17046pt too wide) in paragraph at lines 392--392
+ []|\T1/lmr/m/n/10 0.0025|
+ []
+
+
+Overfull \hbox (2.17046pt too wide) in paragraph at lines 393--393
+ []|\T1/lmr/m/n/10 0.0007|
+ []
+
+
+Overfull \hbox (2.17046pt too wide) in paragraph at lines 395--395
  []|\T1/lmr/m/n/10 0.0009|
  []
 
@@ -829,46 +830,133 @@ has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.418 
-      pdfTeX warning (ext4): destination with the same identifier (name{table.1
-}) has been already used, duplicate ignored
+l.402 N
+       ew child starts here..pdfTeX warning (ext4): destination with the same i
+dentifier (name{table.1}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.418 
-      pdfTeX warning (ext4): destination with the same identifier (name{table.2
-}) has been already used, duplicate ignored
+l.402 N
+       ew child starts here..pdfTeX warning (ext4): destination with the same i
+dentifier (name{table.2}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.418 
-       <c:/Users/miked/OneDrive/Statistics/R/Projects/nuiphao/2014-revisit-pane
-lcomparison/05_fig_output/allStreamsCummulativePreModelling.pdf>] [6pdfTeX warn
-ing (ext4): destination with the same identifier (name{figure.3}) has been alre
-ady used, duplicate ignored
+l.402 N
+       ew child starts here.. <c:/Users/miked/OneDrive/Statistics/R/Projects/nu
+iphao/2014-revisit-panelcomparison/05_fig_output/allStreamsCummulativePreModell
+ing.pdf>] [6pdfTeX warning (ext4): destination with the same identifier (name{f
+igure.3}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.418 
-      ] [7]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 495.
+l.402 N
+       ew child starts here..]
+Overfull \hbox (4.57129pt too wide) in paragraph at lines 413--413
+[]|\T1/lmr/m/n/10 (Intercept)|  
+ []
+
+
+Overfull \hbox (4.57129pt too wide) in paragraph at lines 415--415
+[]|\T1/lmr/m/n/10 (Intercept)|  
+ []
+
+
+Overfull \hbox (4.57129pt too wide) in paragraph at lines 417--417
+[]|\T1/lmr/m/n/10 (Intercept)|  
+ []
+
+
+Overfull \hbox (4.57129pt too wide) in paragraph at lines 420--420
+[]|\T1/lmr/m/n/10 (Intercept)|  
+ []
+
+
+Overfull \hbox (4.57129pt too wide) in paragraph at lines 433--433
+[]|\T1/lmr/m/n/10 (Intercept)|  
+ []
+
+
+Overfull \hbox (4.57129pt too wide) in paragraph at lines 435--435
+[]|\T1/lmr/m/n/10 (Intercept)|  
+ []
+
+
+Overfull \hbox (4.57129pt too wide) in paragraph at lines 449--449
+[]|\T1/lmr/m/n/10 (Intercept)|  
+ []
+
+
+Overfull \hbox (4.57129pt too wide) in paragraph at lines 451--451
+[]|\T1/lmr/m/n/10 (Intercept)|  
+ []
+
+
+Overfull \hbox (4.57129pt too wide) in paragraph at lines 453--453
+[]|\T1/lmr/m/n/10 (Intercept)|  
+ []
+
+
+Overfull \hbox (4.57129pt too wide) in paragraph at lines 456--456
+[]|\T1/lmr/m/n/10 (Intercept)|  
+ []
+
+
+Overfull \hbox (4.57129pt too wide) in paragraph at lines 469--469
+[]|\T1/lmr/m/n/10 (Intercept)|  
+ []
+
+
+Overfull \hbox (4.57129pt too wide) in paragraph at lines 471--471
+[]|\T1/lmr/m/n/10 (Intercept)|  
+ []
+
+[7pdfTeX warning (ext4): destination with the same identifier (name{table.3}) h
+as been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.522 I
+       m not too happy with the layout structure and flow. compare withpdfTeX w
+arning (ext4): destination with the same identifier (name{table.4}) has been al
+ready used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.522 I
+       m not too happy with the layout structure and flow. compare withpdfTeX w
+arning (ext4): destination with the same identifier (name{table.5}) has been al
+ready used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.522 I
+       m not too happy with the layout structure and flow. compare withpdfTeX w
+arning (ext4): destination with the same identifier (name{table.6}) has been al
+ready used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.522 I
+       m not too happy with the layout structure and flow. compare with]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 578.
 [8]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 495.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 578.
 (./base.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 495.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 495.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 578.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 578.
 Package rerunfilecheck Info: File `base.out' has not changed.
-(rerunfilecheck)             Checksum: E76DF0191EBB78BBC2726B89BB27A78D;2277.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 495.
+(rerunfilecheck)             Checksum: 8A9B6E17FC3188783D4EA0A2D2C8519B;2048.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 578.
  ) 
 Here is how much of TeX's memory you used:
- 12077 strings out of 482913
- 175600 string characters out of 5957672
- 428866 words of memory out of 5000000
- 27050 multiletter control sequences out of 15000+600000
+ 12082 strings out of 482913
+ 175561 string characters out of 5957672
+ 431825 words of memory out of 5000000
+ 27051 multiletter control sequences out of 15000+600000
  584386 words of font info for 67 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 34i,13n,37p,501b,329s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 34i,15n,37p,501b,391s stack positions out of 5000i,500n,10000p,200000b,80000s
 {c:/Users/miked/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-rm.e
 nc}{c:/Users/miked/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mat
 hit.enc}{c:/Users/miked/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/l
@@ -889,10 +977,10 @@ pData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr5.pfb><c:/Users/miked
 /AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr7.pfb><c:/Users/mi
 ked/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy10.pfb><c:/Use
 rs/miked/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtt10.pfb>
-Output written on base.pdf (8 pages, 267880 bytes).
+Output written on base.pdf (8 pages, 268889 bytes).
 PDF statistics:
- 229 PDF objects out of 1000 (max. 8388607)
- 199 compressed objects within 2 object streams
- 50 named destinations out of 1000 (max. 500000)
+ 234 PDF objects out of 1000 (max. 8388607)
+ 203 compressed objects within 3 object streams
+ 54 named destinations out of 1000 (max. 500000)
  152 words of extra memory for PDF output out of 10000 (max. 10000000)
 

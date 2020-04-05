@@ -13,16 +13,10 @@ outputs are exported or written to code/01_code-outputs.
 ```{r, include = FALSE}
 #Function here::here to help with file paths relative to the project folder:
 library("here")
-```
 
-
-```{r,include = FALSE }
 #attache rpackages from central location:
 source(here::here("02_rpackages",'projectpackages.R'))
 
-```
-
-```{r}
 #various options that controle chunk and graphics:
 
 knitr::opts_chunk$set(echo = FALSE, warning=FALSE,message=FALSE)
