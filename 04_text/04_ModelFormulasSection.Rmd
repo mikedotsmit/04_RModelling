@@ -10,15 +10,22 @@ output:
 The RR model distribution function has been used to describe the particle size distributions of various minerals, powders and liquids of various types and sizes. The function is particularly suited to represent those produced by grinding, milling, and crushing operations. The general expression of the RR model is:
 
 
-$$  F\left(d\right) = exp\left[-(\frac{d}{l})^{m} \right] $$
+$$  F\left(d\right) = exp\left[-(\frac{d}{\bar{d}})^{m} \right] $$
 
 
 where:  
 $F(d)$ = distribution function (cum. passing)  
 $d$ = particle size [mm]  
 Parameters $\bar{d}$ and $m$ are adjustable parameters characteristic of the distribution.   
-$\bar{d}$ = scale paramater (mean particle size [mm]) and  = $\exp\left({-\frac{intercept}{slope}}\right)$.    
+$\bar{d}$ = scale paramater (mean particle size [mm]) 
+
+where 
+
+$$\bar{d} = \exp\left({-\frac{intercept}{slope}}\right) $$ 
+
 $m$ = slope paramater (measure of the spread of particle sizes).  
+
+<br><br><br><br>
 
 
 

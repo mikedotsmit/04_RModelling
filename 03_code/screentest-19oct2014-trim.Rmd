@@ -71,7 +71,7 @@ gramdata1 <- gramdata %>%
 #calculating %mass retained for all samples.
 
 pct <- gramdata1 %>% #mass percentage
-  mutate_all ( ~(./sum(.)))
+  mutate_all ( ~(./sum(.))) #mutate_all overwrites ("converts") original
 ```
 
 
@@ -124,27 +124,33 @@ OS14MeanPct <- osize14$mean_pct
 plotting raw_psd feed distribution to have a quick view if they are simmilar. if they are not (simmilar) then the expeririment or test will not not give conclusive results. as our aim is to test if one panel size is "signifficantly" better than another panels size.
 
 ```{r }
-feedraw_psd <- cbind(sieve, Feed13MeanPct, Feed14MeanPct) 
-OSraw_psd <- cbind(sieve, OS13MeanPct, OS14MeanPct)  
-USraw_psd <- cbind(sieve, US13MeanPct, US14MeanPct)
+FeedRawPSD <- cbind(sieve, Feed13MeanPct, Feed14MeanPct) 
+OSRawPSD <- cbind(sieve, OS13MeanPct, OS14MeanPct)  
+USRawPSD <- cbind(sieve, US13MeanPct, US14MeanPct)
 ```
 ```{r }
-write.table(feedraw_psd, here("03_code/01_code-output","feedraw_psd.txt"), sep=",", quote = FALSE)
-write.table(OSraw_psd, here("03_code/01_code-output","OSraw_psd.txt"), sep=",", quote = FALSE)
-write.table(USraw_psd, here("03_code/01_code-output","USraw_psd.txt"), sep=",", quote = FALSE)
+write.table(FeedRawPSD, here("03_code/01_code-output","FeedRawPSD.txt"), sep=",", quote = FALSE,row.names = FALSE)
+write.table(OSRawPSD, here("03_code/01_code-output","OSRawPSD.txt"), sep=",", quote = FALSE, row.names = FALSE)
+write.table(USRawPSD, here("03_code/01_code-output","USRawPSD.txt"), sep=",", quote = FALSE, row.names = FALSE)
+
+
+write.csv(FeedRawPSD, here("03_code/01_code-output","FeedRawPSD.csv"),row.names = FALSE)
+write.csv(OSRawPSD, here("03_code/01_code-output","OSRawPSD.csv"),row.names = FALSE)
+write.csv(USRawPSD, here("03_code/01_code-output","USRawPSD.csv"),row.names = FALSE)
+
 
 #long format prep for plot
 #this code is duplicated (convert to long data and plots) in "results-and-discussionSEction".. here for prior checking, there for report inclusion.
 
-long_feedraw_psd <- feedraw_psd %>% pivot_longer(-sieve, names_to= "stream" , values_to = "probability")
-long_OSraw_psd <- OSraw_psd %>% pivot_longer(-sieve, names_to= "stream" , values_to = "probability")  
-long_USraw_psd <- USraw_psd %>% pivot_longer(-sieve, names_to= "stream" , values_to = "probability")
+long_FeedRawPSD <- FeedRawPSD %>% pivot_longer(-sieve, names_to= "stream" , values_to = "probability")
+long_OSRawPSD <- OSRawPSD %>% pivot_longer(-sieve, names_to= "stream" , values_to = "probability")  
+long_USRawPSD <- USRawPSD %>% pivot_longer(-sieve, names_to= "stream" , values_to = "probability")
 
 #combine the datasets:
-PSD_raw_psd_allStreams <- rbind(long_feedraw_psd,long_OSraw_psd,long_USraw_psd)
+PSD_raw_psd_allStreams <- rbind(long_FeedRawPSD,long_OSRawPSD,long_USRawPSD)
 PSD_raw_psd_allStreams <- data.frame(PSD_raw_psd_allStreams,
                              Df = rep(c("Feed (unmodeled)","OS (unmod.)","US (unmod.)" ),
-                                                      times=c(nrow(long_feedraw_psd),nrow(long_OSraw_psd),nrow(long_USraw_psd))))
+                                                      times=c(nrow(long_FeedRawPSD),nrow(long_OSRawPSD),nrow(long_USRawPSD))))
 
 (outplot_all_unmodelled <- ggplot(PSD_raw_psd_allStreams, aes(sieve, probability, colour = stream)) +
   geom_line(size = 1) +
@@ -166,20 +172,21 @@ feed streams' psd look close enough in this test.
 #cummulative data for plots
 #for cumsum ..do before convert to long format
 
-feedraw_cum <- feedraw_psd %>% 
+feedraw_cum <- FeedRawPSD %>% 
   mutate (
     CumRet_F13 = cumsum(Feed13MeanPct),
     CumPass_F13 = 1-CumRet_F13, 
     CumRet_F14 = cumsum(Feed14MeanPct),
     CumPass_F14 = 1-CumRet_F14)
   
-OSraw_cum <- OSraw_psd %>% 
+
+OSraw_cum <- OSRawPSD %>% 
   mutate (CumRet_OS13 = cumsum(OS13MeanPct),
    CumPass_OS13 = 1-CumRet_OS13,
    CumRet_OS14 = cumsum(OS14MeanPct),
    CumPass_OS14 = 1-CumRet_OS14)
 
-USraw_cum <- USraw_psd %>% 
+USraw_cum <- USRawPSD %>% 
   mutate (CumRet_US13 = cumsum(US13MeanPct),
    CumPass_US13 = 1-CumRet_US13,
    CumRet_US14 = cumsum(US14MeanPct),
@@ -227,39 +234,14 @@ ggsave(here::here("05_fig_output","allStreamsCummulativePreModelling.pdf"), plot
 
 
 ```{r}
-#bring all the screen stream means together.
-#In the following steps, transformations are applied. these transformations involve double logs. as these logs  will be applied to cummulative percentage values, the last and largest will be 1, and log of 1 is 0, and the second log (log of 0) is "-inf,
-#thus i''ll exclude the last row using dplyr::slice (::filter does work anymore (tidyverse update)).
 
-meanpct <- cbind(sieve, Feed13MeanPct, OS13MeanPct, US13MeanPct, Feed14MeanPct, OS14MeanPct, US14MeanPct)
+FeedRawPSD2 <- read_csv(here("03_code/01_code-output", "FeedRawPSD.csv"), col_names = TRUE) #just calling variable #2 as it was brought in, and not to overwrite the existing variable in the RSudio environment.
+OSRawPSD2 <- read_csv(here("03_code/01_code-output", "OSRawPSD.csv"), col_names = TRUE)
+USRawPSD2 <- read_csv(here("03_code/01_code-output", "USRawPSD.csv"), col_names = TRUE)
 
-#here the vector "meanpct" contains all stream averages. In certain circumstances this would suffice. In this case, its doesnt: 
-# the streams US13MeanPct and US14MeanPct have zero mass retained in the 1180um bin of the particle size distribution (largest screen). 
-#We know we're going to use log transforms and logs of zero mass = -Inf. 
-#Thus we'll have to apply our models separately to the two parts of our data (due to their difference in vector lengths).
-# i'll keep vector "meanpct" but also separate them and then apply the linear models on the two groups separately:
-#there must a shorter way to ignore nas..[add to to do]
-#maybe a good idea is to separate them from the data indraw step thus excel.
-
-##
-meanPct_FeedAndOS <- cbind(sieve, Feed13MeanPct, OS13MeanPct, Feed14MeanPct, OS14MeanPct)
-##
-
-
-sieve_sliced <- sieve %>% 
+USRawPSD2 <- USRawPSD2 %>% 
   dplyr::slice(2:n()) #also have to prepare the x(sieve) vector to be the same n() as y (in the case of the undersize streams).(https://dplyr.tidyverse.org/reference/slice.html)
 
-sliced_US13MeanPct <- US13MeanPct %>% 
-  dplyr::slice(2:n())
-
-sliced_US14MeanPct <- US14MeanPct %>% 
-  dplyr::slice(2:n())
-
-#combine the sliced vectors 
-
-##
-meanPct_US <- cbind(sieve_sliced, sliced_US13MeanPct, sliced_US14MeanPct)
-##
 
 #the work done here ontop is not automated and the engineer has to look-think-do depending on the data.
 
@@ -278,14 +260,17 @@ meanPct_US <- cbind(sieve_sliced, sliced_US13MeanPct, sliced_US14MeanPct)
 #rearange in long format (tidy data) to enable grouping in following step.    
 #"pivot_longer" function renders data compatable with tidyverse plotting and analases
 
-long_meanPct_FeedAndOS <- meanPct_FeedAndOS %>% 
+long_FeedRawPSD2 <- FeedRawPSD2 %>% 
   pivot_longer(-sieve, names_to= "stream" , values_to = "probability") # opposite is :pivot_wider(names_from= stream, values_from = probs). use quotes when names do not yet exist, if exist ,; no quotes.
 
-long_meanPct_US <- meanPct_US %>% 
+long_OSRawPSD2 <- OSRawPSD2 %>% 
+  pivot_longer(-sieve, names_to= "stream" , values_to = "probability") 
+
+long_USRawPSD2 <- USRawPSD2 %>% 
   pivot_longer(-sieve, names_to= "stream" , values_to = "probability") 
 
 #plot
-#feed and OS
+
 #adding the () arround the entire function will execute the plot as well as display (print) it
 
 
@@ -297,7 +282,7 @@ long_meanPct_US <- meanPct_US %>%
 #the formulas are descibed in the .rmd writeup in Latex.
 
 ##
-transformations1 <- long_meanPct_FeedAndOS %>% 
+transformedFeed <- long_FeedRawPSD2 %>% 
   group_by (stream)%>% 
   mutate (cumret = cumsum(probability)) %>%
   select (-probability) %>%
@@ -314,9 +299,32 @@ transformations1 <- long_meanPct_FeedAndOS %>%
   mutate_if(is.numeric, list(~na_if(., -Inf)))%>% #removes -Infinities and replace with NA. This required as we took logs of 0 (sieve) and 1 (cumret).
   nest() 
 # Nesting is often useful for creating per group models
+##
+
+
+
+transformedOS <- long_OSRawPSD2 %>% 
+  group_by (stream)%>% 
+  mutate (cumret = cumsum(probability)) %>%
+  select (-probability) %>%
+  dplyr::slice(1:11) %>% #dplyr::filter worked here previously, but now doesn't anymore. dplyr::slice works with exact same syntax as ::filter did.
+  mutate (cumpass = 1-cumret) %>%
+    #Rosin Rammler transforms:
+  mutate (
+    RRx = log(sieve),
+    RRy = log(log(1/cumret)), # or log(-log(cumret))
+    # Gauss Gaudin Shumann transforms:
+    GGSx = log(sieve),
+    GGSy = log(cumret))  %>%
+  
+  mutate_if(is.numeric, list(~na_if(., -Inf)))%>% #removes -Infinities and replace with NA. This required as we took logs of 0 (sieve) and 1 (cumret).
+  nest() 
+
+
+
 
 ##
-transformations2 <- long_meanPct_US %>% 
+transformedUS <- long_USRawPSD2 %>% 
   group_by (stream)%>% 
   mutate (cumret = cumsum(probability)) %>%
   select (-probability) %>%
@@ -334,15 +342,9 @@ transformations2 <- long_meanPct_US %>%
   nest() 
 ```
 ```{r}
-# transformations1
-# transformations2
-# 
-# 
-# long_transformations1_FeedAndOS <- ungroup(unnest(transformations1)) %>% 
-#   pivot_longer(-sieve, names_to= "stream" , values_to = "probability") # opposite is :pivot_wider(names_from= stream, values_from = probs). use quotes when names do not yet exist, if exist ,; no quotes.
-# 
-# long_transformations2_US <- transformations2 %>% 
-#   pivot_longer(-sieve, names_to= "stream" , values_to = "probability") 
+transformedFeed
+transformedOS
+transformedUS
 
 
 
@@ -356,8 +358,26 @@ transformations2 <- long_meanPct_US %>%
 
 ```{r}
 
-#continuing with two sets, we'll have two sets of regressions:
-regression1 <- transformations1 %>% 
+regressionFeed <- transformedFeed %>%
+mutate(
+  #RRmodel
+  #tidy, glance and augment are funtions from the broom package that helps extraxt model details.
+  RRmodels = lapply(data, function(df) lm(RRy ~ RRx, data = df)),# "RRmodels" column will be created in the mutate.
+  tidied_RR = map (RRmodels, tidy),
+  glanced_RR = map(RRmodels, glance),
+  augmented_RR = map (RRmodels, augment),
+
+  #GGS model
+  GGS_models = lapply(data, function(df) lm(GGSy ~ GGSx, data = df)),# "GGS_models" column will be created in the mutate.
+  tidied_GGS = map (GGS_models, tidy),
+  glanced_GGS = map(GGS_models, glance),
+  augmented_GGS = map (GGS_models, augment)
+)
+
+
+
+
+regressionOS <- transformedOS %>% 
   mutate(
     #RRmodel
     #tidy, glance and augment are funtions from the broom package that helps extraxt model details.
@@ -375,8 +395,7 @@ regression1 <- transformations1 %>%
 
 
 
-
-regression2 <- transformations2 %>% 
+regressionUS <- transformedUS %>% 
   mutate(
     #RRmodel
     #tidy, glance and augment are funtions from the broom package that helps extraxt model details.
@@ -392,50 +411,43 @@ regression2 <- transformations2 %>%
     augmented_GGS = map (GGS_models, augment)
   ) 
 
-```
-
-
-```{r}
-# ggplot(PSD_raw_cum_allStreams, aes(sieve, probability, colour = stream)) + geom_point()+
-#   geom_line(aes(y=predict(regression1)))
 
 
 ```
 
 
-
-
-
-
-
-
-
-
 ```{r}
-#####
+#Tidied
 
 #unnest two list at sme gives issues after dplyr update? 
 #so for now we'll unnest individually..
 
-# tidy_reg_RR_GGS_1 <-regression1 %>% 
+# tidy_reg_RR_GGS_1 <-regressionFeed %>% 
 #   unnest(c(tidied_RR,tidied_GGS))
 
-#exctract regression analasese twice
-#once for both parts of regression1
-tidy_reg_RR_1 <-regression1 %>% 
+#extract regression analasese twice
+#once for both parts of regressionFeed
+tidy_reg_RRFeed <-regressionFeed %>% 
   unnest(tidied_RR)
 
-tidy_reg_GGS_1 <-regression1 %>% 
+tidy_reg_GGSFeed <-regressionFeed %>% 
   unnest(tidied_GGS)
 
-#once for both parts of regression2
-tidy_reg_RR_2 <-regression2 %>% 
+
+
+tidy_reg_RROS <-regressionOS %>% 
   unnest(tidied_RR)
 
-tidy_reg_GGS_2 <-regression2 %>% 
+tidy_reg_GGSOS <-regressionOS %>% 
   unnest(tidied_GGS) 
 
 
+
+tidy_reg_RRUS <-regressionUS %>% 
+  unnest(tidied_RR)
+
+tidy_reg_GGSUS <-regressionUS %>% 
+  unnest(tidied_GGS) 
 
 
 ```
@@ -447,69 +459,138 @@ i do quick check if i can print tables in .rmd mother report (currently named "g
 to prevent the .RMD file to all the script from this .R script, we help .RMD identify wich code to use:
 
 ```{r}
-Coef_RR1 <- tidy_reg_RR_1 %>% 
+#TIDIED
+
+#feed coeficient
+
+Coef_RRFeed <- tidy_reg_RRFeed %>% 
   dplyr::select(stream,term, estimate)
 
-Coef_RR2 <- tidy_reg_RR_2 %>% 
+Coef_GGSFeed <- tidy_reg_GGSFeed %>% 
   dplyr::select(stream,term, estimate)
 
-Coef_GGS1 <- tidy_reg_GGS_1 %>% 
+#OS coef
+  
+Coef_RROS <- tidy_reg_RROS %>% 
   dplyr::select(stream,term, estimate)
 
-Coef_GGS2 <- tidy_reg_GGS_2 %>% 
+
+Coef_GGSOS <- tidy_reg_GGSOS %>% 
   dplyr::select(stream,term, estimate)
+
+#US Coef
+
+Coef_RRUS <- tidy_reg_RRUS %>% 
+  dplyr::select(stream,term, estimate)
+
+Coef_GGSUS <- tidy_reg_GGSUS %>% 
+  dplyr::select(stream,term, estimate)
+
+
 
 #write the tibbles to \01_code-output folder  for use in table generated in resultsanddiscion section
-write.table(Coef_RR1, file = here("03_code/01_code-output","CoefRR1.txt"), sep=",", quote = FALSE)
-write.table(Coef_RR2, file = here("03_code/01_code-output","CoefRR2.txt"), sep=",", quote = FALSE)
-write.table(Coef_GGS1, file = here("03_code/01_code-output","CoefGGS1.txt"), sep=",", quote = FALSE)
-write.table(Coef_GGS2, file = here("03_code/01_code-output","CoefGGS2.txt"), sep=",", quote = FALSE)
+write.table(Coef_RRFeed, file = here("03_code/01_code-output","CoefRRFeed.txt"), sep=",", quote = FALSE)
+write.table(Coef_GGSFeed, file = here("03_code/01_code-output","CoefGGSFeed.txt"), sep=",", quote = FALSE)
 
+write.table(Coef_RROS, file = here("03_code/01_code-output","CoefRROS.txt"), sep=",", quote = FALSE)
+write.table(Coef_GGSOS, file = here("03_code/01_code-output","CoefGGSOS.txt"), sep=",", quote = FALSE)
+
+
+write.table(Coef_RRUS, file = here("03_code/01_code-output","CoefRRUS.txt"), sep=",", quote = FALSE)
+write.table(Coef_GGSUS, file = here("03_code/01_code-output","CoefGGSUS.txt"), sep=",", quote = FALSE)
 
 ```
-#it might be worth it to separate each stream's coefficients in its own dataframe.
+
 #this should ease creation or presentation of the regression formulas.
 
 
 ```{r}
+#Glanced
 
-glanced_reg_RR_1 <-regression1 %>% 
+
+#feed
+glancedRRFeed <-regressionFeed %>% 
   unnest(glanced_RR)
 
-glanced_reg_GGS_1 <-regression1 %>% 
+glancedGGSFeed <-regressionFeed %>% 
   unnest(glanced_GGS)
 
-#once for both parts of regression2
-glanced_reg_RR_2 <-regression2 %>% 
+
+
+#OS
+#once for both parts of regressionOS
+glanced_reg_RR_OS <-regressionOS %>% 
   unnest(glanced_RR)
 
-glanced_reg_GGS_2 <-regression2 %>% 
+glanced_reg_GGS_OS <-regressionOS %>% 
   unnest(glanced_GGS)
+
+
+#US
+glanced_reg_RR_US <-regressionUS %>% 
+  unnest(glanced_RR)
+
+glanced_reg_GGS_US <-regressionUS %>% 
+  unnest(glanced_GGS)
+
+
+
+
 ```
 
 ```{r}
 #statistical measures of model fit.
 #CLeaning up the glanced data and only selecting the output required for presentation.
 #Coefficient of determination (r^2).(i tried latex formatting for the R2 not yet successful)
-coef_deter_RR1 <- glanced_reg_RR_1 %>% 
+
+
+
+#RR
+coef_deter_RR_Feed <- glancedRRFeed %>% 
   #conduct select and rename in one step with dplyr::select()
- select(stream, R2 = r.squared, adj.R2 = adj.r.squared, p.value, AIC)
+    select(stream, R2 = r.squared, adj.R2 = adj.r.squared, p.value, AIC)
 
-coef_deter_RR2 <- glanced_reg_RR_2 %>% 
-  select(stream, R2 = r.squared, adj.R2 = adj.r.squared, p.value, AIC)
+coef_deter_RR_OS <- glanced_reg_RR_OS %>% 
+    select(stream, R2 = r.squared, adj.R2 = adj.r.squared, p.value, AIC)
 
-coef_deter_GGS1 <- glanced_reg_GGS_1 %>% 
-  select(stream, R2 = r.squared, adj.R2 = adj.r.squared, p.value, AIC)
+coef_deter_RR_US <- glanced_reg_RR_US %>% 
+    select(stream, R2 = r.squared, adj.R2 = adj.r.squared, p.value, AIC)
 
-coef_deter_GGS2 <- glanced_reg_GGS_2 %>% 
-  select(stream, R2 = r.squared, adj.R2 = adj.r.squared, p.value, AIC)
 
-R2_RR <- full_join(coef_deter_RR1,coef_deter_RR2)
-R2_GGS <- full_join(coef_deter_GGS1,coef_deter_GGS2)
+#GGS
+coef_deter_GGS_Feed <- glancedGGSFeed %>% 
+    select(stream, R2 = r.squared, adj.R2 = adj.r.squared, p.value, AIC)
+
+coef_deter_GGSOS <- glanced_reg_GGS_OS %>% 
+    select(stream, R2 = r.squared, adj.R2 = adj.r.squared, p.value, AIC)
+
+coef_deter_GGSUS <- glanced_reg_GGS_US %>% 
+    select(stream, R2 = r.squared, adj.R2 = adj.r.squared, p.value, AIC)
+
+
+#one for eaCh stream 
+#all models combined
+
+
+# R2_RR <- full_join(coef_deter_RR_Feed, coef_deter_RR_OS, coef_deter_RR_US)
+# R2_GGS <- full_join(coef_deter_GGS_Feed, coef_deter_GGSOS, coef_deter_GGSUS)
+
+R2RR <- rbind(coef_deter_RR_Feed, coef_deter_RR_OS, coef_deter_RR_US)
+R2GGS <- rbind(coef_deter_GGS_Feed, coef_deter_GGSOS, coef_deter_GGSUS)
+
+
+#these are summaries thus can be combine as summaries of different lengs of rows are all a one liner...
 
 #write the tibbles to \01_code-output folder  for use in table generated in resultsanddiscion section
+# as well as experimental..
+
 write.table(R2_RR, file = here("03_code/01_code-output","R2_RR.txt"), sep=",", quote = FALSE)
 write.table(R2_GGS, file = here("03_code/01_code-output","R2_GGS.txt"), sep=",", quote = FALSE)
+
+write.csv(R2_RR, here("03_code/01_code-output","R2RR.csv"),row.names = FALSE)
+write.csv(R2_GGS, here("03_code/01_code-output","R2GGS.csv"),row.names = FALSE)
+
+
 ```
 
 creating the tables
@@ -522,10 +603,11 @@ creating the tables
 
 
 # bring in the saved data to be tabled:
-R2_RR <- read.csv(file = here::here("03_code/01_code-output","R2_RR.txt"))
-R2_GGS <- read.csv(file = here::here("03_code/01_code-output","R2_GGS.txt"))
+R2_RR <- read.csv(file = here::here("03_code/01_code-output","R2RR.csv"))
+R2_GGS <- read.csv(file = here::here("03_code/01_code-output","R2GGS.csv"))
 
-tblR2RR <- knitr::kable(R2_RR,
+
+tblR2RR <- knitr::kable(R2RR,
                         "latex",
                         escape = F,booktabs = T, 
                         digits = c(0,3,3,4,1)) %>% 
@@ -538,7 +620,7 @@ tblR2RR <- knitr::kable(R2_RR,
 #https://www.rdocumentation.org/packages/kableExtra/versions/1.1.0/topics/column_spec
 
 
-tblR2GGS <- knitr::kable(R2_GGS,
+tblR2GGS <- knitr::kable(R2GGS,
                   "latex",
                   escape = F, booktabs = T, 
                   digits = c(0,3,3,4,1)) %>% 
@@ -577,31 +659,9 @@ cat(c("\\begin{table}[!htb]
 
 
 ```{r}
-# tidy_reg_RR_GGS%>% 
-#   unnest (glanced_RR)
-# tidy_reg_RR_GGS%>% 
-#   unnest(augmented_RR)
-
-
-
-
-
-# coefs <- tidy_reg_RR_GGS %>% 
-#   select (stream, term, estimate, term1, estimate1)
 # 
-# coefs_rr <- tidy_reg_RR_GGS %>% 
-#   select (stream, term, estimate)
-# 
-# coefs_ggs <- tidy_reg_RR_GGS %>% 
-#   select (stream, term1, estimate1)
-
-
-# kable(gr2, format = "html") %>% 
-#   kable_styling(c("striped", "bordered"), full_width = F)%>% 
-#   add_header_above(c(' ', 'r.sqaured' = 2, 'adj. r.sqaured' = 2))
-
 #change to a wider format 
-coef_wider <- coefs_rr %>% 
+coef_wider <- Coef_RRFeed %>% 
   pivot_wider(names_from = stream, values_from = estimate) 
 
 coef_names1 <- coef_wider %>% 
@@ -628,6 +688,14 @@ kable(coefs_intcpt_slope_scale1, digits = 3)
 
 
 
+
+
+```
+
+
+```{r}
+#AUGMENTED
+
 #prepare for back transformation
 
 #Declare function for back transformation:
@@ -636,79 +704,48 @@ kable(coefs_intcpt_slope_scale1, digits = 3)
 # }
 
 Perc <- c(seq(0.95, 0.05, -0.05))
-size <- ??????? 
+#size <- ??????? 
+
+########
+fitFeed2 <- regressionFeed %>%
+  unnest(augmented_RR, augmented_GGS) %>% 
+  select(stream,RRx,RRy,GGSx,GGSy)  
   
-  
-  reg_with_fittedRR <- regression %>%
-  unnest(augmented_RR) %>% 
-  mutate(fitted_RR = exp(-exp(.fitted))) 
+fitOS2 <- regressionOS %>%
+  unnest(augmented_RR, augmented_GGS) %>% 
+  select(stream,RRx,RRy,GGSx,GGSy)  
+
+fitUS2 <- regressionUS %>%
+  unnest(augmented_RR, augmented_GGS) %>% 
+  select(stream,RRx,RRy,GGSx,GGSy)  
+
+fit2 <- rbind(fitFeed2, fitOS2, fitUS2)
 
 
 
-s <- reg_with_fittedRR %>% 
-  select(stream,RRx,RRy,.fitted,fitted_RR) %>% 
-  mutate(x = exp(log(RRx)),
-         y = exp(-exp(RRy)))
+
+#This plot needs ficxing 
+
+plotRR <- ggplot(fit2, aes(x = RRx, y = RRy, color = stream) ) +
+     geom_point() +
+     geom_smooth(method = "lm", se = FALSE) #se is confidense intervals
+
+plotGGS <- ggplot(fit2, aes(x = GGSx, y = GGSy, color = stream) ) +
+     geom_point() +
+     geom_smooth(method = "lm", se = FALSE) #se is confidense intervals
 
 
-ss <- s %>%  
-  group_by(stream) %>% 
-  nest()
-```
+(plotRRandGGS <- plotRR + plotGGS)
 
-```{r}
-# join the table containing data and model transformation with coeficients.
-#sss <- dplyr::left_join(ss, coefs_intcpt_slope_scale, by = "stream") 
 
-#error from here on (cannot find "unnest_sss)
-# unnest_sss <- sss %>% 
-#   unnest() %>% 
-#   select(stream,x,y,everything()) # rearange columns
-# 
-# 
-# #details for adding caption
-# caption <- (strwrap("Modeled PSD overlaying unnoddeled Cummulative passing distribution."))
-# 
-# ggplot(unnest_sss, aes(x = x, y = y, shape = stream)) +
-#   
-#   geom_point()+ 
-#   annotate( #annotate for adding the caption.
-#     geom = "text", x = 1.00, y = 1.00,    #(x = xrng[1], y = yrng[2],) i mannually tiped the y=1.oo um in here to move the caption to start at 1um and not on top of the plots at 0 um as the rng(range) arguments would do.
-#     label = caption, hjust = 0, vjust = 0, size = 3
-#   )
-# 
-# 
-# 
-# #y vs fitted y:
-# 
-# caption <- (strwrap("Observed (y-axis) VS predicted (x-axis) Cummulative passing distributions."))
-# 
-# ggplot(unnest_sss, aes(x = fitted_RR, y = y, shape = stream)) +
-#   
-#   geom_point()+ #geom_smooth() +
-#   annotate( #annotate for adding the caption.
-#     geom = "text", x = 1.0, y = 1.00,    #(x = xrng[1], y = yrng[2],) i mannually tiped the y=1.oo um in here to move the caption to start at 1um and not on top of the plots at 0 um as the rng(range) arguments would do.
-#     label = caption, hjust = 1.25, vjust = 0, size = 3
-#   )
-# 
-# 
-# #y- and fitted y vs x:
-# 
-# caption <- (strwrap("Observed and predicted Cummulative passing distributions."))
-# 
-# ggplot() +
-#   geom_point ( aes(x = x, y = y), unnest_sss) +
-#   geom_smooth ( aes(x = x, y = fitted_RR), unnest_sss) +
-#   
-#   annotate( #annotate for adding the caption.
-#     geom = "text", x = 10, y = 1.00,    
-#     label = caption, hjust = 0, vjust = 0, size = 3
-#   )
-# 
-# 
-# 
-# 
-# 
+ggsave(here::here("05_fig_output","plotRRandGGS.pdf"), plotRRandGGS, width=10, height=8)
+
+
+
+
 
 ```
+##########
+
+
 

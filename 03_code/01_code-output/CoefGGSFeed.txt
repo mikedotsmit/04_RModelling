@@ -1,0 +1,5 @@
+stream,term,estimate
+1,Feed13MeanPct,(Intercept),3.24632859289022
+2,Feed13MeanPct,GGSx,-0.806419747876361
+3,Feed14MeanPct,(Intercept),3.10752526377886
+4,Feed14MeanPct,GGSx,-0.772961005699523
