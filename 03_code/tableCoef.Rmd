@@ -22,10 +22,10 @@ source(here::here("02_rpackages",'projectpackages.R'))
 ```{r echo = FALSE, results='asis'}
 
 # bring in the saved data to be tabled:
-Coef_RR1 <- read.csv(file = here::here("03_code/01_code-output","CoefRR1.txt"))
-Coef_RR2 <- read.csv(file = here::here("03_code/01_code-output","CoefRR2.txt"))
-Coef_GGS1 <- read.csv(file = here::here("03_code/01_code-output","CoefGGS1.txt"))
-Coef_GGS2 <- read.csv(file = here::here("03_code/01_code-output","CoefGGS2.txt"))
+Coef_RR1 <- read.csv(file = here::here("03_code/01_code-output","CoefRR1.csv"))
+Coef_RR2 <- read.csv(file = here::here("03_code/01_code-output","CoefRR2.csv"))
+Coef_GGS1 <- read.csv(file = here::here("03_code/01_code-output","CoefGGS1.csv"))
+Coef_GGS2 <- read.csv(file = here::here("03_code/01_code-output","CoefGGS2.csv"))
 
 
 

@@ -1,5 +1,5 @@
 stream,term,estimate
 1,US13MeanPct,(Intercept),-6.15394524301695
-2,US13MeanPct,log(sieve),1.28839675108827
+2,US13MeanPct,RRx,1.28839675108827
 3,US14MeanPct,(Intercept),-5.87324769934733
-4,US14MeanPct,log(sieve),1.24322026274186
+4,US14MeanPct,RRx,1.24322026274186

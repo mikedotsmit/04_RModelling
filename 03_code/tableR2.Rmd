@@ -27,10 +27,10 @@ source(here::here("02_rpackages",'projectpackages.R'))
 ```{r echo = FALSE, results='asis'}
 
 # bring in the saved data to be tabled:
-R2_RR <- read.csv(file = here::here("03_code/01_code-output","R2_RR.txt"))
-R2_GGS <- read.csv(file = here::here("03_code/01_code-output","R2_GGS.txt"))
+R2RR <- read.csv(file = here::here("03_code/01_code-output","R2RR.csv"))
+R2GGS <- read.csv(file = here::here("03_code/01_code-output","R2GGS.csv"))
 
-tblR2RR <- knitr::kable(R2_RR,
+tblR2RR <- knitr::kable(R2RR,
                         "latex",
                         escape = F,booktabs = T, 
                         digits = c(0,3,3,4,1)) %>% 
@@ -43,7 +43,7 @@ tblR2RR <- knitr::kable(R2_RR,
 #https://www.rdocumentation.org/packages/kableExtra/versions/1.1.0/topics/column_spec
 
 
-tblR2GGS <- knitr::kable(R2_GGS,
+tblR2GGS <- knitr::kable(R2GGS,
                   "latex",
                   escape = F, booktabs = T, 
                   digits = c(0,3,3,4,1)) %>% 
@@ -53,9 +53,9 @@ tblR2GGS <- knitr::kable(R2_GGS,
 #kable_styling(c("striped", "bordered"), 
               #full_width = F) %>% 
 
-# t1 <- kable(R2_RR, format = "latex", booktabs = TRUE)
+# t1 <- kable(R2RR, format = "latex", booktabs = TRUE)
 # 
-# t2 <- kable(R2_GGS, format = "latex", booktabs = TRUE)
+# t2 <- kable(R2GGS, format = "latex", booktabs = TRUE)
 
 #code posistions side by side
 cat(c("\\begin{table}[!htb]

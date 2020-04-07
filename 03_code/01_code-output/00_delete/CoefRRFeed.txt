@@ -1,0 +1,5 @@
+stream,term,estimate
+1,Feed13MeanPct,(Intercept),-4.88365283742336
+2,Feed13MeanPct,RRx,0.856746548231492
+3,Feed14MeanPct,(Intercept),-4.8908312410162
+4,Feed14MeanPct,RRx,0.851619781691739
