@@ -1,0 +1,5 @@
+"stream","term","estimate"
+"US13MeanPct","(Intercept)",-6.15394524301696
+"US13MeanPct","log(sieve)",1.28839675108827
+"US14MeanPct","(Intercept)",-5.87324769934733
+"US14MeanPct","log(sieve)",1.24322026274186

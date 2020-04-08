@@ -1,0 +1,5 @@
+"stream","term","estimate"
+"Feed13MeanPct","(Intercept)",-4.88365283742335
+"Feed13MeanPct","log(sieve)",0.85674654823149
+"Feed14MeanPct","(Intercept)",-4.89083124101619
+"Feed14MeanPct","log(sieve)",0.851619781691738

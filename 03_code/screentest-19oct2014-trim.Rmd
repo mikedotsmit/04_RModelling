@@ -224,23 +224,6 @@ ggsave(here::here("05_fig_output","allStreamsCummulativePreModelling.pdf"), plot
 
 
 
-
-
-
-```{r}
-
-USRawPSD <- USRawPSD %>% 
-  dplyr::slice(2:n()) #also have to prepare the x(sieve) vector to be the same n() as y (in the case of the undersize streams).(https://dplyr.tidyverse.org/reference/slice.html)
-
-
-#the work done here ontop is not automated and the engineer has to look-think-do depending on the data.
-
-#As we have two 'sets' of data primarily because of different lengths of data points (1st screen pan had 0 grams in the largest size fraction for the Us samples),
-#thus we'll do two code sets of regressions separately. Done simmilarly but just separately..we've already prepared the data ontop.
-
-```
-
-
 ```{r}
 #here the cummulative passing and retained mass percentages of each stream is calculated (with dplyr::mutate),
 #followed by applied the Rosin Rammler- as well as the Gates-Gaudin-Schumann distribution transformations.
@@ -291,7 +274,7 @@ transformedUS <- long_USRawPSD %>%
   group_by (stream)%>% 
   mutate (cumret = cumsum(probability)) %>%
   select (-probability) %>%
-  dplyr::slice(1:10) %>% #i select rows 1 to 10 as we've already removed row1 in the previous step with 'slice' 2:n(). 
+  dplyr::slice(2:11) %>% #remoed the first and last rows with -ind and NA
   mutate (cumpass = 1-cumret) %>%
   #Rosin Rammler transforms:
   mutate (
@@ -303,14 +286,7 @@ transformedUS <- long_USRawPSD %>%
   mutate_if(is.numeric, list(~na_if(., -Inf)))%>% #removes -Infinities and replace with NA. This required as we took logs of 0 (sieve) and 1 (cumret).
   nest() 
 ```
-```{r}
-transformedFeed
-transformedOS
-transformedUS
 
-
-
-```
 
 
 
@@ -356,6 +332,8 @@ regressionOS <- transformedOS %>%
   ) 
 
 
+
+transformedUS <- transformedUS %>% dplyr::slice(1:10) #remove top line containg -Inf and NA values.
 
 regressionUS <- transformedUS %>% 
   mutate(
@@ -425,41 +403,43 @@ to prevent the .RMD file to all the script from this .R script, we help .RMD ide
 
 #feed coeficient
 
-Coef_RRFeed <- tidy_reg_RRFeed %>% 
+CoefRRFeed <- tidy_reg_RRFeed %>% 
   dplyr::select(stream,term, estimate)
 
-Coef_GGSFeed <- tidy_reg_GGSFeed %>% 
+CoefGGSFeed <- tidy_reg_GGSFeed %>% 
   dplyr::select(stream,term, estimate)
 
 #OS coef
   
-Coef_RROS <- tidy_reg_RROS %>% 
+CoefRROS <- tidy_reg_RROS %>% 
   dplyr::select(stream,term, estimate)
 
 
-Coef_GGSOS <- tidy_reg_GGSOS %>% 
+CoefGGSOS <- tidy_reg_GGSOS %>% 
   dplyr::select(stream,term, estimate)
 
 #US Coef
 
-Coef_RRUS <- tidy_reg_RRUS %>% 
+CoefRRUS <- tidy_reg_RRUS %>% 
   dplyr::select(stream,term, estimate)
 
-Coef_GGSUS <- tidy_reg_GGSUS %>% 
+CoefGGSUS <- tidy_reg_GGSUS %>% 
   dplyr::select(stream,term, estimate)
 
 
 
 #write the tibbles to \01_code-output folder  for use in table generated in resultsanddiscion section
-write.table(Coef_RRFeed, file = here("03_code/01_code-output","CoefRRFeed.txt"), sep=",", quote = FALSE)
-write.table(Coef_GGSFeed, file = here("03_code/01_code-output","CoefGGSFeed.txt"), sep=",", quote = FALSE)
-
-write.table(Coef_RROS, file = here("03_code/01_code-output","CoefRROS.txt"), sep=",", quote = FALSE)
-write.table(Coef_GGSOS, file = here("03_code/01_code-output","CoefGGSOS.txt"), sep=",", quote = FALSE)
 
 
-write.table(Coef_RRUS, file = here("03_code/01_code-output","CoefRRUS.txt"), sep=",", quote = FALSE)
-write.table(Coef_GGSUS, file = here("03_code/01_code-output","CoefGGSUS.txt"), sep=",", quote = FALSE)
+write.csv(CoefRRFeed, file = here("03_code/01_code-output","CoefRRFeed.csv"), row.names = FALSE)
+write.csv(CoefGGSFeed, file = here("03_code/01_code-output","CoefGGSFeed.csv"), row.names = FALSE)
+
+write.csv(CoefRROS, file = here("03_code/01_code-output","CoefRROS.csv"), row.names = FALSE)
+write.csv(CoefGGSOS, file = here("03_code/01_code-output","CoefGGSOS.csv"), row.names = FALSE)
+
+
+write.csv(CoefRRUS, file = here("03_code/01_code-output","CoefRRUS.csv"), row.names = FALSE)
+write.csv(CoefGGSUS, file = here("03_code/01_code-output","CoefGGSUS.csv"), row.names = FALSE)
 
 ```
 
@@ -621,41 +601,7 @@ cat(c("\\begin{table}[!htb]
 
 
 ```{r}
-# 
-#change to a wider format 
-coef_wider <- Coef_RRFeed %>% 
-  pivot_wider(names_from = stream, values_from = estimate) 
 
-coef_names1 <- coef_wider %>% 
-  select("term")
-
-coefs_intcpt_slope <- coef_wider %>% 
-  select(-"term") %>% 
-  t() %>% 
-  as_tibble(rownames = "stream") 
-#rename column names
-names(coefs_intcpt_slope) <-c("stream", "intcpt", "slope")
-
-# calc the RR scale paramater for use in percentile of back transformed distributions
-coefs_intcpt_slope_scale <- coefs_intcpt_slope %>% 
-  mutate(scale = exp(-intcpt/slope))
-
-
-#with rownames as colnames
-coefs_intcpt_slope_scale1 <-coefs_intcpt_slope_scale %>% 
-  #set streams column at rownames
-  column_to_rownames("stream")
-
-kable(coefs_intcpt_slope_scale1, digits = 3)
-
-
-
-
-
-```
-
-
-```{r}
 #AUGMENTED
 
 #prepare for back transformation
