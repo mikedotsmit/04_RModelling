@@ -86,7 +86,7 @@ and Ends here..
 
 
 
-New child starts here..
+New New child starts here..
 ```{r child = (file = here::here("03_code","tableCoef.Rmd"))}
 
 ```

@@ -270,6 +270,26 @@ FirstImport_gramdata <- read_csv(here("01_data/02_preparedData", "test-31aug-201
 
 
 
+https://kbroman.org/knitr_knutshell/pages/figs_tables.html
+
+```{r pander}
+library(pander)
+
+n <- 100
+x <- rnorm(n)
+y <- 2*x + rnorm(n)
+out <- lm(y ~ x)
+library(pander)
+panderOptions("digits", 2)
+pander(out)
+```
+```
+
+
+
+
+
+
 
 
 
