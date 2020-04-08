@@ -1,7 +1,7 @@
 ---
 output:
-  html_document: default
   pdf_document: default
+  html_document: default
 ---
 
 ```{r, include = FALSE}
@@ -32,49 +32,52 @@ CoefGGSUS <- read.csv(file = here::here("03_code/01_code-output","CoefGGSUS.csv"
 
 
 ```{r echo = FALSE, results='asis'}
+
 CoefRR <- rbind(CoefRRFeed, CoefRROS, CoefRRUS)
-CoefGGS <- rbind(CoefRRFeed, CoefGGSOS, CoefGGSUS)
+CoefGGS <- rbind(CoefGGSFeed, CoefGGSOS, CoefGGSUS)
 
 
-(tblCoefRR <- knitr::kable(CoefRR,
+tblCoefRR <- knitr::kable(CoefRR,
                         "latex",
                         escape = F,booktabs = T, 
                         digits = c(0,0,3)) %>% 
   column_spec(1, width = "3cm") %>% 
   column_spec(2:3, width = "1.5cm") %>% 
-  kable_styling(c("striped", "bordered")))
+  kable_styling(c("striped", "bordered"))
   #this column_spec is supposed to set column widths to force text to wrap inside the colmn #https://community.rstudio.com/t/wrap-column-name-in-pdf-table-from-knitr-kable/3278/4)
                         #caption="RR Model(formula)") # %>%
 #  kable_styling(c("striped", "bordered"), 
                 #full_width = F) %>% 
 #https://www.rdocumentation.org/packages/kableExtra/versions/1.1.0/topics/column_spec
-```
 
 
-```{r echo = FALSE, results='asis'}
-(tblCoefGGS <- knitr::kable(CoefGGS,
+
+tblCoefGGS <- knitr::kable(CoefGGS,
                   "latex",
                   escape = F, booktabs = T, 
                   digits = c(0,0,3)) %>% 
   column_spec(1, width = "3cm") %>% 
   column_spec(2:3, width = "1.5cm") %>% 
-  kable_styling(c("striped", "bordered")) )
+  kable_styling(c("striped", "bordered"))
+
 
 
 
 #code below posistions tables side by side
-# cat(c("\\begin{table}[!htb]
-#     \\begin{minipage}{.5\\linewidth}
-#       \\caption{RR Model Coeficients}
-#       \\centering",
-#         tblCoefRR,
-#     "\\end{minipage}%
-#     \\begin{minipage}{.5\\linewidth}
-#       \\centering
-#         \\caption{GGS Model Coeficients}",
-#         tblCoefGGS,
-#     "\\end{minipage} 
-# \\end{table}"
-# ))
+
+cat(c("\\begin{table}[!htb]
+    \\begin{minipage}{.5\\linewidth}
+      \\caption{RR Model Coeficients}
+      \\centering",
+        tblCoefRR,
+    "\\end{minipage}%
+    \\begin{minipage}{.5\\linewidth}
+      \\centering
+        \\caption{GGS Model Coeficients}",
+        tblCoefGGS,
+    "\\end{minipage}
+\\end{table}"
+))
+
 
 ```
