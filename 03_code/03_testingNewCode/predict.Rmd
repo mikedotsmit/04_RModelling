@@ -1,0 +1,54 @@
+
+
+
+```{r}
+feedrawCum <- read.csv( here("03_code/01_code-output","feedrawCum.csv"))
+OSrawCum <- read.csv( here("03_code/01_code-output","OSrawCum.csv"))
+USrawCum <- read.csv( here("03_code/01_code-output","USrawCum.csv"))
+
+
+trainSieve <- feedrawCum %>% 
+ dplyr::slice(1:11) %>% 
+dplyr::select(sieve) 
+
+trainFeed13 <- feedrawCum %>% 
+ dplyr::slice(1:11)%>% 
+dplyr::select(CumPass_F13) 
+
+
+
+
+data <- data.frame(trainSieve, trainFeed13)
+
+dataLog <- data.frame(log(trainSieve), log(trainFeed13))
+
+plot(dataLog, pch = 16)
+
+
+```
+
+
+
+```{r}
+plot(data, pch = 16)
+LinReg <- lm(trainFeed13 ~ trainSieve)
+abline(LinReg, col = "green", lwd = 2)
+```
+
+
+```{r}
+
+#can only predict the Y (response variable) wrt X because lm(Y~x) [ to predict X, make x the reponse var]
+
+LinReg <- lm(trainFeed13 ~ trainSieve)
+
+predict(LinReg, data.frame(trainSieve = 250))
+```
+```{r}
+# to predict the percent passing: rerun linerar model and wrt trainSieve being predicted. 
+LinReg1 <- lm(log(trainSieve) ~ log(trainFeed13))
+predict(LinReg1, data.frame(trainFeed13 = log(0.8)))
+```
+
+
+

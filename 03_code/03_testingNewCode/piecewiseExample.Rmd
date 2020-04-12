@@ -1,0 +1,96 @@
+plotting a fitted segmented linear model shows more break points than what is estimated
+https://stackoverflow.com/questions/51564909/plotting-a-fitted-segmented-linear-model-shows-more-break-points-than-what-is-es
+
+I was helping a friend with segmented regressions today. We were trying to fit a piecewise regression with a breakpoints to see if it fits data better than a standard linear model.
+
+I stumbled across a problem I cannot understand. When fitting a piecewise regression with a single breakpoint with the data provided, it does indeed fit a single breakpoint.
+
+However, when you predict from the model it gives what looks like 2 breakpoints. When plotting the model using plot.segmented() this problem does not happen.
+
+Anyone have any idea what is going on and how I can get the proper predictions (and standard errors etc)? Or what I am doing wrong in the code in general?
+```{r}
+# load packages
+library(segmented)
+
+# make data
+d <- data.frame(x = c(0, 3, 13, 18, 19, 19, 26, 26, 33, 40, 49, 51, 53, 67, 70, 88
+),
+                y = c(0, 3.56211608128595, 10.5214485148819, 3.66063708049802, 6.11000808621074, 
+                      5.51520423804034, 7.73043895812661, 7.90691392857039, 6.59626527933846, 
+                      10.4413913666936, 8.71673928545967, 9.93374157928462, 1.214860139929, 
+                      3.32428882257746, 2.65223361387063, 3.25440939462105))
+
+# fit normal linear regression and segmented regression
+lm1 <- lm(y ~ x, d)
+seg_lm <- segmented(lm1, ~ x)
+
+slope(seg_lm)
+```
+
+
+```{r}
+#> $x
+#>            Est.  St.Err. t value CI(95%).l   CI(95%).u
+#> slope1  0.17185 0.094053  1.8271 -0.033079  0.37677000
+#> slope2 -0.15753 0.071933 -2.1899 -0.314260 -0.00079718
+
+# make predictions
+preds <- data.frame(x = d$x, preds = predict(seg_lm))
+
+# plot segmented fit
+plot(seg_lm, res = TRUE)
+
+# plot predictions
+lines(preds$preds ~ preds$x, col = 'red')
+```
+
+
+2 Answers
+
+
+It is a pure plotting issue.
+
+```{r}
+segmented.lm(obj = lm1, seg.Z = ~x)
+#
+#Meaningful coefficients of the linear terms:
+#(Intercept)            x         U1.x  
+#     2.7489       0.1712      -0.3291  
+#
+#Estimated Break-Point(s):
+#psi1.x  
+# 37.46  
+
+```
+
+The break point is estimated to be at x = 37.46, which is not any of the sampling locations:
+
+```{r}
+
+d$x
+```
+# [1]  0  3 13 18 19 19 26 26 33 40 49 51 53 67 70 88
+If you make your plot with fitted values at those sampling locations,
+
+```{r}
+preds <- data.frame(x = d$x, preds = predict(seg_lm))
+lines(preds$preds ~ preds$x, col = 'red')
+```
+You won't visually see those fitted two segments join up at the break points, as lines just line up fitted values one by one. plot.segmented instead would watch for the break points and make the correct plot.
+
+
+Try the following:
+
+## the fitted model is piecewise linear between boundary points and break points
+```{r}
+xp <- c(min(d$x), seg_lm$psi[, "Est."], max(d$x))
+yp <- predict(seg_lm, newdata = data.frame(x = xp))
+
+
+plot(d, col = 8, pch = 19)  ## observations
+lines(xp, yp)  ## fitted model
+points(d$x, seg_lm$fitted, pch = 19)  ## fitted values
+abline(v = d$x, col = 8, lty = 2)  ## highlight sampling locations
+```
+
+

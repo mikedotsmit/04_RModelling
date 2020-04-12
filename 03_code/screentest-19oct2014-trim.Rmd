@@ -131,8 +131,10 @@ USRawPSD <- cbind(sieve, US13MeanPct, US14MeanPct)
 write.csv(FeedRawPSD, here("03_code/01_code-output","FeedRawPSD.csv"),row.names = FALSE)
 write.csv(OSRawPSD, here("03_code/01_code-output","OSRawPSD.csv"),row.names = FALSE)
 write.csv(USRawPSD, here("03_code/01_code-output","USRawPSD.csv"),row.names = FALSE)
+```
 
 
+```{r }
 #long format prep for plot
 #this code is duplicated (convert to long data and plots) in "results-and-discussionSEction".. here for prior checking, there for report inclusion.
 
@@ -185,6 +187,13 @@ USraw_cum <- USRawPSD %>%
    CumPass_US13 = 1-CumRet_US13,
    CumRet_US14 = cumsum(US14MeanPct),
    CumPass_US14 = 1-CumRet_US14)
+
+write.csv(feedraw_cum, here("03_code/01_code-output","feedrawCum.csv"),row.names = FALSE)
+write.csv(OSraw_cum, here("03_code/01_code-output","OSrawCum.csv"),row.names = FALSE)
+write.csv(USraw_cum, here("03_code/01_code-output","USrawCum.csv"),row.names = FALSE)
+
+
+
 
 #select the columns to plot
 #in this case: cumpass
@@ -636,11 +645,11 @@ fit2 <- rbind(fitFeed2, fitOS2, fitUS2)
 
 plotRR <- ggplot(fit2, aes(x = "log(sieve)", y = RRy, color = stream) ) +
      geom_point() +
-     geom_smooth(method = "lm", se = FALSE) #se is confidense intervals
+     geom_smooth(method = "lm", se = FALSE) #se is confidence intervals
 
 plotGGS <- ggplot(fit2, aes(x = "log(sieve)", y = GGSy, color = stream) ) +
      geom_point() +
-     geom_smooth(method = "lm", se = FALSE) #se is confidense intervals
+     geom_smooth(method = "lm", se = FALSE) #se is confidence intervals
 
 
 (plotRRandGGS <- plotRR + plotGGS)

@@ -1,0 +1,49 @@
+plotting a fitted segmented linear model shows more break points than what is estimated
+https://stackoverflow.com/questions/51564909/plotting-a-fitted-segmented-linear-model-shows-more-break-points-than-what-is-es
+
+
+```{r}
+# load packages
+library(segmented)
+
+# make data
+d <- data.frame(x = c(0, 3, 13, 18, 19, 19, 26, 26, 33, 40, 49, 51, 53, 67, 70, 88
+),
+                y = c(0, 3.56211608128595, 10.5214485148819, 3.66063708049802, 6.11000808621074, 
+                      5.51520423804034, 7.73043895812661, 7.90691392857039, 6.59626527933846, 
+                      10.4413913666936, 8.71673928545967, 9.93374157928462, 1.214860139929, 
+                      3.32428882257746, 2.65223361387063, 3.25440939462105))
+
+# fit normal linear regression and segmented regression
+lm1 <- lm(y ~ x, d)
+seg_lm <- segmented(lm1, ~ x)
+
+slope(seg_lm)
+```
+
+
+```{r}
+segmented.lm(obj = lm1, seg.Z = ~x)
+
+```
+
+The break point is estimated to be at x = 7.02, which is not any of the sampling locations:
+
+```{r}
+
+d$x
+```
+
+## the fitted model is piecewise linear between boundary points and break points
+```{r}
+xp <- c(min(d$x), seg_lm$psi[, "Est."], max(d$x))
+yp <- predict(seg_lm, newdata = data.frame(x = xp))
+
+
+plot(d, col = 8, pch = 19)  ## observations
+lines(xp, yp)  ## fitted model
+points(d$x, seg_lm$fitted, pch = 19)  ## fitted values
+abline(v = d$x, col = 8, lty = 2)  ## highlight sampling locations
+```
+
+
