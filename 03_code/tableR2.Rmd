@@ -3,6 +3,21 @@ output:
   pdf_document: default
   html_document: default
 ---
+Aim of this file:
+Generate table (r-saquared) for chapter (child) input to base.Rmd (mother)
+
+Reason: i cant the table to gerate from within a code chunk or r.script, ub only once knitted doe the table show.., so for now i 'll keep it sepparate here in this .Rmd.
+
+This file:
++ reads code from: "02_rpackages",'projectpackages.R' for libraries.
++ reads code from: "03_code/01_code-output","R2RR.csv"
++ reads code from: "03_code/01_code-output","R2GGS.csv"
+
+and
+
++ outputs code to: 05_Results-and-discussion.Rmd
+
+
 
 ```{r, include = FALSE}
 #Function here::here to help with file paths relative to the project folder:
