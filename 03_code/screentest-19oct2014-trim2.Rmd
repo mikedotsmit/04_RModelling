@@ -1,0 +1,64 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
+This file houses most of the code for this specific test conducted.
+the filename (of this file) denotes the specific test which's code is represented here.
+the raw_psd data is pulled into this file and processed.
+data munging/wrangling ocurrs here mainly.
+the outputs from this file is used within or drawn into the various chapters and subsequently into the final file (base.Rmd) for conversion to PDF (currently not HTML (my code)).
+outputs are exported or written to code/01_code-outputs.
+
+```{r, include = FALSE}
+library("here")
+source(here::here("02_rpackages",'projectpackages.R'))
+
+#various options that controle chunk and graphics:
+
+knitr::opts_chunk$set(echo = FALSE, warning=FALSE,message=FALSE)
+knitr::opts_chunk$set(fig.align="center") #default align for figures
+knitr.table.format = "latex" #global option for tables. can still set any in each kable function.
+```
+
+#############################
+data wrangling
+upto line 135 in ~trim.RMD
+
+
+read wrangled data:
+```{r }
+F <- FeedRawPSD <- read.csv( here("03_code/01_code-output","FeedRawPSD.csv"))
+O <- OSRawPSD <- read.csv( here("03_code/01_code-output","OSRawPSD.csv"))
+U <- USRawPSD <- read.csv( here("03_code/01_code-output","USRawPSD.csv"))
+```
+
+
+```{r}
+unmod <- left_join(F,O, by = "sieve") #(only joins 2 tables at a time)
+unmod <- left_join(unmod,U, by = "sieve")
+
+unmodlong <- unmod %>% pivot_longer(-sieve, names_to= "stream" , values_to = "probability")
+unmodlong <- data.frame(unmodlong,
+                             Df = rep(c("Feed (unmodeled)","OS (unmod.)","US (unmod.)" ),                                                                         times=c(nrow(F),nrow(O),nrow(U))))
+```
+
+```{r}
+
+(plotUnmodCum <- ggplot(unmodlong, aes(sieve, probability, colour = stream)) +
+  geom_line(size = 1) +
+  geom_point() +
+  ggtitle("Cummulative unmoddeled solids frequency distributions.") +
+  theme(plot.title = element_text(size=9)) +
+  facet_wrap(~Df))
+
+```
+
+
+
+
+
+
+
+
+

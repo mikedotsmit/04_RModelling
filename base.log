@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/W32TeX) (preloaded format=pdflatex 2020.3.29)  10 APR 2020 10:53
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/W32TeX) (preloaded format=pdflatex 2020.3.29)  12 APR 2020 11:41
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -784,8 +784,38 @@ Overfull \hbox (4.00372pt too wide) in paragraph at lines 380--380
  []
 
 
+Overfull \hbox (2.17046pt too wide) in paragraph at lines 380--380
+ []|\T1/lmr/m/n/10 0.0914|
+ []
+
+
 Overfull \hbox (4.00372pt too wide) in paragraph at lines 381--381
 []|\T1/lmr/m/n/10 Feed14MeanPct|  
+ []
+
+
+Overfull \hbox (2.17046pt too wide) in paragraph at lines 381--381
+ []|\T1/lmr/m/n/10 0.0618|
+ []
+
+
+Overfull \hbox (2.17046pt too wide) in paragraph at lines 382--382
+ []|\T1/lmr/m/n/10 0.0000|
+ []
+
+
+Overfull \hbox (2.17046pt too wide) in paragraph at lines 383--383
+ []|\T1/lmr/m/n/10 0.0000|
+ []
+
+
+Overfull \hbox (2.17046pt too wide) in paragraph at lines 384--384
+ []|\T1/lmr/m/n/10 0.0000|
+ []
+
+
+Overfull \hbox (2.17046pt too wide) in paragraph at lines 386--386
+ []|\T1/lmr/m/n/10 0.0000|
  []
 
 
@@ -961,7 +991,7 @@ pData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr5.pfb><c:/Users/miked
 /AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr7.pfb><c:/Users/mi
 ked/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy10.pfb><c:/Use
 rs/miked/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtt10.pfb>
-Output written on base.pdf (9 pages, 269795 bytes).
+Output written on base.pdf (9 pages, 269802 bytes).
 PDF statistics:
  236 PDF objects out of 1000 (max. 8388607)
  204 compressed objects within 3 object streams

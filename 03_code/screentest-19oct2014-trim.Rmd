@@ -45,7 +45,7 @@ gramdata <- as_tibble(gramdata)
 #separating x and y eases calculation steps 
 
 sieve <- gramdata %>% 
-  select(1) %>% 
+  dplyr::select(1) %>% 
   as_tibble(as.data.frame(.))
 #now to save the out put so it cab reused in the report:
 # there no confusion when i use the term "takeout" (like pizza) i.e. take from here to smw else.
@@ -195,16 +195,16 @@ write.csv(USraw_cum, here("03_code/01_code-output","USrawCum.csv"),row.names = F
 
 
 
-#select the columns to plot
+#dplyr::select the columns to plot
 #in this case: cumpass
 feedRawCumOnly <- feedraw_cum %>% 
-  select(sieve, CumPass_F13, CumPass_F14)
+  dplyr::select(sieve, CumPass_F13, CumPass_F14)
 
 OSRawCumOnly <- OSraw_cum %>% 
-  select(sieve, CumPass_OS13, CumPass_OS14)
+  dplyr::select(sieve, CumPass_OS13, CumPass_OS14)
 
 USRawCumOnly <- USraw_cum %>% 
-  select(sieve, CumPass_US13, CumPass_US14)
+  dplyr::select(sieve, CumPass_US13, CumPass_US14)
 
 #long format for ggplot
 long_feedraw_cum <- feedRawCumOnly %>% pivot_longer(-sieve, names_to= "stream" , values_to = "probability")
@@ -214,8 +214,7 @@ long_USraw_cum <- USRawCumOnly %>% pivot_longer(-sieve, names_to= "stream" , val
 #combine the datasets: (to ease side by side plot in ggplot)
 PSD_raw_cum_allStreams <- rbind(long_feedraw_cum,long_OSraw_cum,long_USraw_cum)
 PSD_raw_cum_allStreams <- data.frame(PSD_raw_cum_allStreams,
-                             Df = rep(c("Feed (unmodeled)","OS (unmod.)","US (unmod.)" ),
-                                                      times=c(nrow(long_feedraw_cum),nrow(long_OSraw_cum),nrow(long_USraw_cum))))
+                             Df = rep(c("Feed (unmodeled)","OS (unmod.)","US (unmod.)" ),                                                                         times=c(nrow(long_feedraw_cum),nrow(long_OSraw_cum),nrow(long_USraw_cum))))
 
 (plot_all_unmodelled_cum <- ggplot(PSD_raw_cum_allStreams, aes(sieve, probability, colour = stream)) +
   geom_line(size = 1) +
@@ -242,7 +241,7 @@ ggsave(here::here("05_fig_output","allStreamsCummulativePreModelling.pdf"), plot
 transformedFeed <- long_FeedRawPSD %>% 
   group_by (stream)%>% 
   mutate (cumret = cumsum(probability)) %>%
-  select (-probability) %>%
+  dplyr::select (-probability) %>%
   dplyr::slice(1:11) %>% #dplyr::filter worked here previously, but now doesn't anymore. dplyr::slice works with exact same syntax as ::filter did.
   mutate (cumpass = 1-cumret) %>%
     #Rosin Rammler transforms:
@@ -251,8 +250,11 @@ transformedFeed <- long_FeedRawPSD %>%
     RRy = log(log(1/cumret)), # or log(-log(cumret))
     # Gauss Gaudin Shumann transforms:
     GGSy = log(cumret))  %>%
+ 
+   mutate_if(is.numeric, list(~na_if(abs(.), Inf)))%>% #Taking absolute values ~na_if(abs(.), Inf) captures both infinities at once (https://stackoverflow.com/questions/12188509/cleaning-inf-values-from-an-r-dataframe)
   
-  mutate_if(is.numeric, list(~na_if(., -Inf)))%>% #removes -Infinities and replace with NA. This required as we took logs of 0 (sieve) and 1 (cumret).
+ 
+   # mutate_if(is.numeric, list(~na_if(., -Inf)))%>% #removes -Infinities and replace with NA. This required as we took logs of 0 (sieve) and 1 (cumret).
   nest() 
 # Nesting is often useful for creating per group models
 ##
@@ -262,7 +264,7 @@ transformedFeed <- long_FeedRawPSD %>%
 transformedOS <- long_OSRawPSD %>% 
   group_by (stream)%>% 
   mutate (cumret = cumsum(probability)) %>%
-  select (-probability) %>%
+  dplyr::select (-probability) %>%
   dplyr::slice(1:11) %>% #dplyr::filter worked here previously, but now doesn't anymore. dplyr::slice works with exact same syntax as ::filter did.
   mutate (cumpass = 1-cumret) %>%
     #Rosin Rammler transforms:
@@ -282,16 +284,16 @@ transformedOS <- long_OSRawPSD %>%
 transformedUS <- long_USRawPSD %>% 
   group_by (stream)%>% 
   mutate (cumret = cumsum(probability)) %>%
-  select (-probability) %>%
-  dplyr::slice(2:11) %>% #remoed the first and last rows with -ind and NA
+  dplyr::select (-probability) %>%
+  dplyr::slice(2:11) %>% #removed the first and last rows with -ind and NA
   mutate (cumpass = 1-cumret) %>%
   #Rosin Rammler transforms:
   mutate (
     "log(sieve)" = log(sieve),
-    RRy = log(log(1/cumret)), 
+    RRy = log(log(1/cumret)),
     # Gauss Gaudin Shumann transforms:
     GGSy = log(cumret))  %>%
-  
+
   mutate_if(is.numeric, list(~na_if(., -Inf)))%>% #removes -Infinities and replace with NA. This required as we took logs of 0 (sieve) and 1 (cumret).
   nest() 
 ```
@@ -402,7 +404,7 @@ tidy_reg_GGSUS <-regressionUS %>%
 ```
 
 the required regression data is now unnested but mixed with all the other nested lists and data generated.
-now pull out or select the relevent data: (with dplyr::select)
+now pull out or dplyr::select the relevent data: (with dplyr::select)
 
 i do quick check if i can print tables in .rmd mother report (currently named "grams3-report-name.RMD")
 to prevent the .RMD file to all the script from this .R script, we help .RMD identify wich code to use:
@@ -499,24 +501,24 @@ glanced_reg_GGS_US <-regressionUS %>%
 #RR
 coef_deter_RR_Feed <- glancedRRFeed %>% 
   #conduct select and rename in one step with dplyr::select()
-    select(stream, R2 = r.squared, adj.R2 = adj.r.squared, p.value, AIC)
+    dplyr::select(stream, R2 = r.squared, adj.R2 = adj.r.squared, p.value, AIC)
 
 coef_deter_RR_OS <- glanced_reg_RR_OS %>% 
-    select(stream, R2 = r.squared, adj.R2 = adj.r.squared, p.value, AIC)
+    dplyr::select(stream, R2 = r.squared, adj.R2 = adj.r.squared, p.value, AIC)
 
 coef_deter_RR_US <- glanced_reg_RR_US %>% 
-    select(stream, R2 = r.squared, adj.R2 = adj.r.squared, p.value, AIC)
+    dplyr::select(stream, R2 = r.squared, adj.R2 = adj.r.squared, p.value, AIC)
 
 
 #GGS
 coef_deter_GGS_Feed <- glancedGGSFeed %>% 
-    select(stream, R2 = r.squared, adj.R2 = adj.r.squared, p.value, AIC)
+    dplyr::select(stream, R2 = r.squared, adj.R2 = adj.r.squared, p.value, AIC)
 
 coef_deter_GGSOS <- glanced_reg_GGS_OS %>% 
-    select(stream, R2 = r.squared, adj.R2 = adj.r.squared, p.value, AIC)
+    dplyr::select(stream, R2 = r.squared, adj.R2 = adj.r.squared, p.value, AIC)
 
 coef_deter_GGSUS <- glanced_reg_GGS_US %>% 
-    select(stream, R2 = r.squared, adj.R2 = adj.r.squared, p.value, AIC)
+    dplyr::select(stream, R2 = r.squared, adj.R2 = adj.r.squared, p.value, AIC)
 
 
 #one for eaCh stream 
@@ -626,15 +628,15 @@ Perc <- c(seq(0.95, 0.05, -0.05))
 ########
 fitFeed2 <- regressionFeed %>%
   unnest(augmented_RR, augmented_GGS) %>% 
-  select(stream,log.sieve.,RRy,GGSy)  
+  dplyr::select(stream,log.sieve.,RRy,GGSy)  
   
 fitOS2 <- regressionOS %>%
   unnest(augmented_RR, augmented_GGS) %>% 
-  select(stream,log.sieve.,RRy,GGSy)  
+  dplyr::select(stream,log.sieve.,RRy,GGSy)  
 
 fitUS2 <- regressionUS %>%
   unnest(augmented_RR, augmented_GGS) %>% 
-  select(stream,log.sieve.,RRy,GGSy)  
+  dplyr::select(stream,log.sieve.,RRy,GGSy)  
 
 fit2 <- rbind(fitFeed2, fitOS2, fitUS2)
 
@@ -643,11 +645,11 @@ fit2 <- rbind(fitFeed2, fitOS2, fitUS2)
 
 #This plot needs ficxing 
 
-plotRR <- ggplot(fit2, aes(x = "log(sieve)", y = RRy, color = stream) ) +
+plotRR <- ggplot(fit2, aes(x = log.sieve., y = RRy, color = stream) ) +
      geom_point() +
-     geom_smooth(method = "lm", se = FALSE) #se is confidence intervals
+     geom_smooth(method = "lm", se = TRUE) #se is confidence intervals
 
-plotGGS <- ggplot(fit2, aes(x = "log(sieve)", y = GGSy, color = stream) ) +
+plotGGS <- ggplot(fit2, aes(x = log.sieve., y = GGSy, color = stream) ) +
      geom_point() +
      geom_smooth(method = "lm", se = FALSE) #se is confidence intervals
 
