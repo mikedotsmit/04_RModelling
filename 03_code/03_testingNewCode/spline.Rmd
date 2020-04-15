@@ -1,0 +1,53 @@
+```{r}
+library(splines) 
+
+matplot(bs(seq(0,1,length=1000),df=12),type= "l",ylab="",col=1) 
+```
+
+```{r}
+data(exa, package="faraway") 
+plot(y ~ x, exa,main="Example A") 
+lines(m ~ x, exa, lwd=2) 
+data(exb, package= "faraway") 
+plot(y ~ x, exb,main="Example B") 
+lines(m ~ x, exb, lwd=2) 
+```
+
+
+
+```{r}
+
+lmod <- lm(y ~ bs(x,12),exa) 
+plot(y ~ x, exa, col=gray(0.75)) 
+lines(m ~ x, exa) 
+lines(predict(lmod) ~ x, exa, lty=2)
+```
+
+my data 
+
+
+
+
+```{r}
+feedRawCumOnly11 <- feedRawCumOnly %>% 
+  slice(1:11)
+
+
+
+lmod <- lm(log(CumPass_F13) ~ bs(log(sieve),3), data = feedRawCumOnly11) 
+
+plot(log(CumPass_F13) ~ log(sieve), data = feedRawCumOnly11, col=gray(0.5)) 
+
+lines(predict(lmod) ~ log(sieve),data =  feedRawCumOnly11, lty=2)
+```
+
+```{r}
+
+
+
+```
+
+
+
+
+

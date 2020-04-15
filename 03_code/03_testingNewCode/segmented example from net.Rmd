@@ -1,0 +1,98 @@
+
+# R : How to determine prediction intervals for an inverse prediction (x from y) in piecewise linear regression (Segmented)?
+
+
+https://www.researchgate.net/post/R_How_to_determine_prediction_intervals_for_an_inverse_prediction_x_from_y_in_piecewise_linear_regression_Segmented
+
+```{r}
+
+x<-c(5.3,5.8,5.1,5.7,5.2,4.7,5.6,4.5,4.9,5.0,5.4,4.8,4.5,4.6,5.5)
+y<-c(86.52,115.43,103.99,96.13,85.56,40.43,82.31,38.88,76.44,60.55,70.76,41.95,-2.14,17.11,79.29)
+data<-data.frame(x,y)
+
+#Build the piecewise linear regression model
+lm <- lm(y~x,data=data)
+sm <- segmented(lm, seg.Z = ~x,psi=mean(data$x))
+
+######################################
+###### DETERMINE CRITICAL POINT ######
+######################################
+
+#METHOD 1 : ALGEBRA#
+
+	#intercept of the left linear regression 
+		intercept1<-intercept(sm)$x[1,1]
+	#slope of the left linear regression
+		slope1<-slope(sm)$x[1,1]
+	#Predict Critical-Point = point for which y = 0 (x = -b/a)
+		CP1<-(-intercept1)/slope1
+
+#METHOD 2 : REVERSED MODEL#
+
+	#y value for prediction
+		predict<-data.frame(y=as.numeric(0.0))
+	#reversed model
+		invlm <- lm(x~y,data=data)
+		invsm <- segmented(invlm, seg.Z = ~y,psi=mean(data$y))
+	#prediction 
+		CP2<-predict.segmented(invsm,predict,interval="prediction")
+		#return the x predicted value for y = 0 and its prediction interval
+
+#UNFORTUNATELY CP1 IS DIFFERENT OF CP2
+#Method of reversed method is not suitable
+#How to calculate prediction interval by algebra method?
+
+######################################
+######        PLOT MODEL        ######
+######################################
+
+#Calculate coordinates of the model
+	#Extract Tipping-Point (Breaking-Point)
+		TP<-summary(sm)$psi[1,2]
+	#Extract R-squared
+		Rsquared<-summary(sm)$r.squared[[1]]
+	#Extract intercept and slope of the right linear regression
+		intercept2<-intercept(sm)$x[2,1]
+		slope2<-slope(sm)$x[2,1]
+	#Calculate coordinates of some points to plot the model latter
+		x1<-as.numeric(min(data$x,na.rm=TRUE))
+		y1<-slope1*x1+intercept1
+		x2<-TP
+		y2<-slope1*x2+intercept1
+		x3<-as.numeric(max(data$x,na.rm=TRUE))
+		y3<-slope2*x3+intercept2
+
+#Plot the model	
+	plot<-ggplot(data, aes(x=x, y=y)) +
+		#format the background, border and axis themes
+		theme(panel.background = element_blank(),
+  		panel.grid.major = element_blank(), 
+  		panel.grid.minor = element_blank(),
+		panel.border = element_rect(color="black",fill=NA),
+		axis.text.x = element_text(face="bold", color="black", size=11),
+          	axis.text.y = element_text(face="bold", color="black", size=11),
+  		axis.ticks = element_line(color="black"))+
+	#format axis labels and limits
+		scale_x_continuous(limits=c(4.4, 5.8), breaks=seq(4.4,5.8,0.4)) +
+	
+	#add points
+		geom_point(data=data, aes(x=x,y=y),color="gray48",shape=1,size=2.3, stroke=0.9)+
+
+	#draw the model 
+		#add part 1 corresponding to x < TP
+		geom_segment(aes(x = x1, y = y1, xend = x2, yend = y2),color="black",size=1) +
+		#add part 2 corresponding to x > TP
+		geom_segment(aes(x = x2, y = y2, xend = x3, yend = y3),color="black",size=1) +
+	#draw Tipping_point with a line
+		geom_vline(xintercept = TP, color = "#0066CC", size=0.8)+
+	#add Tipping-Point value
+		geom_label(aes(x = TP+0.005, y = 50, 
+			label = sprintf('%3.2f',TP)), color ="#0066CC", fill = "#99CCFF", size=4, label.size=0, fontface="bold")+
+	#add Rsquared value
+		annotate("text", x = 5.8, y = 65, label=paste("R^2==", sprintf('%3.2f',Rsquared)), parse=TRUE, hjust=1, vjust=0, size=4)
+
+plot
+#by graphical observation, CP1 seems to be the correct x value for y = 0
+#CP2 is a wrong value
+
+```

@@ -1,0 +1,51 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r, include = FALSE}
+#Function here::here to help with file paths relative to the project folder:
+library("here")
+```
+
+
+```{r, include = FALSE }
+#attache rpackages from central location:
+source(here::here("02_rpackages",'projectpackages.R'))
+
+```
+
+
+```{r, include = FALSE }
+#the original code (displayed below is from the code file: "screentest-19oct2014.Rmd"). another copy is in a code testing file:" testSideBySidePlot.Rmd.
+#here this table geerating code is kept in its own child Rmd file, a i could not get it to save a table for simple inclusion into the results discussion section. Having the code in oits own rmd file generates the pdf of the table only , and this way there is an image file of the table.
+
+```
+
+
+```{r echo = FALSE, results='asis'}
+
+# bring in the saved data to be tabled:
+R2RR <- read.csv(file = here::here("03_code/01_code-output","R2RR.csv"))
+R2GGS <- read.csv(file = here::here("03_code/01_code-output","R2GGS.csv"))
+
+joinedTable <- dplyr::left_join(R2RR, R2GGS, by = "stream")
+
+
+
+
+tblR2Joined <- knitr::kable(joinedTable, "latex",
+                        escape = F,booktabs = T,
+                        digits = c(0,3,3,4,1,3,3,4,1)) %>%
+  kable_styling(latex_options = "striped") %>%
+  column_spec(1, width = "2.3cm") %>% 
+  column_spec(2:9, width = "0.9cm") %>% 
+  add_header_above(c(" ", "RR Model" = 4, "GGS Model" = 4))
+
+
+
+print(tblR2Joined)
+
+
+```

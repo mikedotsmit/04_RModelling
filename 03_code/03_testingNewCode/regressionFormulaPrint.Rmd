@@ -1,0 +1,45 @@
+
+
+```{r, include = FALSE}
+#Function here::here to help with file paths relative to the project folder:
+library("here")
+#attache rpackages from central location:
+source(here::here("02_rpackages",'projectpackages.R'))
+```
+
+https://stackoverflow.com/questions/7549694/add-regression-line-equation-and-r2-on-graph
+
+
+
+
+
+
+
+I changed a few lines of the source of stat_smooth and related functions to make a new function that adds the fit equation and R squared value. This will work on facet plots too!
+
+
+```{r}
+
+
+library(devtools)
+source_gist("524eade46135f6348140")
+df = data.frame(x = c(1:100))
+df$y = 2 + 5 * df$x + rnorm(100, sd = 40)
+df$class = rep(1:2,50)
+ggplot(data = df, aes(x = x, y = y, label=y)) +
+  stat_smooth_func(geom="text",method="lm",hjust=0,parse=TRUE) +
+  geom_smooth(method="lm",se=FALSE) +
+  geom_point() + facet_wrap(~class)
+#enter image description here
+```
+
+I used the code in @Ramnath's answer to format the equation. The stat_smooth_func function isn't very robust, but it shouldn't be hard to play around with it.
+
+https://gist.github.com/kdauria/524eade46135f6348140. Try updating ggplot2 if you get an error.
+
+shareeditfollow
+edited Feb 21 '16 at 1:59
+answered Jan 15 '15 at 8:34
+
+kdauria
+5,39822 gold badges2525 silver badges47

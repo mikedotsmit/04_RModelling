@@ -1,0 +1,5 @@
+stream,term,estimate
+1,OS13MeanPct,(Intercept),-7.60415216274687
+2,OS13MeanPct,RRx,1.16490280632245
+3,OS14MeanPct,(Intercept),-7.84111405899432
+4,OS14MeanPct,RRx,1.18002736667265

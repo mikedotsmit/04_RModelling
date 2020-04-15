@@ -37,6 +37,10 @@ If a distribution plots a straight line after the above RR transformation, then 
 
 
 $$ Y=mX + C$$
+in Statisticall terms that includes the error between the model and the observed distributions: (epsilon is the that error)
+
+$$y=\beta_0+\beta_1x+\epsilon$$
+
 
 
 $$\underbrace{\ln\left\{-\ln\left[1-F(d)\right] \right\}}_\textrm{Y} =  \underbrace{m}_\textrm{slope}\times \underbrace{\ln d}_\textrm{X}+\underbrace{ \left(-m\times \ln \bar{d}\right)}_\textrm{C} $$
