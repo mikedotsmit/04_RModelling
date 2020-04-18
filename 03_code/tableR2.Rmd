@@ -6,9 +6,10 @@ output:
 Aim of this file:
 Generate table (r-saquared) for chapter (child) input to base.Rmd (mother)
 
-Reason: i cant the table to gerate from within a code chunk or r.script, ub only once knitted doe the table show.., so for now i 'll keep it sepparate here in this .Rmd.
+Reason: i cant get the table to gerate from within a code chunk or r.script, but only once knitted does the table show.., so for now i 'll keep it sepparate here in this (its own) .Rmd.
 
 This file:
+
 + reads code from: "02_rpackages",'projectpackages.R' for libraries.
 + reads code from: "03_code/01_code-output","R2RR.csv"
 + reads code from: "03_code/01_code-output","R2GGS.csv"
@@ -72,7 +73,7 @@ tblR2GGS <- knitr::kable(R2GGS,
 # 
 # t2 <- kable(R2GGS, format = "latex", booktabs = TRUE)
 
-#code posistions side by side
+#code posistions 2 tables side by side
 cat(c("\\begin{table}[!htb]
     \\begin{minipage}{.5\\linewidth}
       \\caption{RR Model(formula)}

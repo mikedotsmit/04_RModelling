@@ -1,0 +1,49 @@
+Predicted vs actual values
+
+
+```{r}
+mtcars %>% 
+  nest(-cyl) %>% 
+  mutate(fit = map(data, ~ lm(mpg ~ hp + wt + disp, data = .)),
+         results = map(fit, augment)) %>% 
+  unnest(results) %>% 
+  ggplot(aes(x = mpg, y = .fitted)) +
+    geom_abline(intercept = 0, slope = 1, alpha = .2) +  # Line of perfect fit
+    geom_point() +
+    facet_grid(cyl ~ .) +
+    theme_bw()
+```
+
+################################
+Now my data:
+########################
+
+import data...
+```{r}
+
+```
+
+
+```{r}
+# mtcars %>% 
+#   nest(-cyl) %>% 
+#   mutate(fit = map(data, ~ lm(mpg ~ hp + wt + disp, data = .)),
+#          results = map(fit, augment)) %>% 
+#   unnest(results) %>% 
+  
+(plotPredictedVSactual <- AugmentedRR <- Reg %>% 
+  unnest(augmented_RR) %>% 
+  
+ggplot(aes(x = sieve, y = .fitted)) +
+    geom_abline(intercept = 0, slope = 1, alpha = .2) +  # Line of perfect fit
+    geom_point() +
+    facet_grid(stream ~ .) +
+    theme_bw()
+)
+
+```
+
+
+
+
+

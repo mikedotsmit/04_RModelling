@@ -3,59 +3,228 @@ output:
   pdf_document: default
   html_document: default
 ---
-This file houses most of the code for this specific test conducted.
-the filename (of this file) denotes the specific test which's code is represented here.
-the raw_psd data is pulled into this file and processed.
-data munging/wrangling ocurrs here mainly.
-the outputs from this file is used within or drawn into the various chapters and subsequently into the final file (base.Rmd) for conversion to PDF (currently not HTML (my code)).
-outputs are exported or written to code/01_code-outputs.
+This file imports the means of the streams from the 5 decks on the each of the two screens in the plant.
+import from 01_ImportWrangle2Means19Oct2014.Rmd
 
 ```{r, include = FALSE}
 library("here")
 source(here::here("02_rpackages",'projectpackages.R'))
-
-#various options that controle chunk and graphics:
 
 knitr::opts_chunk$set(echo = FALSE, warning=FALSE,message=FALSE)
 knitr::opts_chunk$set(fig.align="center") #default align for figures
 knitr.table.format = "latex" #global option for tables. can still set any in each kable function.
 ```
 
-#############################
-data wrangling
-upto line 135 in ~trim.RMD
 
-
-read wrangled data:
-```{r }
-F <- FeedRawPSD <- read.csv( here("03_code/01_code-output","FeedRawPSD.csv"))
-O <- OSRawPSD <- read.csv( here("03_code/01_code-output","OSRawPSD.csv"))
-U <- USRawPSD <- read.csv( here("03_code/01_code-output","USRawPSD.csv"))
+import wrangled means
+```{r}
+unmod2 <- read_csv(here("03_code/01_code-output","RawPSD.csv"))
 ```
 
 
 ```{r}
-unmod <- left_join(F,O, by = "sieve") #(only joins 2 tables at a time)
-unmod <- left_join(unmod,U, by = "sieve")
+# change underpan from 0 to 1 micron to avoid log0 
+#im sure this step can be removed as this line will be remove for the moddeling anyway...
+  tmp <- rev(unmod2$sieve)
+ if(tmp[1]  < 1) {
+    tmp[1] <- 1
+    unmod2$sieve <- rev(tmp)
+  }
 
-unmodlong <- unmod %>% pivot_longer(-sieve, names_to= "stream" , values_to = "probability")
-unmodlong <- data.frame(unmodlong,
-                             Df = rep(c("Feed (unmodeled)","OS (unmod.)","US (unmod.)" ),                                                                         times=c(nrow(F),nrow(O),nrow(U))))
 ```
 
-```{r}
 
-(plotUnmodCum <- ggplot(unmodlong, aes(sieve, probability, colour = stream)) +
+
+
+```{r}
+unmodlong2 <- unmod2 %>% 
+  pivot_longer(-sieve, names_to= "stream" , values_to = "probability")%>% 
+ group_by(stream) %>% 
+  mutate (cumret = cumsum(probability))
+
+  tmp <- rev(unmodlong2$cumret)
+ if(tmp[1] - 1 < 1e-12) {
+    tmp[1] <- 1
+    unmodlong2$cumret <- rev(tmp)
+  }
+
+unmodlong2$cumpass <- (1-unmodlong2$cumret)  
+
+
+# unmodungroup <- unmodlong2 %>% 
+#   ungroup()
+
+#   tmp <- rev(unmodungroup$cumret)
+#   
+# if(tmp[1] - 1 < 1e-12) {
+#     tmp[1] <- 1
+#     unmodungroup$cumret <- rev(tmp)
+#   }
+
+
+
+
+unmodlongDF <- data.frame(unmodlong2,
+                             Df = rep(c("Feed (unmodeled)","OS (unmod.)","US (unmod.)" ),                                                                         times=c(2,2,2))) #the 222 :the df has 2 feeds 2 oversize 2 undersize factors that gets repeated.
+```
+
+
+```{r}
+(plotUnmodCum <- ggplot(unmodlongDF, aes(sieve, probability, colour = stream)) +
   geom_line(size = 1) +
   geom_point() +
-  ggtitle("Cummulative unmoddeled solids frequency distributions.") +
+  ggtitle(" unmoddeled solids frequency distributions.") +
+  theme(plot.title = element_text(size=9)) +
+  facet_wrap(~Df))
+
+
+(plotUnmodCum <- ggplot(unmodlongDF, aes(sieve, cumpass, colour = stream)) +
+  geom_line(size = 1) +
+  geom_point() +
+  ggtitle(" unmoddeled solids frequency distributions.") +
   theme(plot.title = element_text(size=9)) +
   facet_wrap(~Df))
 
 ```
 
 
+```{r}
+#remove last row in wide tibble before converting to tidy datat with subsequint cummulative calc
 
+cumsum<- unmod2 %>% 
+  dplyr::select(-sieve) %>% 
+  cumsum() %>% 
+  dplyr::slice(1:11) 
+
+sieveSliced<- unmod2 %>% 
+  dplyr::select(sieve) %>% 
+  dplyr::slice(1:11)
+
+#join the x and y back into one tibble
+SlicedCumsum <- cbind(sieveSliced ,cumsum)
+```
+
+
+```{r}
+#Pivot longer then group_by stream and calculate the cumulative %retained "cumret".
+
+longCumsum <- SlicedCumsum %>% 
+  pivot_longer(-sieve, names_to= "stream" , values_to = "cumret")%>% 
+ group_by(stream) %>% 
+  mutate (cumpass = 1- cumret)
+
+```
+
+
+```{r}
+#Rosin Rammler plot
+
+longCumsumDF <- data.frame(
+  longCumsum, Df = rep(c("Feed (modeled)","OS (mod.)","US (mod.)" ), 
+                       times=c(2,2,2)))
+
+(plotModRR <- ggplot(longCumsumDF, 
+                        aes(log(sieve), log(-log(1-cumpass)), colour = stream)) +
+  # geom_line(size = 1) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE)+
+  ggtitle(" Rosin Rammler Modelled distributions.") +
+  theme(plot.title = element_text(size=9)) +
+  facet_wrap(~Df))
+
+
+```
+
+
+```{r}
+longCumsumDF <- data.frame(
+  longCumsum, Df = rep(c("Feed (modeled)","OS (mod.)","US (mod.)" ), times=c(2,2,2)))
+
+(plotModGGS <- ggplot(longCumsumDF, 
+                        aes(log(sieve), log(cumpass), colour = stream)) +
+  # geom_line(size = 1) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE)+
+  ggtitle(" GAtes-Gaudin-Schumann Modelled distributions.") +
+  theme(plot.title = element_text(size=9)) +
+  facet_wrap(~Df))
+```
+
+
+```{r}
+
+c <- 1e-12
+
+Reg <- longCumsumDF %>% 
+  group_by(stream) %>% 
+  nest() %>% 
+ mutate(
+   RRmodels = lapply(data, function(df) lm(log(-log(1-cumpass + c)) ~ log(sieve), data = df)),# "RRmodels" column will be created in the mutate.
+   tidied_RR = map (RRmodels, tidy),
+   glanced_RR = map(RRmodels, glance),
+   augmented_RR = map (RRmodels, augment),
+
+  #GGS model
+   GGS_models = lapply(data, function(df) lm(log(cumpass) ~ log(sieve), data = df)),# "GGS_models" column will be created in the mutate.
+   tidied_GGS = map (GGS_models, tidy),
+   glanced_GGS = map(GGS_models, glance))#,
+   # augmented_GGS = map (GGS_models, augment)) %>% 
+   #  mutate_if(is.numeric, list(~na_if(., abs(Inf))))
+```
+
+
+
+```{r}
+tidiedRR <- Reg %>% 
+  unnest(tidied_RR) %>% 
+  dplyr::select(stream,term, estimate)
+
+tidiedGGS <- Reg %>% 
+  unnest(tidied_GGS) %>% 
+  dplyr::select(stream,term, estimate)
+
+glancedRR <- Reg %>% 
+  unnest(glanced_RR)
+
+glancedGGS <- Reg %>% 
+  unnest(glanced_GGS)
+```
+
+
+
+extra r^2 chart
+```{r}
+#https://drsimonj.svbtle.com/running-a-model-on-separate-groups
+
+glancedRR %>% 
+  ggplot(aes(x = factor(stream), y = r.squared)) +
+    geom_bar(stat = "identity") +
+    labs(x = "Stream", y = expression(R^{2}))
+
+
+```
+statistical measures of model fit.
+CLeaning up the glanced data and only selecting the output required for presentation.
+Coefficient of determination `R^2`.(i tried latex formatting for the R2 not yet successful)
+```{r}
+#coeficient of determinant
+R2RR <- glancedRR %>% 
+      dplyr::select(stream, R2 = r.squared, adj.R2 = adj.r.squared, p.value, AIC)#conduct select and rename in one step with dplyr::select()
+
+R2GGS <- glancedGGS %>% 
+      dplyr::select(stream, R2 = r.squared, adj.R2 = adj.r.squared, p.value, AIC)
+
+write.csv(R2RR, here("03_code/01_code-output","R2RR.csv"),row.names = FALSE)
+write.csv(R2GGS, here("03_code/01_code-output","R2GGS.csv"),row.names = FALSE)
+#written csvs are drawin by ~03_code/tableR2.Rmd
+
+```
+
+Predicting values
+
+```{r}
+
+```
 
 
 
