@@ -491,8 +491,6 @@ cat(c("\\begin{table}[!htb]
 #   exp(-exp(x))
 # }
 
-Perc <- c(seq(0.95, 0.05, -0.05))
-#size <- ??????? 
 
 ########
 fitFeed2 <- regressionFeed %>%

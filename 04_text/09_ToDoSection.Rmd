@@ -1,5 +1,8 @@
 # To Do 
 
+Include instructions (steps) on which files to Run of Knit to preduce the final report.
+
+
 fix output location of knits for files in /04-text
 
 + make a subfolder (output)

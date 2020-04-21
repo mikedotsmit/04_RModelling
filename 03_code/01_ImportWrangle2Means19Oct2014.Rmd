@@ -144,30 +144,12 @@ FeedRawPSD <- cbind(sieve, Feed13MeanPct, Feed14MeanPct)
 OSRawPSD <- cbind(sieve, OS13MeanPct, OS14MeanPct)  
 USRawPSD <- cbind(sieve, US13MeanPct, US14MeanPct)
 ```
-```{r}
-RawPSD <- cbind(
-  sieve,
-  Feed13MeanPct,
-  Feed14MeanPct,
-  OS13MeanPct,
-  OS14MeanPct,
-  US13MeanPct,
-  US14MeanPct
-  ) 
+left_join
 
-```
+
 
 ```{r }
 write.csv(FeedRawPSD, here("03_code/01_code-output","FeedRawPSD.csv"),row.names = FALSE)
 write.csv(OSRawPSD, here("03_code/01_code-output","OSRawPSD.csv"),row.names = FALSE)
 write.csv(USRawPSD, here("03_code/01_code-output","USRawPSD.csv"),row.names = FALSE)
-
-write.csv(RawPSD, here("03_code/01_code-output","RawPSD.csv"),row.names = FALSE)
 ```
-
-To Do : analasys of the means of the two screens?
-
-
-
-
-
