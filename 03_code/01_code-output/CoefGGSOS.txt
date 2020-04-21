@@ -1,5 +1,0 @@
-stream,term,estimate
-1,OS13MeanPct,(Intercept),2.5577554464889
-2,OS13MeanPct,log(sieve),-0.584482687785532
-3,OS14MeanPct,(Intercept),2.41714281538183
-4,OS14MeanPct,log(sieve),-0.548808607371766

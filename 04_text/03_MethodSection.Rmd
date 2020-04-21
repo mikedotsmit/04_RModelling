@@ -19,10 +19,6 @@ source(here::here("02_rpackages",'projectpackages.R'))
 ```
 
 
-```{r}
-
-```
-
 
 
 ## Design of experiment

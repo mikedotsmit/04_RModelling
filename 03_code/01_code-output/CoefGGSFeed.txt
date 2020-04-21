@@ -1,5 +1,0 @@
-stream,term,estimate
-1,Feed13MeanPct,(Intercept),3.24632859289021
-2,Feed13MeanPct,log(sieve),-0.80641974787636
-3,Feed14MeanPct,(Intercept),3.10752526377885
-4,Feed14MeanPct,log(sieve),-0.772961005699523

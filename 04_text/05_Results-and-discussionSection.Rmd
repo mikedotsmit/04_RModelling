@@ -45,8 +45,8 @@ knitr::include_graphics(here::here("05_fig_output",'allStreamsCummulativePreMode
 
 #here added the "fig.show='hold'" in chunk option from https://bookdown.org/yihui/rmarkdown/r-code.html#figures
 
-knitr::include_graphics(here::here("05_fig_output",'allStreamsPreModelling.pdf'))
-knitr::include_graphics(here::here("05_fig_output",'allStreamsCummulativePreModelling.pdf'))
+knitr::include_graphics(here::here("05_fig_output",'RRModelled.pdf'))
+knitr::include_graphics(here::here("05_fig_output",'GGSModelled.pdf'))
 ```
 
 
@@ -79,15 +79,15 @@ As the previous approach failed to save a readable image of the table.
 
 
 New child starts here..
-```{r child = (file = here::here("03_code","tableR2.Rmd"))}
+```{r child = (file = here::here("03_code","tableRSquared.Rmd"))}
 
 ```
 and Ends here..
 
 
 
-New New child starts here..
-```{r child = (file = here::here("03_code","tableCoef.Rmd"))}
+Another New New child starts here..
+```{r child = (file = here::here("03_code","tableCoef2.Rmd"))}
 
 ```
 and Ends here..

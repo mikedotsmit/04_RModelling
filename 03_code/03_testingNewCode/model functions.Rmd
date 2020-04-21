@@ -1,0 +1,65 @@
+
+
+
+```{r}
+modelsGGS <- unmodlongDF %>% 
+  split(.$stream) %>% 
+  map(~lm(log(cumpass) ~ log(sieve), data = ., subset=sieve>0))
+```
+
+
+
+
+# tmp <- rev(unmodlong2Sliced$cumret)
+#  if(tmp[1] - 1 < 1e-12) {
+#     tmp[1] <- 1
+#    unmodlong2Sliced$cumret <- rev(tmp)
+#   }
+# 
+# unmodlong2Sliced$cumpass <- (1-unmodlong2Sliced$cumret) 
+
+
+
+
+
+```{r}
+#add small value to avoid log0.
+#c <- 10^(-12)
+c <- 1e-22
+modelsRR <- unmodlong2 %>% 
+  split(.$stream) %>% 
+  map(~lm(log(-log(1-cumpass + c)) ~ log(sieve), data = .,
+          subset = c(sieve>0,log(sieve)>0,(1-cumpass)>0,(-log(1-cumpass))>0),
+          na.action=na.exclude
+          ))
+
+summary(modelsRR)
+```
+
+
+
+
+```{r}
+
+c <- 10^(-12) #small constant 
+
+RossRammFunc <- possibly(function(cumpass) {
+          log(-log(1-cumpass +c))
+          }
+     , otherwise = NA)
+
+
+```
+
+
+```{r}
+
+modelsRR1 <- unmodlong2 %>% 
+  split(.$stream) %>% 
+  map(safely(~lm(RossRammFunc) ~ log(sieve)
+          ))
+
+
+```
+
+

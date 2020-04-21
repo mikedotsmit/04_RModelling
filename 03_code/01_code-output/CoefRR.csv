@@ -1,0 +1,13 @@
+"stream","term","estimate"
+"Feed13MeanPct","(Intercept)",-4.88365283742804
+"Feed13MeanPct","log(sieve)",0.856746548231583
+"Feed14MeanPct","(Intercept)",-4.89083124102175
+"Feed14MeanPct","log(sieve)",0.851619781692003
+"OS13MeanPct","(Intercept)",-7.60415216278152
+"OS13MeanPct","log(sieve)",1.16490280632735
+"OS14MeanPct","(Intercept)",-7.84111405903489
+"OS14MeanPct","log(sieve)",1.18002736667843
+"US13MeanPct","(Intercept)",-6.43806139616989
+"US13MeanPct","log(sieve)",1.34913716024168
+"US14MeanPct","(Intercept)",-6.1880481038986
+"US14MeanPct","log(sieve)",1.31052057341316
