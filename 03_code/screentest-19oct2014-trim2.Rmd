@@ -70,7 +70,7 @@ unmodlongDF <- data.frame(unmodlong2,
 
 
 ```{r}
-(plotUnmod <- ggplot(unmodlongDF, aes(sieve, probability, colour = stream)) +
+(plotUnmodCum <- ggplot(unmodlongDF, aes(sieve, probability, colour = stream)) +
   geom_line(size = 1) +
   geom_point() +
   ggtitle(" unmoddeled solids frequency distributions.") +
@@ -85,9 +85,6 @@ unmodlongDF <- data.frame(unmodlong2,
   theme(plot.title = element_text(size=9)) +
   facet_wrap(~Df))
 
-ggsave(here("05_fig_output","allStreamsPreModelling.pdf"), plotUnmod, width=10, height=8)
-
-ggsave(here("05_fig_output","allStreamsCummulativePreModelling.pdf"), plotUnmodCum, width=10, height=8)
 ```
 
 
@@ -148,92 +145,37 @@ longCumsumDF <- data.frame(
   # geom_line(size = 1) +
   geom_point() +
   geom_smooth(method = "lm", se = FALSE)+
-  ggtitle(" Gates-Gaudin-Schumann Modelled distributions.") +
+  ggtitle(" GAtes-Gaudin-Schumann Modelled distributions.") +
   theme(plot.title = element_text(size=9)) +
   facet_wrap(~Df))
-
-
-
-ggsave(here("05_fig_output","RRModelled.pdf"), plotModRR, width=10, height=8)
-
-ggsave(here("05_fig_output","GGSModelled.pdf"), plotModGGS, width=10, height=8)
-
 ```
 
-still trying to the predictions
+
 ```{r}
+
 c <- 1e-12
 
-
-#functions
-RosinRammler <- function(df) {
-  lm(log(-log(1-cumpass + c)) ~ log(sieve),
-    data = df
-    )
-}
-
-GatesGaudinSchumann <- function(df) {
-  lm(log(cumpass) ~ log(sieve), 
-     data = df
-    )
-}
-```
-trying to replace the model function above ..the "df" part is confusing where does the data come from.
-so now below i try hadleys way :P
-
-
-
-```{r}
 Reg <- longCumsumDF %>% 
   group_by(stream) %>% 
   nest() %>% 
  mutate(
-   RRmodels = lapply(data, RosinRammler),# "RRmodels" column will be created in the mutate. RosinRammler defined function is applied to the data "data" within (pipe opperator)  "longCumSumDF" the data frame.
+   RRmodels = lapply(data, function(df) lm(log(-log(1-cumpass + c)) ~ log(sieve), data = df)),# "RRmodels" column will be created in the mutate.
    tidied_RR = map (RRmodels, tidy),
    glanced_RR = map(RRmodels, glance),
    augmented_RR = map (RRmodels, augment),
 
   #GGS model
-   GGS_models = lapply(data, GatesGaudinSchumann),# "GGS_models" column will be created in the mutate.
+   GGS_models = lapply(data, function(df) lm(log(cumpass) ~ log(sieve), data = df)),# "GGS_models" column will be created in the mutate.
    tidied_GGS = map (GGS_models, tidy),
    glanced_GGS = map(GGS_models, glance))#,
    # augmented_GGS = map (GGS_models, augment)) %>% 
    #  mutate_if(is.numeric, list(~na_if(., abs(Inf))))
-
-
-
-
 ```
 
-predicting the fraction of material that will pass a certain screen size:
 ```{r}
-#https://stackoverflow.com/questions/52331501/using-predict-function-for-new-data-along-with-tidyverse
-
-#Small constant to avoid log of zero
-c <- 1e-12
-
-newdat <- data.frame(sieve = c(250))
-library(tidyverse)
-preds <- longCumsumDF %>%
-  group_by(stream) %>%
-  nest() %>%
-  mutate(model1  = purrr::map(.x = data, .f = ~ lm(log(cumpass) ~ log(sieve), data = .))) %>%
-  mutate(logPred = purrr::map(.x = model1, ~ predict(., newdat))) %>%
- 
-  mutate(model2  = purrr::map(.x = data, .f = ~ lm(log(-log(1-cumpass+c)) ~ log(sieve), data = .))) %>%
-  mutate(loglogPred = purrr::map(.x = model2, ~ predict(., newdat))) %>%
- 
-  
-  select(stream, logPred, loglogPred) %>%
-  unnest() %>%   #%>% cbind(newdat = newdat) 
-  mutate(PredGGS = exp(logPred)) %>% 
-  mutate(PredRR = exp(-exp(loglogPred))) %>% 
-    select(stream, PredGGS, PredRR, logPred, loglogPred) 
-
-preds
-#yay it works !!!
+preds <-Reg$RRmodels %>% 
+  predict("sieve" = 250)
 ```
-
 
 
 
@@ -245,11 +187,6 @@ tidiedRR <- Reg %>%
 tidiedGGS <- Reg %>% 
   unnest(tidied_GGS) %>% 
   dplyr::select(stream,term, estimate)
-
-write.csv(tidiedRR, file = here("03_code/01_code-output","CoefRR.csv"), row.names = FALSE)
-write.csv(tidiedGGS, file = here("03_code/01_code-output","CoefGGS.csv"), row.names = FALSE)
-
-
 
 glancedRR <- Reg %>% 
   unnest(glanced_RR)
@@ -284,11 +221,11 @@ R2GGS <- glancedGGS %>%
 
 write.csv(R2RR, here("03_code/01_code-output","R2RR.csv"),row.names = FALSE)
 write.csv(R2GGS, here("03_code/01_code-output","R2GGS.csv"),row.names = FALSE)
-#written csvs are draw in by ~03_code/tableR2.Rmd
+#written csvs are drawin by ~03_code/tableR2.Rmd
 
 ```
 
-
+Predicting values
 
 ```{r}
 
