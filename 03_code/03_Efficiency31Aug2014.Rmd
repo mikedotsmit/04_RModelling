@@ -1,0 +1,89 @@
+
+Screening efficiency
+
+
+
+```{r, include = FALSE}
+#Function here::here to help with file paths relative to the project folder:
+library("here")
+```
+
+```{r, include = FALSE }
+#attach rpackages from central location:
+source(here::here("02_rpackages",'projectpackages.R'))
+```
+```{r}
+BestF13 <- read.csv(here::here("03_code/01_code-output", "BestF13.csv"))
+BestOS13 <- read.csv(here::here("03_code/01_code-output", "BestOS13.csv"))
+BestUS13 <- read.csv(here::here("03_code/01_code-output", "BestUS13.csv"))
+
+
+```
+
+
+Derrick Method
+A	<- Percent of oversize in the feed (% > 250um in Feed)
+B	<- Percent of undersize in the feed (% < 250um in Feed)
+C	<- Percent of oversize in the oversize product (% >250um in OS)
+D	<- Percent of undersize in the undersize product (% < 250um in US)
+
+U  <- Undersize weight percent
+O  <- Oversize weight percent
+EU <- Undersize efficiency
+Eo <- Oversize efficiency
+E  <- Overall efficiency
+
+```{r}
+#assign letters accoring to Derrick efficiency formula:  
+Screen <- 13
+
+A <- 1-BestF13$Predict
+B <- BestF13$Predict
+C <- 1- BestOS13$Predict
+D <- BestUS13$Predict
+
+U <- (C-A)/(C+D-1)
+O <- 1 - U
+Eu <- U*D/B
+Eo <- O*C/A
+E <- U*D+O*C/100
+    
+Screen13Efficiency <- cbind(Screen,A,B,C,D,U,O,Eu,Eo,E) %>% 
+  as_tibble() 
+  
+```
+
+
+```{r}
+  
+Screen <- 14
+
+A <- 1-BestF14$Predict
+B <- BestF14$Predict
+C <- 1- BestOS14$Predict
+D <- BestUS14$Predict
+
+U <- (C-A)/(C+D-1)
+O <- 1 - U
+Eu <- U*D/B
+Eo <- O*C/A
+E <- U*D+O*C/100
+    
+Screen14Efficiency <- cbind(Screen,A,B,C,D,U,O,Eu,Eo,E) %>% 
+  as_tibble() 
+
+```
+
+Combining the two efficiency outputs
+
+```{r}
+eff <- rbind (Screen13Efficiency,Screen14Efficiency)
+eff
+```
+
+```{r}
+#t.test(extra ~ group, data = sleep, alternative = "less")
+```
+
+
+

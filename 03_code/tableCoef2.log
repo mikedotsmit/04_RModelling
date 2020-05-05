@@ -1,9 +1,9 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/W32TeX) (preloaded format=pdflatex 2020.3.29)  2 MAY 2020 11:45
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/W32TeX) (preloaded format=pdflatex 2020.3.29)  21 APR 2020 09:05
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**base.tex
-(./base.tex
+**tableCoef2.tex
+(./tableCoef2.tex
 LaTeX2e <2020-02-02> patch level 5
 L3 programming layer <2020-02-25> (c:/Users/miked/AppData/Roaming/TinyTeX/texmf
 -dist/tex/latex/base/article.cls
@@ -546,27 +546,28 @@ d-pdfmode.def
 File: l3backend-pdfmode.def 2020-02-23 L3 backend support: PDF mode
 \l__kernel_color_stack_int=\count288
 \l__pdf_internal_box=\box65
-) (./base.aux)
-\openout1 = `base.aux'.
+)
+No file tableCoef2.aux.
+\openout1 = `tableCoef2.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 81.
-LaTeX Font Info:    ... okay on input line 81.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 81.
-LaTeX Font Info:    ... okay on input line 81.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 81.
-LaTeX Font Info:    ... okay on input line 81.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 81.
-LaTeX Font Info:    ... okay on input line 81.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 81.
-LaTeX Font Info:    ... okay on input line 81.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 81.
-LaTeX Font Info:    ... okay on input line 81.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 81.
-LaTeX Font Info:    ... okay on input line 81.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 81.
-LaTeX Font Info:    ... okay on input line 81.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 81.
-LaTeX Font Info:    ... okay on input line 81.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 78.
+LaTeX Font Info:    ... okay on input line 78.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 78.
+LaTeX Font Info:    ... okay on input line 78.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 78.
+LaTeX Font Info:    ... okay on input line 78.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 78.
+LaTeX Font Info:    ... okay on input line 78.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 78.
+LaTeX Font Info:    ... okay on input line 78.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 78.
+LaTeX Font Info:    ... okay on input line 78.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 78.
+LaTeX Font Info:    ... okay on input line 78.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 78.
+LaTeX Font Info:    ... okay on input line 78.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 78.
+LaTeX Font Info:    ... okay on input line 78.
 
 (c:/Users/miked/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/epstopdf-pkg/epsto
 pdf-base.sty
@@ -580,7 +581,7 @@ File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
 \AtBeginShipoutBox=\box66
-Package hyperref Info: Link coloring OFF on input line 81.
+Package hyperref Info: Link coloring OFF on input line 78.
 
 (c:/Users/miked/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/nameref.s
 ty
@@ -596,12 +597,11 @@ Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
 \c@section@level=\count289
 )
-LaTeX Info: Redefining \ref on input line 81.
-LaTeX Info: Redefining \pageref on input line 81.
-LaTeX Info: Redefining \nameref on input line 81.
-(./base.out) (./base.out)
+LaTeX Info: Redefining \ref on input line 78.
+LaTeX Info: Redefining \pageref on input line 78.
+LaTeX Info: Redefining \nameref on input line 78.
 \@outlinefile=\write3
-\openout3 = `base.out'.
+\openout3 = `tableCoef2.out'.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -638,334 +638,146 @@ LaTeX Info: Redefining \nameref on input line 81.
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
 LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 8
-3.
+5.
 (c:/Users/miked/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/ot1lmr.fd
 File: ot1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OML+lmm on input line 8
-3.
+5.
 (c:/Users/miked/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/omllmm.fd
 File: omllmm.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 
-83.
+85.
 (c:/Users/miked/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/omslmsy.fd
 File: omslmsy.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 
-83.
+85.
 (c:/Users/miked/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/omxlmex.fd
 File: omxlmex.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <12> on input line 83.
+(Font)              <10> on input line 85.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 83.
+(Font)              <7> on input line 85.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 83.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 83.
+(Font)              <5> on input line 85.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 85.
 
 (c:/Users/miked/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 83.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 85.
 
 (c:/Users/miked/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-<06_images/me-glasses.jpg, id=72, 281.05pt x 374.39874pt>
-File: 06_images/me-glasses.jpg Graphic file (type jpg)
-<use 06_images/me-glasses.jpg>
-Package pdftex.def Info: 06_images/me-glasses.jpg  used on input line 84.
-(pdftex.def)             Requested size: 75.27983pt x 100.2835pt.
-File: 06_images/me-glasses.jpg Graphic file (type jpg)
-<use 06_images/me-glasses.jpg>
-Package pdftex.def Info: 06_images/me-glasses.jpg  used on input line 85.
-(pdftex.def)             Requested size: 56.45773pt x 75.20976pt.
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10> on input line 92.
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7> on input line 92.
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <5> on input line 92.
-LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 9
-3.
-(c:/Users/miked/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/t1lmtt.fd
-File: t1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
-) [1
+Overfull \hbox (4.57129pt too wide) in paragraph at lines 89--89
+[]|\T1/lmr/m/n/10 (Intercept)|  
+ []
+
+
+Overfull \hbox (4.57129pt too wide) in paragraph at lines 91--91
+[]|\T1/lmr/m/n/10 (Intercept)|  
+ []
+
+
+Overfull \hbox (4.57129pt too wide) in paragraph at lines 93--93
+[]|\T1/lmr/m/n/10 (Intercept)|  
+ []
+
+
+Overfull \hbox (4.57129pt too wide) in paragraph at lines 96--96
+[]|\T1/lmr/m/n/10 (Intercept)|  
+ []
+
+
+Overfull \hbox (4.57129pt too wide) in paragraph at lines 98--98
+[]|\T1/lmr/m/n/10 (Intercept)|  
+ []
+
+
+Overfull \hbox (4.57129pt too wide) in paragraph at lines 101--101
+[]|\T1/lmr/m/n/10 (Intercept)|  
+ []
+
+
+Overfull \hbox (4.57129pt too wide) in paragraph at lines 114--114
+[]|\T1/lmr/m/n/10 (Intercept)|  
+ []
+
+
+Overfull \hbox (4.57129pt too wide) in paragraph at lines 116--116
+[]|\T1/lmr/m/n/10 (Intercept)|  
+ []
+
+
+Overfull \hbox (4.57129pt too wide) in paragraph at lines 118--118
+[]|\T1/lmr/m/n/10 (Intercept)|  
+ []
+
+
+Overfull \hbox (4.57129pt too wide) in paragraph at lines 121--121
+[]|\T1/lmr/m/n/10 (Intercept)|  
+ []
+
+
+Overfull \hbox (4.57129pt too wide) in paragraph at lines 123--123
+[]|\T1/lmr/m/n/10 (Intercept)|  
+ []
+
+
+Overfull \hbox (4.57129pt too wide) in paragraph at lines 126--126
+[]|\T1/lmr/m/n/10 (Intercept)|  
+ []
+
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 133.
+[1
 
 {c:/Users/miked/AppData/Roaming/TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdfte
-x.map} <./06_images/me-glasses.jpg>]
-LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 1
-61.
-(c:/Users/miked/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/ts1lmr.fd
-File: ts1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
-)
-
-LaTeX Warning: Command \textmu invalid in math mode on input line 176.
-
-
-LaTeX Warning: Command \textmu invalid in math mode on input line 176.
-
-[2] [3]
-<C:/Users/miked/OneDrive/Statistics/R/Projects/nuiphao/2014-revisit-panelcompar
-ison/05_fig_output/allStreamsPreModelling.pdf, id=112, 722.7pt x 578.16pt>
-File: C:/Users/miked/OneDrive/Statistics/R/Projects/nuiphao/2014-revisit-panelc
-omparison/05_fig_output/allStreamsPreModelling.pdf Graphic file (type pdf)
-<use C:/Users/miked/OneDrive/Statistics/R/Projects/nuiphao/2014-revisit-panelco
-mparison/05_fig_output/allStreamsPreModelling.pdf>
-Package pdftex.def Info: C:/Users/miked/OneDrive/Statistics/R/Projects/nuiphao/
-2014-revisit-panelcomparison/05_fig_output/allStreamsPreModelling.pdf  used on 
-input line 312.
-(pdftex.def)             Requested size: 234.87471pt x 187.89977pt.
-<C:/Users/miked/OneDrive/Statistics/R/Projects/nuiphao/2014-revisit-panelcompar
-ison/05_fig_output/allStreamsCummulativePreModelling.pdf, id=113, 722.7pt x 578
-.16pt>
-File: C:/Users/miked/OneDrive/Statistics/R/Projects/nuiphao/2014-revisit-panelc
-omparison/05_fig_output/allStreamsCummulativePreModelling.pdf Graphic file (typ
-e pdf)
-<use C:/Users/miked/OneDrive/Statistics/R/Projects/nuiphao/2014-revisit-panelco
-mparison/05_fig_output/allStreamsCummulativePreModelling.pdf>
-Package pdftex.def Info: C:/Users/miked/OneDrive/Statistics/R/Projects/nuiphao/
-2014-revisit-panelcomparison/05_fig_output/allStreamsCummulativePreModelling.pd
-f  used on input line 321.
-(pdftex.def)             Requested size: 281.85185pt x 225.48149pt.
-<C:/Users/miked/OneDrive/Statistics/R/Projects/nuiphao/2014-revisit-panelcompar
-ison/05_fig_output/RRModelled.pdf, id=114, 722.7pt x 578.16pt>
-File: C:/Users/miked/OneDrive/Statistics/R/Projects/nuiphao/2014-revisit-panelc
-omparison/05_fig_output/RRModelled.pdf Graphic file (type pdf)
-<use C:/Users/miked/OneDrive/Statistics/R/Projects/nuiphao/2014-revisit-panelco
-mparison/05_fig_output/RRModelled.pdf>
-Package pdftex.def Info: C:/Users/miked/OneDrive/Statistics/R/Projects/nuiphao/
-2014-revisit-panelcomparison/05_fig_output/RRModelled.pdf  used on input line 3
-30.
-(pdftex.def)             Requested size: 281.85185pt x 225.48149pt.
-<C:/Users/miked/OneDrive/Statistics/R/Projects/nuiphao/2014-revisit-panelcompar
-ison/05_fig_output/GGSModelled.pdf, id=115, 722.7pt x 578.16pt>
-File: C:/Users/miked/OneDrive/Statistics/R/Projects/nuiphao/2014-revisit-panelc
-omparison/05_fig_output/GGSModelled.pdf Graphic file (type pdf)
-<use C:/Users/miked/OneDrive/Statistics/R/Projects/nuiphao/2014-revisit-panelco
-mparison/05_fig_output/GGSModelled.pdf>
-Package pdftex.def Info: C:/Users/miked/OneDrive/Statistics/R/Projects/nuiphao/
-2014-revisit-panelcomparison/05_fig_output/GGSModelled.pdf  used on input line 
-330.
-(pdftex.def)             Requested size: 281.85185pt x 225.48149pt.
-[4] [5pdfTeX warning (ext4): destination with the same identifier (name{figure.
-1}) has been already used, duplicate ignored
-
-\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
-                                                  \fi \fi 
-l.365 
-      pdfTeX warning (ext4): destination with the same identifier (name{figure.
-2}) has been already used, duplicate ignored
-
-\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
-                                                  \fi \fi 
-l.365 
-       <c:/Users/miked/OneDrive/Statistics/R/Projects/nuiphao/2014-revisit-pane
-lcomparison/05_fig_output/allStreamsPreModelling.pdf> <c:/Users/miked/OneDrive/
-Statistics/R/Projects/nuiphao/2014-revisit-panelcomparison/05_fig_output/allStr
-eamsCummulativePreModelling.pdf>] [6pdfTeX warning (ext4): destination with the
- same identifier (name{figure.3}) has been already used, duplicate ignored
-
-\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
-                                                  \fi \fi 
-l.365 
-       <c:/Users/miked/OneDrive/Statistics/R/Projects/nuiphao/2014-revisit-pane
-lcomparison/05_fig_output/RRModelled.pdf> <c:/Users/miked/OneDrive/Statistics/R
-/Projects/nuiphao/2014-revisit-panelcomparison/05_fig_output/GGSModelled.pdf>]
-Overfull \hbox (3.14244pt too wide) in paragraph at lines 405--405
- []|\T1/lmr/m/n/10 adj.R2|
- []
-
-
-Overfull \hbox (5.22614pt too wide) in paragraph at lines 405--405
- []|\T1/lmr/m/n/10 p.value|
- []
-
-
-Overfull \hbox (4.00372pt too wide) in paragraph at lines 407--407
-[]|\T1/lmr/m/n/10 Feed13MeanPct|  
- []
-
-
-Overfull \hbox (4.00372pt too wide) in paragraph at lines 408--408
-[]|\T1/lmr/m/n/10 Feed14MeanPct|  
- []
-
-
-Overfull \hbox (3.14244pt too wide) in paragraph at lines 421--421
- []|\T1/lmr/m/n/10 adj.R2|
- []
-
-
-Overfull \hbox (5.22614pt too wide) in paragraph at lines 421--421
- []|\T1/lmr/m/n/10 p.value|
- []
-
-
-Overfull \hbox (4.00372pt too wide) in paragraph at lines 423--423
-[]|\T1/lmr/m/n/10 Feed13MeanPct|  
- []
-
-
-Overfull \hbox (1.61519pt too wide) in paragraph at lines 423--423
- []|\T1/lmr/m/n/10 0e+00|
- []
-
-
-Overfull \hbox (4.00372pt too wide) in paragraph at lines 424--424
-[]|\T1/lmr/m/n/10 Feed14MeanPct|  
- []
-
-
-Overfull \hbox (1.61519pt too wide) in paragraph at lines 424--424
- []|\T1/lmr/m/n/10 0e+00|
- []
-
-
-Overfull \hbox (1.61519pt too wide) in paragraph at lines 425--425
- []|\T1/lmr/m/n/10 0e+00|
- []
-
-
-Overfull \hbox (1.61519pt too wide) in paragraph at lines 426--426
- []|\T1/lmr/m/n/10 0e+00|
- []
-
-
-Overfull \hbox (1.61519pt too wide) in paragraph at lines 429--429
- []|\T1/lmr/m/n/10 0e+00|
- []
-
-
-Overfull \hbox (4.57129pt too wide) in paragraph at lines 447--447
-[]|\T1/lmr/m/n/10 (Intercept)|  
- []
-
-
-Overfull \hbox (4.57129pt too wide) in paragraph at lines 449--449
-[]|\T1/lmr/m/n/10 (Intercept)|  
- []
-
-
-Overfull \hbox (4.57129pt too wide) in paragraph at lines 451--451
-[]|\T1/lmr/m/n/10 (Intercept)|  
- []
-
-
-Overfull \hbox (4.57129pt too wide) in paragraph at lines 454--454
-[]|\T1/lmr/m/n/10 (Intercept)|  
- []
-
-
-Overfull \hbox (4.57129pt too wide) in paragraph at lines 456--456
-[]|\T1/lmr/m/n/10 (Intercept)|  
- []
-
-
-Overfull \hbox (4.57129pt too wide) in paragraph at lines 459--459
-[]|\T1/lmr/m/n/10 (Intercept)|  
- []
-
-
-Overfull \hbox (4.57129pt too wide) in paragraph at lines 472--472
-[]|\T1/lmr/m/n/10 (Intercept)|  
- []
-
-
-Overfull \hbox (4.57129pt too wide) in paragraph at lines 474--474
-[]|\T1/lmr/m/n/10 (Intercept)|  
- []
-
-
-Overfull \hbox (4.57129pt too wide) in paragraph at lines 476--476
-[]|\T1/lmr/m/n/10 (Intercept)|  
- []
-
-
-Overfull \hbox (4.57129pt too wide) in paragraph at lines 479--479
-[]|\T1/lmr/m/n/10 (Intercept)|  
- []
-
-
-Overfull \hbox (4.57129pt too wide) in paragraph at lines 481--481
-[]|\T1/lmr/m/n/10 (Intercept)|  
- []
-
-
-Overfull \hbox (4.57129pt too wide) in paragraph at lines 484--484
-[]|\T1/lmr/m/n/10 (Intercept)|  
- []
-
-[7pdfTeX warning (ext4): destination with the same identifier (name{table.1}) h
-as been already used, duplicate ignored
-
-\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
-                                                  \fi \fi 
-l.522 
-      pdfTeX warning (ext4): destination with the same identifier (name{table.2
+x.map}pdfTeX warning (ext4): destination with the same identifier (name{table.1
 }) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.522 
-      ] [8pdfTeX warning (ext4): destination with the same identifier (name{tab
-le.3}) has been already used, duplicate ignored
+l.133 \end{document}
+                    pdfTeX warning (ext4): destination with the same identifier
+ (name{table.2}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.563 ...) = exp\left[-(\frac{d}{l})^{m} \right]\]
-                                                  pdfTeX warning (ext4): destin
-ation with the same identifier (name{table.4}) has been already used, duplicate
- ignored
+l.133 \end{document}
+                    ]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 133.
+(./tableCoef2.aux)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 133.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 133.
 
-\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
-                                                  \fi \fi 
-l.563 ...) = exp\left[-(\frac{d}{l})^{m} \right]\]
-                                                  ]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 594.
-[9]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 594.
-(./base.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 594.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 594.
-Package rerunfilecheck Info: File `base.out' has not changed.
-(rerunfilecheck)             Checksum: 8A9B6E17FC3188783D4EA0A2D2C8519B;2048.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 594.
+Package rerunfilecheck Warning: File `tableCoef2.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `tableCoef2.out':
+(rerunfilecheck)             Before: <no file>
+(rerunfilecheck)             After:  D41D8CD98F00B204E9800998ECF8427E;0.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 133.
  ) 
 Here is how much of TeX's memory you used:
- 12095 strings out of 482913
- 176998 string characters out of 5957672
- 439825 words of memory out of 5000000
- 27063 multiletter control sequences out of 15000+600000
- 584386 words of font info for 67 fonts, out of 8000000 for 9000
+ 11848 strings out of 482913
+ 170511 string characters out of 5957672
+ 426632 words of memory out of 5000000
+ 26901 multiletter control sequences out of 15000+600000
+ 547689 words of font info for 42 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 34i,15n,37p,445b,391s stack positions out of 5000i,500n,10000p,200000b,80000s
-{c:/Users/miked/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-math
-it.enc}{c:/Users/miked/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm
--rm.enc}{c:/Users/miked/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/l
-m-ec.enc}{c:/Users/miked/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/
-lm-mathex.enc}{c:/Users/miked/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvip
-s/lm/lm-ts1.enc}{c:/Users/miked/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dv
-ips/lm/lm-mathsy.enc}<c:/Users/miked/AppData/Roaming/TinyTeX/texmf-dist/fonts/t
-ype1/public/lm/lmbx10.pfb><c:/Users/miked/AppData/Roaming/TinyTeX/texmf-dist/fo
-nts/type1/public/lm/lmbx12.pfb><c:/Users/miked/AppData/Roaming/TinyTeX/texmf-di
-st/fonts/type1/public/lm/lmex10.pfb><c:/Users/miked/AppData/Roaming/TinyTeX/tex
-mf-dist/fonts/type1/public/lm/lmmi10.pfb><c:/Users/miked/AppData/Roaming/TinyTe
-X/texmf-dist/fonts/type1/public/lm/lmmi5.pfb><c:/Users/miked/AppData/Roaming/Ti
-nyTeX/texmf-dist/fonts/type1/public/lm/lmmi7.pfb><c:/Users/miked/AppData/Roamin
-g/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr10.pfb><c:/Users/miked/AppData/Ro
-aming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr12.pfb><c:/Users/miked/AppDat
-a/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr17.pfb><c:/Users/miked/Ap
-pData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr5.pfb><c:/Users/miked
-/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr7.pfb><c:/Users/mi
-ked/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy10.pfb><c:/Use
-rs/miked/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtt10.pfb>
-Output written on base.pdf (9 pages, 288326 bytes).
+ 34i,15n,37p,277b,388s stack positions out of 5000i,500n,10000p,200000b,80000s
+{c:/Users/miked/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ec.e
+nc}<c:/Users/miked/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr
+10.pfb>
+Output written on tableCoef2.pdf (1 page, 31525 bytes).
 PDF statistics:
- 250 PDF objects out of 1000 (max. 8388607)
- 214 compressed objects within 3 object streams
- 53 named destinations out of 1000 (max. 500000)
- 162 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 20 PDF objects out of 1000 (max. 8388607)
+ 15 compressed objects within 1 object stream
+ 4 named destinations out of 1000 (max. 500000)
+ 1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

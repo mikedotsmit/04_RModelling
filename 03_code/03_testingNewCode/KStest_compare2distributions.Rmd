@@ -1,0 +1,54 @@
+
+Comparison of two distribtions
+
+the k-s test returns a D statistic and a p-value corresponding to the D statistic. 
+The D statistic is the absolute max distance (supremum) between the CDFs of the two samples. 
+The closer this number is to 0 the more likely it is that the two samples were drawn from the same distribution.
+
+
+Feed vs Feed
+```{r}
+RawPSD1 <- read_csv(here("03_code/01_code-output","RawPSD.csv"))
+```
+
+
+```{r}
+ks.test(cumsum(RawPSD1$Feed13MeanPct), cumsum(RawPSD1$Feed14MeanPct))
+
+```
+
+OS vs OS
+```{r}
+ks.test(cumsum(RawPSD1$OS13MeanPct), cumsum(RawPSD1$OS14MeanPct))
+```
+
+US vs US
+```{r}
+ks.test(cumsum(RawPSD1$US13MeanPct), cumsum(RawPSD1$US14MeanPct))
+```
+SC13
+Feed Vs OS
+```{r}
+ks.test(cumsum(RawPSD1$Feed13MeanPct), cumsum(RawPSD1$OS13MeanPct))
+```
+
+SC14
+Feed Vs OS
+```{r}
+ks.test(cumsum(RawPSD1$Feed14MeanPct), cumsum(RawPSD1$OS14MeanPct))
+```
+comparison between feed vs OS for that of sc13 vs sc14 looks wrong..they are exactly the same... when compared to the OS vs US results
+
+
+
+SC13
+OS Vs US
+```{r}
+ks.test(cumsum(RawPSD1$OS13MeanPct), cumsum(RawPSD1$US13MeanPct))
+```
+
+SC14
+OS Vs US
+```{r}
+ks.test(cumsum(RawPSD1$OS14MeanPct), cumsum(RawPSD1$US14MeanPct))
+```
