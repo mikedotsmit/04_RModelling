@@ -1,0 +1,53 @@
+
+
+
+
+predicting the fraction of material that will pass a certain screen size:
+```{r}
+#https://stackoverflow.com/questions/52331501/using-predict-function-for-new-data-along-with-tidyverse
+
+#Small constant to avoid log of zero
+c <- 1e-12
+# the screen size we want to predict at is 250 um
+Apperture <- data.frame(sieve = c(250))
+
+library(tidyverse)
+
+modelOutput <- longCumsumDF %>%
+  group_by(stream) %>%
+  nest() %>%
+ 
+  mutate(model1  = purrr::map(.x = data, .f = ~ lm(log(cumpass) ~ log(sieve), data = .))) %>%
+  mutate(model2  = purrr::map(.x = data, .f = ~ lm(log(-log(1-cumpass+c)) ~ log(sieve), data = .))) %>%
+ #do the prediction at the required (declared) screen size
+  mutate(logPred = purrr::map(.x = model1, ~ predict(., Apperture))) %>%
+  mutate(loglogPred = purrr::map(.x = model2, ~ predict(., Apperture))) %>%
+ 
+  select(stream,loglogPred, logPred,) %>%
+  unnest() %>%   #%>% cbind(Apperture = Apperture) 
+  
+  mutate(PredGGS = exp(logPred)) %>% 
+  mutate(PredRR = 1-exp(-exp(loglogPred))) %>% 
+  
+  select(stream,PredRR, PredGGS, loglogPred, logPred, ) 
+
+write.csv(modelOutput,here::here("03_code/01_code-output","modelOutput.csv"),row.names = FALSE)
+
+
+modelOutput
+#yay it works !!!
+```
+
+```{r echo=FALSE, results='asis'}
+
+
+tblpred <- knitr::kable(modelOutput,
+                        "latex",caption = "Modelled cummulative passing 250um" ,
+                        escape = F,booktabs = T, 
+                        digits = c(0,2,2,2,2)) %>% 
+  column_spec(1, width = "3cm") %>% 
+  column_spec(2:5, width = "1.5cm") %>% 
+  kable_styling(c("striped", "bordered")) 
+
+```
+

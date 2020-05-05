@@ -1,0 +1,236 @@
+---
+title: "Grinding screen panel comparrison"
+author: "Michael C. Smit"
+date: "2014"
+output: html_document
+
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning=FALSE,message=FALSE)
+knitr::opts_chunk$set(fig.align="center")
+
+
+
+# *Load R packages used in this code:*
+#install.packages("tinytex")
+# install.packages("ssh") #Secure Shell (SSH) Client for R
+#tinytex::latexmk() #this has smt to with pdf latex 
+
+
+library(conflicted)
+library(markdown)
+library(tidyverse)
+library(readxl)
+library(modelr)
+library(broom)
+library(reshape)
+library(readr)
+library(knitr)
+library(kableExtra)
+library(magrittr)
+library(tinytex)
+#devtools::install_github("username/packagename")
+knitr.table.format = "latex" #global option for tables. can still set any in each kable function.
+#excellent for LaTeX equaitons:(probable keep this in bib)
+#http://visualmatheditor.equatheque.net/VisualMathEditor.html
+```
+   
+bib refererence: 
+* http://www.chem.mtu.edu/chem_eng/faculty/kawatra/CM2200_2009_HW_3_sizedist.pdf
+
+* https://www.researchgate.net/publication/288048837_Particle_size_distribution_of_a_waste_sand_from_a_waste_water_treatment_plant_with_use_of_Rosin-Rammler_and_Gates-Gaudin-Schumann_mathematical_model
+
+# Summary
+
+Ten $250 \mu M$ screen aperture panels were installed on Grinding Screen `321-SC-014` to compare efficiency with the standard $230 \mu M$ apperture panels. No statistically significant difference in overall efficiency and fines recovery were observed between the two types of panels. The effect on the `P80` of the underflow was recognized to be important but due to lack of sampling points this could not be safely assessed.
+
+# Introduction
+
+Large amounts of fines ($-38 \mu M$) are generated and recirculated in the grinding circuit, resulting in overgrinding of the SCheelite contributing to loss of tungsten in the downstream gravity circuit.
+The Year to date average of $-38 \mu M$ material is $30 %$ by weight of grinding thickener underflow solids.
+Derrick provided $250 \mu M$ aperture (0.25 MTQ) screen trial panels to compare efficiency with the currently installed $230 \mu M$ aperture (`0.23 MT`) panels. 
+The calculated open area of the 0.23 MT screen panels is 36.88 % while that of 0.25 MTQ panels is 37.12 %. Note that `Q` in the [anel code `MTQ` indicates the **modifier** added to the urethane to make it more resistant to degradation but essentially `0.23 MT` and `0.23 MTQ` are geometrically similar.  This report presents the results of two screen surveys conducted after the installation of the trial panels. 
+
+# Method
+
+## Design of experiment
+Include here...
+
+formula used by OEM for efficiency calcultions. Not sure if they modeled the data (what model).
+
+
+
+
+
+## Preparation (maybe include in design of experiment?)
+
+Grinding Screens `321-SC-013` and `321-SC-014` were chosen for the comparison test. Ten `0.25 MTQ` panels were installed in `321-SC-014` on the $30^{th}$ of September.  
+
+`321-SC-013` was also fitted with relatively new `0.23 MT` screen panels. The oldest panels were installed 9th September. 
+
+
+
+## Sampling
+Survey 1 was conducted while `Mill 2` was offline due to an issue with the mill liners. Survey 2 conducted with two secondary mills online but with higher than usual recirculating load. 
+During the surveys, feed to the mills and recirculating load were steady for at least an hour.
+
+Five (`5`) personnel were involved in obtaining the survey samples during each survey:
+
+
+* One person took samples at the Primary Distributor, `DI-028`, that feeds the seven screen sets. 
+
+* Four personnel took overflow cuts from the individual screen decks' lips using deep and wide rimmed plastic containers. care was given to cut streams entirely at constant speeds while ensuring no container overflow or spillage. Samples were simultaneously taken from both sides of individual screen decks by two personnel and then individual deck's samples were combined. 
+
+Two sample cuts were taken from the feeds of `321-SC-013` and `321-SC-014`, as well as from the individual deck lip overflows. 
+
+
+Screen cluster feed and individual deck overflow samples were weighed, wet screened to get $-38 µm$ fractions, dried in the oven and sieved to determine the weight of each size fraction. 
+
+
+The following screens sizes were used ($\mu M$) ```print(sieve)```
+
+Each stream sample's cummulative mass distribution function was modelled with two commonly used models in practise represent a vast variety of communution circuit products very well, namely the:
+
+**Rosin-Rammler distribution** and  
+**Gauss-Gaudin-Schumann distribution**.
+
+The model that best fit each stream was  selected with the aid of statistics. The modeled distribution functions ennabled more accurate interpolation of cumulative mass percentages.
+
+Interpolation of points following the modelled distributions could then be used to determine screen efficiency and subsequent efficiency comparison between the screens fitted with the `0.23 MT` and the `0.24 MTQ` panels.
+
+insert table
+
+
+
+## Model fitting
+
+Modeling of particle size distributions are statical procedures where distributions with known distribution functions are used to compare or model real life distribution to.
+
+The two most commmonly used distributions in Geology and Mineral Processing and specifically comminution circuits are the Roslin-Rammler and the Gates-Gaudin-Schumann distributions.
+
+Both models were used  to model all PSD screening data to, and the subsequent best fit model was selected in each case. Model selection was determined by comparing each PSD's transformed linear model's determinant ($R^2$).
+Interpolation betweeen measured sizing points is conducted by the back-transformation of the model-fitted points along the respective model's distribution function. 
+
+
+
+### Rosin Rammler (RR) Model:
+The RR model distribution function has been used to describe the particle size distributions of various minerals, powders and liquids of various types and sizes. The function is particularly suited to represent those produced by grinding, milling, and crushing operations. The general expression of the RR model is:
+
+\begin{equation}
+
+  F\left(d\right) = exp\left[-(\frac{d}{l})^{m} \right]
+
+  \label{eq : RR}
+\end{equation}
+
+
+
+
+where:  
+$F(d)$ = distribution function (cum. passing)  
+$d$ = particle size [mm]  
+Parameters $\bar{d}$ and $m$ are adjustable parameters characteristic of the distribution.   
+$\bar{d}$ = scale paramater (mean particle size [mm]) and  = $\exp\left({-\frac{intercept}{slope}}\right)$.    
+$m$ = slope paramater (measure of the spread of particle sizes).  
+
+
+
+The RR transformation is achieved by taking the natural log twice and simplified as:
+$$\ln\left\{-\ln\left[1-F(d)\right] \right\} = m\times \ln d - m\times \ln \bar{d} $$
+Note that the RR distribution transformation is conducted on the cummulative retained distribution (thus the $\left[1-F(d)\right]$.)
+
+If a distribution plots a straight line after the above RR transformation, then the distrubution can be represented by the RR distribution function. This will alllow percentile interpolation according to the distribution and not a straight line between two points obatained from screening. 
+
+
+$$ Y=mX + C$$
+
+
+$$\underbrace{\ln\left\{-\ln\left[1-F(d)\right] \right\}}_\textrm{Y} =  \underbrace{m}_\textrm{slope}\times \underbrace{\ln d}_\textrm{X}+\underbrace{ \left(-m\times \ln \bar{d}\right)}_\textrm{C} $$
+
+#### Back-transformation
+(This is really the reason why we're doing the model fitting; so that we can better estimate the size at which a certain specified mass fraction will pass). 
+The back-transform is then conducted to determine the required percentile values:
+
+$$ x = \bar{d} \left(- \ln \left(1-Y \right)    \right)^\frac{1}{m}$$
+$$size = scale parameter\times (-\ln (1-percentile))^{1/slope parameter}$$ ,
+where the scale_parameter; is a function of the slope and intercept of the transf
+ormed RR model fit, as follows: $$scale parameter = exp(-\frac{intercept}{slope} )$$
+
+
+
+
+### Gates-Gaudin-Schumann (GGS) Model:
+
+The Gates-Gaudin-Schumann plot is a graph of **cumulative % passing versus nominal
+sieve size**, with both the $X$ and $Y$ axes being logarithmic plots. In this type of plot, most of the data points (except for the two or three coarsest sizes measured) should lie nearly in a straight line.
+
+$$y = F(x) = \left(\frac{x}{k}\right) ^n$$
+or simmilarly:
+The above formula can be rewritten as:
+$x = k \times y ^ \frac{1}{n}$  
+
+
+where:  
+$y$ = $F \left(x\right)$ = cumulative undersize distribution function.  
+$x$ = particle size,  
+$k$ = maximum particle size of the transformed straight line corresponding to $100%$ cum. passing.
+
+
+Log transformation of the distribution yields:
+
+$$\ln y = n \ln x - n \ln k$$
+
+Applying this transformation to the measured observed distribution data points will yield near straight lines if the data fits the model.
+
+
+
+
+If the size distribution of particles from a crushing or grinding operation does not
+approximate a straight line, it suggests that there may have been a problem with the data
+collection, or there is something unusual happening in the comminution process.
+The size modulus is a measure of how coarse the size distribution is, and the distribution
+modulus is a measure of how broad the size distribution is. Size modulus for a size
+distribution can be determined from a graph by extrapolating the straight-line portion up
+to 100% passing and finding the corresponding size value. The distribution modulus can
+be calculated by choosing two points in the linear portion of the graph, calculating the
+logs of the sizes and % passing values, and calculating the slope. 
+
+
+
+
+
+
+
+
+RR model fits the feed streams means (F13m and F14m) better (near straight line QQ fits) than the Oversize streams.
+
+# Model results
+
+```{r echo=FALSE}
+getwd()
+setwd("C:/Users/miked/OneDrive/Statistics/R/Projects/nuiphao/Grinding-screen-panel-comparison/2014")
+
+
+#above, we check and set the working directory again as i we want to use from an Rscript in the 'code' file within the working directory.
+#to use code from an external .R script, we note this in both the .RMD and .R:
+#
+```
+
+
+```{r, include=FALSE, cache=FALSE}
+knitr::read_chunk("C:/Users/miked/OneDrive/Statistics/R/Projects/nuiphao/Grinding-screen-panel-comparison/2014/code/screentest-19oct2014.R")
+```
+
+```{r, test-a, echo=FALSE}
+
+```
+
+
+```{r, coefprint2}
+```
+
+
+
+

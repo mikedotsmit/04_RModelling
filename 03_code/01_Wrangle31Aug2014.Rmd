@@ -1,0 +1,153 @@
+This is the Starting point in this project.
+
+this file imports the raw data and wrangle to means of the repeated tests.
+
++ import  
++ wrangle
++ exports preocessed data to foder ~03code_output for use in futher processing / analasys.
+
+
+This Code imports raw data for a specific test conducted.
+In this case:
+
++ the test includes two industrial screens
++ each screen has five decks with the same apperture that receive the 'same' feed.
+
+This file determines the averages of the five decks for use in modeling.
+The filename (of this file) denotes the specific test which's code is represented here.
+
+The outputs from this file is used within or drawn into the various chapters of the analasys and subsequently into the final file (base.Rmd) for conversion to PDF (currently not HTML (my code)).
+outputs are exported or written to code/01_code-outputs.
+
+```{r, include = FALSE}
+#Package::Function "here::here" keeps file paths relative to the project folder:
+library("here")
+
+#attache rpackages from central location:
+source(here::here("02_rpackages",'projectpackages.R'))
+
+#various options that controle chunk and graphics:
+
+knitr::opts_chunk$set(echo = FALSE, warning=FALSE,message=FALSE)
+knitr::opts_chunk$set(fig.align="center") #default align for figures
+#devtools::install_github("username/packagename")
+knitr.table.format = "latex" #global option for tables. can still set any in each kable function.
+#excellent for LaTeX equaitons:(probable keep this in bib)
+#http://visualmatheditor.equatheque.net/VisualMathEditor.html
+```
+
+```{r}
+#pull in the data, try to give descriptive name: in this case 'gramdata'.
+
+gramdata <- read_csv(here("01_data/02_preparedData", "test31Aug2014csv.csv")) #read here to see more about "here::here" function (https://malco.io/2018/11/05/why-should-i-use-the-here-package-when-i-m-already-using-projects/)
+
+```
+
+```{r}
+
+#save imported data as a tibble..convenient type of data frame for further processing.
+gramdata <- as_tibble(gramdata)
+
+# each screen has 5 decks and here ill average these. "deck_0" is a sample taken from the distributor that feeds the screen and thus represents all 5 decks. in this excercise ill combine the distributor sample with th decks to compile a mean.
+
+# In this excercise ill focus on the means of the distributions.
+#separating x and y eases calculation steps 
+
+sieve <- gramdata %>% 
+  dplyr::select(1) %>% 
+  as_tibble(as.data.frame(.))
+#now to save the out put so it cab reused in the report:
+# there no confusion when i use the term "takeout" (like pizza) i.e. take from here to smw else.
+# simmilarlt, Im trying "BrinIn" on the other end (the child of the mother file where this code will be brought in .)
+##I should have a lis tin thie beginning  of this script detailing a list of these depencansies, so one can see at 1st glance the risk of changing code.
+##as well as (maybe) a key section detailing terms used for objects.
+```
+
+```{r}
+write.csv(sieve, here("03_code/01_code-output","sievesUsed.csv"),row.names = FALSE)
+
+#dependents / use in: methodSection.Rmd.
+```
+
+
+```{r}
+#excluding the sieve (first) column (x axis).
+gramdata1 <- gramdata %>%
+  dplyr::select(-1) %>%   #dplyr::select(2:ncol(.)) %>%
+  as_tibble()
+
+#calculating %mass retained for all samples.
+
+pct <- gramdata1 %>% #mass percentage
+  mutate_all ( ~(./sum(.))) #mutate_all overwrites ("converts") original
+```
+
+
+```{r}
+#in this script, feed stream PSD results separated from that of Over and undersize.
+#calculate means in the same step with dplyr::select function.
+
+# Means of streams frequency distribution 
+
+
+# Two plant screen tested for comparison. Each plant screen has 5 decks.
+# In this test we'll average the results of the five decks. We can (and should) also have a look at the variability between the 5 decks to see if all results look plausible.
+#The two screen are called "screen13" and "screen14".
+#Results of screen13's feed samples are located in columns 1:6, thus we select columns 1:6 and calculate their means with the dplyr's mutate function.
+feed13 <- pct %>% 
+  dplyr::select(1:6) %>%   #check in the data which columns contain the data stream to be averaged.
+  mutate(Feed13MeanPct = rowMeans(.)) #mutate creates the new colu,m with mean mass percent data.
+
+#pull this mean column out as a vector to use later:
+Feed13MeanPct <- feed13$Feed13MeanPct 
+
+#underpan from screen 13 only allowed for 1 sample to be taken and this sample represent all the decks and thus we rename it as the mean.
+US13MeanPct <- pct %>%  
+  dplyr::select(US13_0, "US13MeanPct" = "US13_0") 
+
+osize13 <- pct %>% 
+  dplyr::select(8:12) %>% 
+  mutate(OS13MeanPct=rowMeans(.))
+OS13MeanPct <- osize13$OS13MeanPct
+```
+
+```{r}
+#do same for screen 14
+
+feed14 <- pct %>% 
+  dplyr::select(13:18) %>%   #check in the data which columns contain the data stream to be averaged.
+  mutate(Feed14MeanPct = rowMeans(.)) #mutate creates the new colu,m with mean mass percent data.
+Feed14MeanPct <- feed14$Feed14MeanPct
+
+
+US14MeanPct <- pct %>%  
+  dplyr::select(US14_0, "US14MeanPct" = "US14_0") 
+
+osize14 <- pct %>% 
+  dplyr::select(20:24) %>% 
+  mutate(mean_pct = rowMeans(.)) 
+OS14MeanPct <- osize14$mean_pct
+```
+
+plotting raw_psd feed distribution to have a quick view if they are simmilar. if they are not (simmilar) then the expeririment or test will not not give conclusive results. as our aim is to test if one panel size is "signifficantly" better than another panels size.
+
+```{r }
+FeedRawPSD <- cbind(sieve, Feed13MeanPct, Feed14MeanPct) 
+OSRawPSD <- cbind(sieve, OS13MeanPct, OS14MeanPct)  
+USRawPSD <- cbind(sieve, US13MeanPct, US14MeanPct)
+
+RawPSD <- cbind(sieve, Feed13MeanPct, Feed14MeanPct,OS13MeanPct, OS14MeanPct,US13MeanPct, US14MeanPct)
+
+```
+
+
+
+```{r }
+write.csv(FeedRawPSD, here::here("03_code/01_code-output","FeedRawPSD.csv"),row.names = FALSE)
+write.csv(OSRawPSD, here::here("03_code/01_code-output","OSRawPSD.csv"),row.names = FALSE)
+write.csv(USRawPSD, here::here("03_code/01_code-output","USRawPSD.csv"),row.names = FALSE)
+
+
+write.csv(RawPSD, here::here("03_code/01_code-output","RawPSD.csv"),row.names = FALSE)
+
+```

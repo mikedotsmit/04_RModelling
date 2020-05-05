@@ -1,0 +1,25 @@
+packages
+this is the central place where this project will attach packages from.
+allpackeges are accumulated here (manualy).
+
+add new packes in the list below names "mypackages" then
+run the chunck code. the chunk will write a csv file that the other files contained within the prject folder will read and attach. 
+
+```{r mypackage}
+
+library(easypackages)
+library(here)
+
+mypackages <- c("patchwork","tidyverse","kableExtra","ggplot2","here","conflicted","markdown","tinytex","tidyverse","readxl","modelr","broom","reshape","readr","knitr","kableExtra","magrittr","qwraps2","xtable","gridExtra","markdown")
+
+packages(mypackages)
+```
+
+
+Run the following code to update the package list after new packages have been added.
+
+```{r}
+
+write.table(mypackages, file = here::here("rpackages","mypackages.txt"), sep=",", quote = FALSE)
+
+```

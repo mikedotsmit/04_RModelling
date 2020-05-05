@@ -1,0 +1,87 @@
+
+
+
+
+predicting the fraction of material that will pass a certain screen size:
+
+Screen 13 fitted with 230um pannels
+Screen 14 fitted with 250um pannels
+
+So the prediction below is split up and done once for each screen 13 and 14 with corresponding pannelsize.
+
+
+
+```{r, include = FALSE}
+library("here")
+source(here::here("02_rpackages",'projectpackages.R'))
+
+knitr::opts_chunk$set(echo = FALSE, warning=FALSE,message=FALSE)
+knitr::opts_chunk$set(fig.align="center") #default align for figures
+knitr.table.format = "latex" #global option for tables. can still set any in each kable function.
+```
+
+```{r}
+#https://stackoverflow.com/questions/52331501/using-predict-function-for-new-data-along-with-tidyverse
+
+#Small constant to avoid log of zero
+c <- 1e-12
+# the screen size we want to predict at is 250 um
+#Input Data
+Apperture1 <- data.frame(sieve = c(230))
+Apperture2 <- data.frame(sieve = c(250))
+
+#import data saved from "Modeling" file.
+longCumsumDF1 <- read.csv(here::here("03_code/01_code-output","longCumsumDF.csv"))
+
+modelOutput <- longCumsumDF1 %>%
+  group_by(stream) %>%
+  nest() %>%
+ #apply (with "Purrrr" package) the models accross all the grouped (by stream) nested (into lists) data.
+  mutate(model1  = purrr::map(.x = data, .f = ~ lm(log(cumpass) ~ log(sieve), data = .))) %>%
+  mutate(model2  = purrr::map(.x = data, .f = ~ lm(log(-log(1-cumpass+c)) ~ log(sieve), data = .))) 
+ #do the prediction at the required (declared) screen size
+```
+
+
+
+```{r}
+
+#use combined modeloutput and filter on each screen's data separately.
+Screen13modelOutput <- modelOutput %>%
+  dplyr::filter(stringr::str_detect(stream,'13')) %>%
+
+mutate(logPred = purrr::map(.x = model1, ~ predict(., Apperture1))) %>%
+  mutate(loglogPred = purrr::map(.x = model2, ~ predict(., Apperture1))) %>%
+ 
+  select(stream,loglogPred, logPred,) %>%
+  unnest() %>%   #%>% cbind(Apperture = Apperture) 
+  
+  mutate(PredGGS = exp(logPred)) %>% 
+  mutate(PredRR = 1-exp(-exp(loglogPred))) %>% 
+  
+  select(stream,PredRR, PredGGS, loglogPred, logPred, ) 
+
+write.csv(Screen13modelOutput,here::here("03_code/01_code-output","Screen13modelOutput.csv"),row.names = FALSE)
+
+```
+
+```{r}
+Screen14modelOutput <- modelOutput %>%
+  dplyr::filter(stringr::str_detect(stream,'14')) %>%
+
+mutate(logPred = purrr::map(.x = model1, ~ predict(., Apperture2))) %>%
+  mutate(loglogPred = purrr::map(.x = model2, ~ predict(., Apperture2))) %>%
+ 
+  select(stream,loglogPred, logPred,) %>%
+  unnest() %>%   
+  
+  mutate(PredGGS = exp(logPred)) %>% 
+  mutate(PredRR = 1-exp(-exp(loglogPred))) %>% 
+  
+  select(stream,PredRR, PredGGS, loglogPred, logPred, ) 
+
+write.csv(Screen14modelOutput,here::here("03_code/01_code-output","Screen14modelOutput.csv"),row.names = FALSE)
+```
+
+
+

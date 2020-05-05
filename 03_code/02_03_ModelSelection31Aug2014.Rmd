@@ -1,0 +1,306 @@
+# Model Section
+
+Automating the selection of the best model for each stream
+create a list of model outputs (adjR2) for every stream,
+thus make a frame for every stream that contains a list of the model outputs, then rank or Order and select (slice) the best.
+
+Preparing for model selection by stream:
+it will be more efficient to list the model outputs within each stream.
+followed  group and nest, then arrange so the best performining model is the first (on top). then slice the best for use in the efficiency determination part.
+
+
+
+
+```{r}
+#draw in data required for modelsection.
+#data generated in precurser file: "Modeling
+Screen13modelOutput <- read.csv(here::here("03_code/01_code-output","Screen13modelOutput.csv"))
+Screen14modelOutput <- read.csv(here::here("03_code/01_code-output","Screen14modelOutput.csv"))
+
+RegAll <- readRDS(here::here("03_code/01_code-output","Reg.Rdata"))
+
+
+
+```
+
+```{r}
+#remove the log predictions
+
+Screen13modelOutput <- Screen13modelOutput %>% 
+  dplyr::select(stream,PredRR,PredGGS)
+
+Screen14modelOutput <- Screen14modelOutput %>% 
+  dplyr::select(stream,PredRR,PredGGS)
+```
+
+
+
+```{r}
+glanced_Reg_allModels  <- RegAll %>% 
+  dplyr::select (stream ,glanced_RR, glanced_GGS)
+#joins model selection criteria and the predictions that will be used once the model is selected.
+
+
+glancedReg13 <- RegAll %>% 
+  dplyr::filter(stringr::str_detect(stream,'13')) %>% 
+  dplyr::select (stream ,glanced_RR, glanced_GGS)
+
+glancedReg14 <- RegAll %>% 
+  dplyr::filter(stringr::str_detect(stream,'13')) %>% 
+  dplyr::select (stream ,glanced_RR, glanced_GGS)
+
+```
+
+model1 <- RR
+model2 <- GGS
+
+```{r}
+modellist <- c("RR","GGS") # vector of the models will improve automation (next time do this earlier on in the project)
+```
+
+
+There are three streams per screen stack, thus best model selection must occur 3 times.
+Starting with SCreen13 Feed:
+
+
+#########################################
+# SCREEN 13
+## FEED
+##########################################
+```{r}
+F13Pred <- Screen13modelOutput %>% 
+  dplyr::filter(stringr::str_detect(stream,'Feed')) %>% 
+  dplyr::select(-1) %>% #column
+  t() %>% 
+  as_tibble()%>% 
+  dplyr::rename("Predict" = V1) #i just chose "Preds" as abr. for Predictions. My code Currently only works with 1 screen size in the model selection automation code im writing here. There aremany packegaes that came save time here..more to read and select and implement.
+
+F13RRCoefD <- glancedReg13%>% 
+   ungroup() %>% 
+  dplyr::filter(stringr::str_detect(stream,'Feed')) %>%  
+    dplyr::select( glanced = glanced_RR)
+
+ F13GGSCoefD <- glancedReg13%>% 
+  ungroup() %>% 
+   dplyr::slice(1) %>% 
+   dplyr::select(glanced = glanced_GGS,)
+
+ #combine rows of all models. NOw all the models have the same col names, so i can add the prediction values in a new col.
+F13modelsArranged <-  rbind(F13RRCoefD,F13GGSCoefD) %>% 
+  unnest() %>% 
+  #rename rows and select those required:
+   mutate(model = modellist) %>% # "modellist" created above
+   mutate(Predict = F13Pred$Predict) %>% 
+   dplyr::select(model,Predict, r.squared, adj.r.squared, AIC) %>% 
+ #sort according to RSquared:
+  arrange(desc(adj.r.squared))
+
+#Best for Stream1
+
+BestF13 <- F13modelsArranged %>% 
+  dplyr::slice(1)
+
+write.csv(BestF13,here::here("03_code/01_code-output", "BestF13.csv"))
+```
+
+
+# SCREEN 13
+## OVERSIZE
+
+```{r}
+OS13Pred <- Screen13modelOutput %>% 
+  dplyr::filter(stringr::str_detect(stream,'OS')) %>% 
+  dplyr::select(-1) %>% #column
+  t() %>% 
+  as_tibble()%>% 
+  dplyr::rename("Predict" = V1) 
+
+OS13RRCoefD <- glancedReg13%>% 
+   ungroup() %>% 
+  dplyr::filter(stringr::str_detect(stream,'OS')) %>%  
+    dplyr::select( glanced = glanced_RR)
+
+ OS13GGSCoefD <- glancedReg13%>% 
+  ungroup() %>% 
+   dplyr::filter(stringr::str_detect(stream,'OS')) %>%
+   # dplyr::slice(3) %>% 
+   dplyr::select(glanced = glanced_GGS,)
+
+ #combine rows of all models. NOw all the models have the same col names, so i can add the prediction values in a new col.
+OS13modelsArranged <-  rbind(OS13RRCoefD,OS13GGSCoefD) %>% 
+  unnest() %>% 
+  #rename rows and select those required:
+   mutate(model = modellist) %>% # "modellist" created above
+   mutate(Predict = OS13Pred$Predict) %>% 
+   dplyr::select(model,Predict, r.squared, adj.r.squared, AIC) %>% 
+ #sort according to RSquared:
+  arrange(desc(adj.r.squared))
+
+#Best for Stream1
+
+BestOS13 <- OS13modelsArranged %>% 
+  dplyr::slice(1)
+
+write.csv(BestOS13,here::here("03_code/01_code-output", "BestOS13.csv"))
+
+```
+
+# SCREEN 13
+## UNDERSIZE
+
+```{r}
+US13Pred <- Screen13modelOutput %>% 
+  dplyr::filter(stringr::str_detect(stream,'US')) %>% 
+  dplyr::select(-1) %>% #column
+  t() %>% 
+  as_tibble()%>% 
+  dplyr::rename("Predict" = V1) 
+
+US13RRCoefD <- glancedReg13%>% 
+   ungroup() %>% 
+  dplyr::filter(stringr::str_detect(stream,'US')) %>%  
+    dplyr::select( glanced = glanced_RR)
+
+ US13GGSCoefD <- glancedReg13%>% 
+  ungroup() %>% 
+   dplyr::filter(stringr::str_detect(stream,'US')) %>%
+   # dplyr::slice(5) %>% 
+   dplyr::select(glanced = glanced_GGS,)
+
+ #combine rows of all models. NOw all the models have the same col names, so i can add the prediction values in a new col.
+US13modelsArranged <-  rbind(US13RRCoefD,US13GGSCoefD) %>% 
+  unnest() %>% 
+  #rename rows and select those required:
+   mutate(model = modellist) %>% # "modellist" created above
+   mutate(Predict = US13Pred$Predict) %>% 
+   dplyr::select(model,Predict, r.squared, adj.r.squared, AIC) %>% 
+ #sort according to RSquared:
+  arrange(desc(adj.r.squared))
+
+#Best for Stream1
+
+BestUS13 <- US13modelsArranged %>% 
+  dplyr::slice(1)
+
+write.csv(BestUS13,here::here("03_code/01_code-output", "BestUS13.csv"))
+
+```
+#########################################
+# SCREEN 14
+## FEED
+##########################################
+```{r}
+F14Pred <- Screen14modelOutput %>% 
+  dplyr::filter(stringr::str_detect(stream,'Feed')) %>% 
+  dplyr::select(-1) %>% #column
+  t() %>% 
+  as_tibble()%>% 
+  dplyr::rename("Predict" = V1) #i just chose "Preds" as abr. for Predictions. My code Currently only works with 1 screen size in the model selection automation code im writing here. There aremany packegaes that came save time here..more to read and select and implement.
+
+F14RRCoefD <- glancedReg14%>% 
+   ungroup() %>% 
+  dplyr::filter(stringr::str_detect(stream,'Feed')) %>%  
+    dplyr::select( glanced = glanced_RR)
+
+ F14GGSCoefD <- glancedReg14%>% 
+  ungroup() %>% 
+   dplyr::slice(1) %>% 
+   dplyr::select(glanced = glanced_GGS,)
+
+ #combine rows of all models. NOw all the models have the same col names, so i can add the prediction values in a new col.
+F14modelsArranged <-  rbind(F14RRCoefD,F14GGSCoefD) %>% 
+  unnest() %>% 
+  #rename rows and select those required:
+   mutate(model = modellist) %>% # "modellist" created above
+   mutate(Predict = F14Pred$Predict) %>% 
+   dplyr::select(model,Predict, r.squared, adj.r.squared, AIC) %>% 
+ #sort according to RSquared:
+  arrange(desc(adj.r.squared))
+
+#Best for Stream1
+
+BestF14 <- F14modelsArranged %>% 
+  dplyr::slice(1)
+
+
+```
+
+
+# SCREEN 14
+## OVERSIZE
+
+```{r}
+OS14Pred <- Screen14modelOutput %>% 
+  dplyr::filter(stringr::str_detect(stream,'OS')) %>% 
+  dplyr::select(-1) %>% #column
+  t() %>% 
+  as_tibble()%>% 
+  dplyr::rename("Predict" = V1) 
+
+OS14RRCoefD <- glancedReg14%>% 
+   ungroup() %>% 
+  dplyr::filter(stringr::str_detect(stream,'OS')) %>%  
+    dplyr::select( glanced = glanced_RR)
+
+ OS14GGSCoefD <- glancedReg14%>% 
+  ungroup() %>% 
+   dplyr::filter(stringr::str_detect(stream,'OS')) %>%
+   # dplyr::slice(3) %>% 
+   dplyr::select(glanced = glanced_GGS,)
+
+ #combine rows of all models. NOw all the models have the same col names, so i can add the prediction values in a new col.
+OS14modelsArranged <-  rbind(OS14RRCoefD,OS14GGSCoefD) %>% 
+  unnest() %>% 
+  #rename rows and select those required:
+   mutate(model = modellist) %>% # "modellist" created above
+   mutate(Predict = OS14Pred$Predict) %>% 
+   dplyr::select(model,Predict, r.squared, adj.r.squared, AIC) %>% 
+ #sort according to RSquared:
+  arrange(desc(adj.r.squared))
+
+#Best for Stream1
+
+BestOS14 <- OS14modelsArranged %>% 
+  dplyr::slice(1)
+```
+
+# SCREEN 14
+## UNDERSIZE
+
+```{r}
+US14Pred <- Screen14modelOutput %>% 
+  dplyr::filter(stringr::str_detect(stream,'US')) %>% 
+  dplyr::select(-1) %>% #column
+  t() %>% 
+  as_tibble()%>% 
+  dplyr::rename("Predict" = V1) 
+
+US14RRCoefD <- glancedReg14%>% 
+   ungroup() %>% 
+  dplyr::filter(stringr::str_detect(stream,'US')) %>%  
+    dplyr::select( glanced = glanced_RR)
+
+ US14GGSCoefD <- glancedReg14%>% 
+  ungroup() %>% 
+   dplyr::filter(stringr::str_detect(stream,'US')) %>%
+   # dplyr::slice(5) %>% 
+   dplyr::select(glanced = glanced_GGS,)
+
+ #combine rows of all models. NOw all the models have the same col names, so i can add the prediction values in a new col.
+US14modelsArranged <-  rbind(US14RRCoefD,US14GGSCoefD) %>% 
+  unnest() %>% 
+  #rename rows and select those required:
+   mutate(model = modellist) %>% # "modellist" created above
+   mutate(Predict = US14Pred$Predict) %>% 
+   dplyr::select(model,Predict, r.squared, adj.r.squared, AIC) %>% 
+ #sort according to RSquared:
+  arrange(desc(adj.r.squared))
+
+#Best for Stream1
+
+BestUS14 <- US14modelsArranged %>% 
+  dplyr::slice(1)
+
+
+```
+
