@@ -3,7 +3,7 @@ output:
   pdf_document: default
   html_document: default
 ---
-This file imports the means of the streams from the 5 decks on the each of the two screens in the plant,
+This file imports the means of the streams of the 5 decks from each of the two screens in the plant,
 Then applies (maps) the models over each stream.
 Most of PSD graphs are produced in this code. All charts are saved as immages for use in writeup (base.RMd)
 An output is produced that is used in the following section "Model Selection"
@@ -203,7 +203,7 @@ Reg <- longCumsumDF %>%
    #  mutate_if(is.numeric, list(~na_if(., abs(Inf))))
 ```
 ```{r}
-saveRDS(Reg, file = (here::here("03_code/01_code-output","Reg.Rdata")))
+saveRDS(Reg, file = (here::here("03_code/01_code-output","Reg.Rdata"))) #use saveRDS as im saving a more complex data group or immage.
 ```
 
 

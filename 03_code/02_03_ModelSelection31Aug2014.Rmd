@@ -6,7 +6,7 @@ thus make a frame for every stream that contains a list of the model outputs, th
 
 Preparing for model selection by stream:
 it will be more efficient to list the model outputs within each stream.
-followed  group and nest, then arrange so the best performining model is the first (on top). then slice the best for use in the efficiency determination part.
+followed by grouping and nesting the model outputs, then arrange so the best performining model is the first (on top). then slice the best for use in the efficiency determination part.
 
 
 
@@ -59,7 +59,7 @@ modellist <- c("RR","GGS") # vector of the models will improve automation (next 
 ```
 
 
-There are three streams per screen stack, thus best model selection must occur 3 times.
+There are three streams per screen stack, thus best model selection must occur 3 times (once for Feed, Oversize, undersize).
 Starting with SCreen13 Feed:
 
 
@@ -100,7 +100,7 @@ F13modelsArranged <-  rbind(F13RRCoefD,F13GGSCoefD) %>%
 BestF13 <- F13modelsArranged %>% 
   dplyr::slice(1)
 
-write.csv(BestF13,here::here("03_code/01_code-output", "BestF13.csv"))
+
 ```
 
 
@@ -141,7 +141,6 @@ OS13modelsArranged <-  rbind(OS13RRCoefD,OS13GGSCoefD) %>%
 BestOS13 <- OS13modelsArranged %>% 
   dplyr::slice(1)
 
-write.csv(BestOS13,here::here("03_code/01_code-output", "BestOS13.csv"))
 
 ```
 
@@ -182,8 +181,6 @@ US13modelsArranged <-  rbind(US13RRCoefD,US13GGSCoefD) %>%
 BestUS13 <- US13modelsArranged %>% 
   dplyr::slice(1)
 
-write.csv(BestUS13,here::here("03_code/01_code-output", "BestUS13.csv"))
-
 ```
 #########################################
 # SCREEN 14
@@ -193,7 +190,7 @@ write.csv(BestUS13,here::here("03_code/01_code-output", "BestUS13.csv"))
 F14Pred <- Screen14modelOutput %>% 
   dplyr::filter(stringr::str_detect(stream,'Feed')) %>% 
   dplyr::select(-1) %>% #column
-  t() %>% 
+  t() %>% #transpose
   as_tibble()%>% 
   dplyr::rename("Predict" = V1) #i just chose "Preds" as abr. for Predictions. My code Currently only works with 1 screen size in the model selection automation code im writing here. There aremany packegaes that came save time here..more to read and select and implement.
 
@@ -301,6 +298,16 @@ US14modelsArranged <-  rbind(US14RRCoefD,US14GGSCoefD) %>%
 BestUS14 <- US14modelsArranged %>% 
   dplyr::slice(1)
 
+
+```
+```{r}
+write.csv(BestF13,here::here("03_code/01_code-output", "BestF13.csv"))
+write.csv(BestOS13,here::here("03_code/01_code-output", "BestOS13.csv"))
+write.csv(BestUS13,here::here("03_code/01_code-output", "BestUS13.csv"))
+
+write.csv(BestF14,here::here("03_code/01_code-output", "BestF14.csv"))
+write.csv(BestOS14,here::here("03_code/01_code-output", "BestOS14.csv"))
+write.csv(BestUS14,here::here("03_code/01_code-output", "BestUS14.csv"))
 
 ```
 
