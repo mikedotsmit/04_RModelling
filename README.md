@@ -1,4 +1,4 @@
-# 2014-revisit-panelcomparison
+Screen modelling and efficiciency using R Code
 revisit using modeling
 here i try two rmarkdown methods in the report
 
