@@ -58,7 +58,9 @@ git commit tried from Rstudio
 
 ```
 
+```{r child = "03_code/03_Efficiency31Aug2014.Rmd"}
 
+```
 
 
 

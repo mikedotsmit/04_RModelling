@@ -1,5 +1,5 @@
 
-Screening efficiency
+# Screening efficiencies and comparison
 
 
 
@@ -12,28 +12,45 @@ library("here")
 #attach rpackages from central location:
 source(here::here("02_rpackages",'projectpackages.R'))
 ```
-```{r}
+```{r echo = FALSE}
 BestF13 <- read.csv(here::here("03_code/01_code-output", "BestF13.csv"))
 BestOS13 <- read.csv(here::here("03_code/01_code-output", "BestOS13.csv"))
 BestUS13 <- read.csv(here::here("03_code/01_code-output", "BestUS13.csv"))
 
-
+BestF14 <- read.csv(here::here("03_code/01_code-output", "BestF14.csv"))
+BestOS14 <- read.csv(here::here("03_code/01_code-output", "BestOS14.csv"))
+BestUS14 <- read.csv(here::here("03_code/01_code-output", "BestUS14.csv"))
 ```
 
 
-Derrick Method
-A	<- Percent of oversize in the feed (% > 250um in Feed)
-B	<- Percent of undersize in the feed (% < 250um in Feed)
-C	<- Percent of oversize in the oversize product (% >250um in OS)
-D	<- Percent of undersize in the undersize product (% < 250um in US)
+## Derrick Method
+
+Let:
+
+
+A	<- Percent of oversize in the feed 
+
+B	<- Percent of undersize in the feed 
+
+C	<- Percent of oversize in the oversize product 
+
+D	<- Percent of undersize in the undersize product 
+
+Then:
 
 U  <- Undersize weight percent
+
 O  <- Oversize weight percent
+
 EU <- Undersize efficiency
+
 Eo <- Oversize efficiency
+
 E  <- Overall efficiency
 
-```{r}
+
+
+```{r echo=FALSE}
 #assign letters accoring to Derrick efficiency formula:  
 Screen <- 13
 
@@ -41,21 +58,26 @@ A <- 1-BestF13$Predict
 B <- BestF13$Predict
 C <- 1- BestOS13$Predict
 D <- BestUS13$Predict
+```
 
+### Derick efficiency formulation
+```{r}
 U <- (C-A)/(C+D-1)
 O <- 1 - U
 Eu <- U*D/B
 Eo <- O*C/A
 E <- U*D+O*C/100
-    
+```
+
+
+```{r echo=FALSE}
 Screen13Efficiency <- cbind(Screen,A,B,C,D,U,O,Eu,Eo,E) %>% 
   as_tibble() 
   
 ```
 
 
-```{r}
-  
+```{r echo=FALSE}
 Screen <- 14
 
 A <- 1-BestF14$Predict
@@ -76,13 +98,12 @@ Screen14Efficiency <- cbind(Screen,A,B,C,D,U,O,Eu,Eo,E) %>%
 
 Combining the two efficiency outputs
 
-```{r}
-eff <- rbind (Screen13Efficiency,Screen14Efficiency)
-eff
+```{r echo = FALSE}
+Efficiencies <- rbind (Screen13Efficiency,Screen14Efficiency)
 ```
 
 ```{r}
-#t.test(extra ~ group, data = sleep, alternative = "less")
+Efficiencies
 ```
 
 
