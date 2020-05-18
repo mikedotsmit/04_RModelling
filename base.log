@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/W32TeX) (preloaded format=pdflatex 2020.3.29)  16 MAY 2020 10:44
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/W32TeX) (preloaded format=pdflatex 2020.3.29)  18 MAY 2020 10:18
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -726,47 +726,41 @@ LaTeX Warning: Command \textmu invalid in math mode on input line 216.
 LaTeX Warning: Command \textmu invalid in math mode on input line 216.
 
 [2] [3]
-<C:/Users/miked/OneDrive/Statistics/R/Projects/nuiphao/2014-revisit-panelcompar
-ison/05_fig_output/allStreamsPreModelling.pdf, id=124, 722.7pt x 578.16pt>
-File: C:/Users/miked/OneDrive/Statistics/R/Projects/nuiphao/2014-revisit-panelc
-omparison/05_fig_output/allStreamsPreModelling.pdf Graphic file (type pdf)
-<use C:/Users/miked/OneDrive/Statistics/R/Projects/nuiphao/2014-revisit-panelco
-mparison/05_fig_output/allStreamsPreModelling.pdf>
-Package pdftex.def Info: C:/Users/miked/OneDrive/Statistics/R/Projects/nuiphao/
-2014-revisit-panelcomparison/05_fig_output/allStreamsPreModelling.pdf  used on 
-input line 352.
+<C:/Users/miked/OneDrive/Github Repos/04_RModelling/05_fig_output/allStreamsPre
+Modelling.pdf, id=124, 722.7pt x 578.16pt>
+File: C:/Users/miked/OneDrive/Github Repos/04_RModelling/05_fig_output/allStrea
+msPreModelling.pdf Graphic file (type pdf)
+<use C:/Users/miked/OneDrive/Github Repos/04_RModelling/05_fig_output/allStream
+sPreModelling.pdf>
+Package pdftex.def Info: C:/Users/miked/OneDrive/Github Repos/04_RModelling/05_
+fig_output/allStreamsPreModelling.pdf  used on input line 352.
 (pdftex.def)             Requested size: 234.87471pt x 187.89977pt.
-<C:/Users/miked/OneDrive/Statistics/R/Projects/nuiphao/2014-revisit-panelcompar
-ison/05_fig_output/allStreamsCummulativePreModelling.pdf, id=125, 722.7pt x 578
-.16pt>
-File: C:/Users/miked/OneDrive/Statistics/R/Projects/nuiphao/2014-revisit-panelc
-omparison/05_fig_output/allStreamsCummulativePreModelling.pdf Graphic file (typ
-e pdf)
-<use C:/Users/miked/OneDrive/Statistics/R/Projects/nuiphao/2014-revisit-panelco
-mparison/05_fig_output/allStreamsCummulativePreModelling.pdf>
-Package pdftex.def Info: C:/Users/miked/OneDrive/Statistics/R/Projects/nuiphao/
-2014-revisit-panelcomparison/05_fig_output/allStreamsCummulativePreModelling.pd
-f  used on input line 361.
+<C:/Users/miked/OneDrive/Github Repos/04_RModelling/05_fig_output/allStreamsCum
+mulativePreModelling.pdf, id=125, 722.7pt x 578.16pt>
+File: C:/Users/miked/OneDrive/Github Repos/04_RModelling/05_fig_output/allStrea
+msCummulativePreModelling.pdf Graphic file (type pdf)
+<use C:/Users/miked/OneDrive/Github Repos/04_RModelling/05_fig_output/allStream
+sCummulativePreModelling.pdf>
+Package pdftex.def Info: C:/Users/miked/OneDrive/Github Repos/04_RModelling/05_
+fig_output/allStreamsCummulativePreModelling.pdf  used on input line 361.
 (pdftex.def)             Requested size: 281.85185pt x 225.48149pt.
-<C:/Users/miked/OneDrive/Statistics/R/Projects/nuiphao/2014-revisit-panelcompar
-ison/05_fig_output/RRModelled.pdf, id=126, 722.7pt x 578.16pt>
-File: C:/Users/miked/OneDrive/Statistics/R/Projects/nuiphao/2014-revisit-panelc
-omparison/05_fig_output/RRModelled.pdf Graphic file (type pdf)
-<use C:/Users/miked/OneDrive/Statistics/R/Projects/nuiphao/2014-revisit-panelco
-mparison/05_fig_output/RRModelled.pdf>
-Package pdftex.def Info: C:/Users/miked/OneDrive/Statistics/R/Projects/nuiphao/
-2014-revisit-panelcomparison/05_fig_output/RRModelled.pdf  used on input line 3
-70.
+<C:/Users/miked/OneDrive/Github Repos/04_RModelling/05_fig_output/RRModelled.pd
+f, id=126, 722.7pt x 578.16pt>
+File: C:/Users/miked/OneDrive/Github Repos/04_RModelling/05_fig_output/RRModell
+ed.pdf Graphic file (type pdf)
+<use C:/Users/miked/OneDrive/Github Repos/04_RModelling/05_fig_output/RRModelle
+d.pdf>
+Package pdftex.def Info: C:/Users/miked/OneDrive/Github Repos/04_RModelling/05_
+fig_output/RRModelled.pdf  used on input line 370.
 (pdftex.def)             Requested size: 281.85185pt x 225.48149pt.
-<C:/Users/miked/OneDrive/Statistics/R/Projects/nuiphao/2014-revisit-panelcompar
-ison/05_fig_output/GGSModelled.pdf, id=127, 722.7pt x 578.16pt>
-File: C:/Users/miked/OneDrive/Statistics/R/Projects/nuiphao/2014-revisit-panelc
-omparison/05_fig_output/GGSModelled.pdf Graphic file (type pdf)
-<use C:/Users/miked/OneDrive/Statistics/R/Projects/nuiphao/2014-revisit-panelco
-mparison/05_fig_output/GGSModelled.pdf>
-Package pdftex.def Info: C:/Users/miked/OneDrive/Statistics/R/Projects/nuiphao/
-2014-revisit-panelcomparison/05_fig_output/GGSModelled.pdf  used on input line 
-370.
+<C:/Users/miked/OneDrive/Github Repos/04_RModelling/05_fig_output/GGSModelled.p
+df, id=127, 722.7pt x 578.16pt>
+File: C:/Users/miked/OneDrive/Github Repos/04_RModelling/05_fig_output/GGSModel
+led.pdf Graphic file (type pdf)
+<use C:/Users/miked/OneDrive/Github Repos/04_RModelling/05_fig_output/GGSModell
+ed.pdf>
+Package pdftex.def Info: C:/Users/miked/OneDrive/Github Repos/04_RModelling/05_
+fig_output/GGSModelled.pdf  used on input line 370.
 (pdftex.def)             Requested size: 281.85185pt x 225.48149pt.
 [4] [5pdfTeX warning (ext4): destination with the same identifier (name{figure.
 1}) has been already used, duplicate ignored
@@ -780,18 +774,18 @@ l.405
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
 l.405 
-       <c:/Users/miked/OneDrive/Statistics/R/Projects/nuiphao/2014-revisit-pane
-lcomparison/05_fig_output/allStreamsPreModelling.pdf> <c:/Users/miked/OneDrive/
-Statistics/R/Projects/nuiphao/2014-revisit-panelcomparison/05_fig_output/allStr
-eamsCummulativePreModelling.pdf>] [6pdfTeX warning (ext4): destination with the
- same identifier (name{figure.3}) has been already used, duplicate ignored
+       <c:/Users/miked/OneDrive/Github Repos/04_RModelling/05_fig_output/allStr
+eamsPreModelling.pdf> <c:/Users/miked/OneDrive/Github Repos/04_RModelling/05_fi
+g_output/allStreamsCummulativePreModelling.pdf>] [6pdfTeX warning (ext4): desti
+nation with the same identifier (name{figure.3}) has been already used, duplica
+te ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
 l.405 
-       <c:/Users/miked/OneDrive/Statistics/R/Projects/nuiphao/2014-revisit-pane
-lcomparison/05_fig_output/RRModelled.pdf> <c:/Users/miked/OneDrive/Statistics/R
-/Projects/nuiphao/2014-revisit-panelcomparison/05_fig_output/GGSModelled.pdf>]
+       <c:/Users/miked/OneDrive/Github Repos/04_RModelling/05_fig_output/RRMode
+lled.pdf> <c:/Users/miked/OneDrive/Github Repos/04_RModelling/05_fig_output/GGS
+Modelled.pdf>]
 Overfull \hbox (3.14244pt too wide) in paragraph at lines 445--445
  []|\T1/lmr/m/n/10 adj.R2|
  []
@@ -957,12 +951,12 @@ Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 693.
  ) 
 Here is how much of TeX's memory you used:
  12563 strings out of 482913
- 184170 string characters out of 5957672
+ 183372 string characters out of 5957672
  449953 words of memory out of 5000000
  27515 multiletter control sequences out of 15000+600000
  584704 words of font info for 68 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 34i,15n,37p,445b,391s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 34i,15n,37p,349b,391s stack positions out of 5000i,500n,10000p,200000b,80000s
 {c:/Users/miked/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ec.e
 nc}{c:/Users/miked/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mat
 hit.enc}{c:/Users/miked/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/l
@@ -985,7 +979,7 @@ ked/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy10.pfb><c:/Use
 rs/miked/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtk10.pfb><c
 :/Users/miked/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtt10.p
 fb>
-Output written on base.pdf (10 pages, 313648 bytes).
+Output written on base.pdf (10 pages, 313527 bytes).
 PDF statistics:
  274 PDF objects out of 1000 (max. 8388607)
  236 compressed objects within 3 object streams
